@@ -1,4 +1,4 @@
-package de.ostfalia.bis.ss17.wareneingang;
+package de.ostfalia.bis.ss17.wareneingang.message;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
-public class WareneingangSenden implements JavaDelegate {
+public class EinlagerungsauftragAnLagerSenden implements JavaDelegate {
 
-    private final static Logger logger = LoggerFactory.getLogger(WareneingangSenden.class);
+    private final static Logger logger = LoggerFactory.getLogger(EinlagerungsauftragAnLagerSenden.class);
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
@@ -21,6 +21,6 @@ public class WareneingangSenden implements JavaDelegate {
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.startProcessInstanceByMessage("Neue Bestellung", messageContent);
+        runtimeService.correlateMessage("Neue Bestellung", messageContent);
     }
 }

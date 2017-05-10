@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.6.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_123e87b">
     <bpmn:participant id="Participant_15la9t8" name="Wareneingang" processRef="Process_1" />
     <bpmn:participant id="Participant_05savs7" name="Lager" processRef="Process_1o219gu" />
@@ -76,7 +76,7 @@
       <bpmn:outgoing>SequenceFlow_1rjprfq</bpmn:outgoing>
     </bpmn:sendTask>
     <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="Task_1tje49m" targetRef="ExclusiveGateway_1vme3kr" />
-    <bpmn:serviceTask id="Task_1tje49m" name="Reourenschein erstellen">
+    <bpmn:serviceTask id="Task_1tje49m" name="Retourenschein erstellen">
       <bpmn:incoming>SequenceFlow_0742d0c</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
     </bpmn:serviceTask>
