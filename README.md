@@ -1,6 +1,6 @@
 # Business IS - Gruppe 4
 
-## Reference
+### Reference
 
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
@@ -10,18 +10,33 @@
 - Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
 
 
-## Progress
+### Progress
 
 #### Wareneingang
 - [ ] <u>Tasks</u>
     - [ ] x    
-    
+
 #### Kundenerfassungsprozess
 - [ ] <u>Tasks</u>
     - [ ] x
 
 
-
 ### Bug-Tracking
 - BUG-1: x
      - `x`
+
+
+### Cheat Sheet
+- Message Start Event:
+
+        final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
+        runtimeService.startProcessInstanceByMessage("Neue Bestellung", messageContent);
+
+- Message Throw Event:
+
+        final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
+        runtimeService.correlateMessage(xxx);
+
+- Mehrere Process Instances:
+
+        delegateExecution.getProcessInstanceId();
