@@ -1,4 +1,4 @@
-package de.ostfalia.bis.ss17.normalebestellung;
+package de.ostfalia.bis.ss17.wareneingang;
 
 import org.camunda.bpm.engine.RuntimeService;
 import org.camunda.bpm.engine.delegate.DelegateExecution;
@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
-public class NormaleBestellungSenden implements JavaDelegate {
+public class WareneingangSenden implements JavaDelegate {
 
-    private final static Logger logger = LoggerFactory.getLogger(NormaleBestellungSenden.class);
+    private final static Logger logger = LoggerFactory.getLogger(WareneingangSenden.class);
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {

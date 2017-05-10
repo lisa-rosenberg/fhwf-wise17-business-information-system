@@ -1,4 +1,4 @@
-package de.ostfalia.bis.ss17.normalebestellung;
+package de.ostfalia.bis.ss17.sonderanfertigung;
 
 import org.camunda.bpm.engine.delegate.DelegateExecution;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
@@ -10,9 +10,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-public class NormaleBestellungSpeichern implements JavaDelegate {
+public class SonderanfertigungSpeichern implements JavaDelegate {
 
-    private final static Logger logger = LoggerFactory.getLogger(NormaleBestellungSpeichern.class);
+    private final static Logger logger = LoggerFactory.getLogger(SonderanfertigungSpeichern.class);
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {

@@ -4,7 +4,7 @@
 
 <process-application
         xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema">
+>
 
     <process-archive name="Normale Bestellung">
         <process-engine>default</process-engine>
