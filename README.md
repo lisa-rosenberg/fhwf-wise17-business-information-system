@@ -1,6 +1,8 @@
-# Business IS - Gruppe 4
+Business IS - Gruppe 4
+======================
 
-### Reference
+Reference
+---------
 
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
@@ -10,16 +12,29 @@
 - Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
 
 
-### Progress
+Progress
+--------
 
 #### Wareneingang
-- [ ] <u>Tasks</u>
-    - [ ] x    
+- [ ] BPMN anpassen
+    - [x] Pool-Einstellungen setzen
+    - [x] Java-Klassen bei Service- und Message-Tasks/-Throw Events hinterlegen
+    - [x] Namen bei Abzweigungen nach allen Gateways wählen
+    - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
+    - [ ] Assignees bei User Tasks wählen
+    - [ ] Form Keys (html-Links) bei User Tasks eingeben
+    - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+
 
 #### Kundenerfassungsprozess
-- [ ] <u>Tasks</u>
-    - [ ] x
-
+- [ ] BPMN anpassen
+    - [x] Pool-Einstellungen setzen
+    - [x] Java-Klassen bei Service- und Message-Tasks/-Throw Events hinterlegen
+    - [ ] Namen bei Abzweigungen nach Gateways wählen
+    - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
+    - [ ] Assignees bei User Tasks wählen
+    - [ ] Form Keys (html-Links) bei User Tasks eingeben
+    - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
 
 ### Bug-Tracking
 - BUG-1: x
@@ -32,7 +47,7 @@
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.startProcessInstanceByMessage("Neue Bestellung", messageContent);
 
-- Message Throw Event:
+- Message Throw Event / Message Send Task:
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.correlateMessage(xxx);
@@ -40,3 +55,14 @@
 - Mehrere Process Instances:
 
         delegateExecution.getProcessInstanceId();
+        
+- Message Start Event:
+    - Mit leerer Message starten, wenn keine Verbindung zu einem Message Throw Event oder Message Send Task besteht.
+ 
+   
+### Notes
+
+- Process_Wareneingang:
+    - bei Wareneingangskontrolle müssen zwei Felder bei der Form gesetzt werden:
+        - Menge
+        - IO/NIO (in Ordnung/nicht in Ordnung)
