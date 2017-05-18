@@ -67,7 +67,7 @@
       <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="Task_1i9rd3h" name="Wareneingangskontrolle" camunda:assignee="demo">
+    <bpmn:userTask id="Task_1i9rd3h" name="Wareneingangskontrolle" camunda:formKey="embedded:app:forms/we_Wareneingangskontrolle.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k02yhk</bpmn:outgoing>
     </bpmn:userTask>
@@ -100,11 +100,11 @@
       <bpmn:outgoing>SequenceFlow_1szsxv2</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1szsxv2" sourceRef="Task_0bs911p" targetRef="Task_1di019o" />
-    <bpmn:userTask id="Task_1di019o" name="Transport zum Lagerfach" camunda:assignee="demo">
+    <bpmn:userTask id="Task_1di019o" name="Transport zum Lagerfach" camunda:formKey="embedded:app:forms/we_Transport_zum_Lagerfach.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1szsxv2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bo8pjj</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0tyf4b8" name="Ware im WE abholen" camunda:assignee="demo">
+    <bpmn:userTask id="Task_0tyf4b8" name="Ware im WE abholen" camunda:formKey="embedded:app:forms/we_Ware_im_WE_abholen.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1yi2fce</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0llmkls</bpmn:outgoing>
     </bpmn:userTask>

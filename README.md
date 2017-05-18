@@ -22,7 +22,7 @@ Progress
     - [x] Namen bei Abzweigungen nach allen Gateways wählen
     - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
     - [ ] Assignees bei User Tasks wählen
-    - [ ] Form Keys (html-Links) bei User Tasks eingeben
+    - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
 - [ ] forms anpassen
 - [ ] Logger-Infos anpassen
@@ -36,7 +36,7 @@ Progress
     - [ ] Namen bei Abzweigungen nach Gateways wählen
     - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
     - [ ] Assignees bei User Tasks wählen
-    - [ ] Form Keys (html-Links) bei User Tasks eingeben
+    - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
 - [ ] forms anpassen
 - [ ] Logger-Infos anpassen

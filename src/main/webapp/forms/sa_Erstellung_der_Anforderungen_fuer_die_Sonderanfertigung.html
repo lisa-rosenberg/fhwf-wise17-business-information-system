@@ -4,15 +4,58 @@
         <input class="form-control" cam-variable-type="Integer" cam-variable-name="kunde">
     </div>
     <div class="form-group">
-        <label>E-Bike</label>
+        <label>E-Bike-Sonderanforderungen</label>
 
-        <select class="form-control" cam-variable-type="Integer" cam-variable-name="bike">
-            <option value="1">E Basic</option>
-            <option value="2">E Advanced</option>
-            <option value="3">E Senior</option>
-            <option value="4">E Kid</option>
-            <option value="5">E Girl</option>
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="räder">
+            <option value="1">25 Zoll</option>
+            <option value="2">26 Zoll</option>
+            <option value="3">27 Zoll</option>
+            <option value="4">28 Zoll</option>
+            <option value="5">29 Zoll</option>
             <option value="99">Nicht valide</option>
         </select>
+
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="rahmen">
+            <option value="1">XS</option>
+            <option value="2">S</option>
+            <option value="3">M</option>
+            <option value="4">L</option>
+            <option value="5">XL</option>
+            <option value="99">Nicht valide</option>
+        </select>
+
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="gabel">
+            <option value="1">Starrgabel</option>
+            <option value="2">Federgabel</option>
+            <option value="99">Nicht valide</option>
+        </select>
+
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="farbe">
+            <option value="1">Schwarz</option>
+            <option value="2">Weiß</option>
+            <option value="3">Grau</option>
+            <option value="4">Silber</option>
+            <option value="5">Gold</option>
+            <option value="6">Rot</option>
+            <option value="7">Grün</option>
+            <option value="8">Blau</option>
+            <option value="9">Gelb</option>
+            <option value="99">Nicht valide</option>
+        </select>
+
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="motor">
+            <option value="1">250 W</option>
+            <option value="2">500 W</option>
+            <option value="99">Nicht valide</option>
+        </select>
+
+        <select class="form-control" cam-variable-type="Integer" cam-variable-name="akku">
+            <option value="1">300 Wh</option>
+            <option value="2">500 Wh</option>
+            <option value="3">600 Wh</option>
+            <option value="99">Nicht valide</option>
+        </select>
+
+        <input class="form-control" cam-variable-type="Integer" cam-variable-min="1" cam-variable-max="100" cam-variable-name="menge">
     </div>
 </form>
