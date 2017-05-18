@@ -14,13 +14,13 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden von Bestellung Start");
+        logger.info("Senden eines Angebotes an Kunden/MessageIntermediateCatchEvent");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("bike", delegateExecution.getVariable("bike"));
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
+        messageContent.put("preis", delegateExecution.getVariable("preis"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Bestellung", messageContent);
+        runtimeService.correlateMessage("Neues Angebot", messageContent);
     }
 }

@@ -14,13 +14,12 @@ public class SendeAbsageAnKunden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden von Bestellung Start");
+        logger.info("Senden einer Absage an Kunden/MessageIntermediateCatchEvent");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("bike", delegateExecution.getVariable("bike"));
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Bestellung", messageContent);
+        runtimeService.correlateMessage("Neue Absage", messageContent);
     }
 }

@@ -14,13 +14,19 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden von Bestellung Start");
+        logger.info("Senden einer Anfrage für Sonderanfertigung an EBIKE2020Vertrieb/MessageStartEvent");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("bike", delegateExecution.getVariable("bike"));
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
+        messageContent.put("räder", delegateExecution.getVariable("räder"));
+        messageContent.put("rahmen", delegateExecution.getVariable("rahmen"));
+        messageContent.put("gabel", delegateExecution.getVariable("gabel"));
+        messageContent.put("farbe", delegateExecution.getVariable("farbe"));
+        messageContent.put("motor", delegateExecution.getVariable("motor"));
+        messageContent.put("akku", delegateExecution.getVariable("akku"));
+        messageContent.put("menge", delegateExecution.getVariable("menge"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.startProcessInstanceByMessage("Neue Bestellung", messageContent);
+        runtimeService.startProcessInstanceByMessage("Neue Sonderanfertigungsanfrage", messageContent);
     }
 }

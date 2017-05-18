@@ -14,13 +14,13 @@ public class EinlagerungsauftragAnLagerSenden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden von Bestellung Start");
+        logger.info("Senden eines Einlagerungsauftrages an Lager/MessageStartEvent");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("bike", delegateExecution.getVariable("bike"));
-        messageContent.put("kunde", delegateExecution.getVariable("kunde"));
+        messageContent.put("teilenummer", delegateExecution.getVariable("teilenummer"));
+        messageContent.put("menge", delegateExecution.getVariable("menge"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Bestellung", messageContent);
+        runtimeService.correlateMessage("Neuer Einlagerungsauftrag", messageContent);
     }
 }
