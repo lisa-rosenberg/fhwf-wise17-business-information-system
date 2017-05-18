@@ -14,7 +14,7 @@ public class SendeAuftragsbestaetigung implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden einer Auftragsbestätigung an EBIKE2020Vertrieb/MessageIntermediateCatchEvent");
+        logger.info("Sende Auftragsbestätigung an EBIKE2020Vertrieb (MessageIntermediateCatchEvent)");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));

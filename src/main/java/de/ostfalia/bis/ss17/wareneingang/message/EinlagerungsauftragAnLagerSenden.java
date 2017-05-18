@@ -14,7 +14,7 @@ public class EinlagerungsauftragAnLagerSenden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden eines Einlagerungsauftrages an Lager/MessageStartEvent");
+        logger.info("Sende Einlagerungsauftrag an Lager (MessageStartEvent)");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("teilenummer", delegateExecution.getVariable("teilenummer"));

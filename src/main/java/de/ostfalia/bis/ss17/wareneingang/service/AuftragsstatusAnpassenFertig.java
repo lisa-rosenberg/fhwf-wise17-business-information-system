@@ -11,6 +11,6 @@ public class AuftragsstatusAnpassenFertig implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("TU IRGENDWAS");
+        logger.info("Passe Auftragsstatus an");
     }
 }

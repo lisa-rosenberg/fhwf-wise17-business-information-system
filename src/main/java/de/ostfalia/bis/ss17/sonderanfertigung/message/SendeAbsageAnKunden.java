@@ -14,7 +14,7 @@ public class SendeAbsageAnKunden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden einer Absage an Kunden/MessageIntermediateCatchEvent");
+        logger.info("Sende Absage an Kunde (MessageIntermediateCatchEvent)");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));

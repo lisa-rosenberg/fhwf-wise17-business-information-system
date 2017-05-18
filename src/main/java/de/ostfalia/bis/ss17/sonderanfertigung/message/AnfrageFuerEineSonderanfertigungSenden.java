@@ -14,7 +14,7 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden einer Anfrage für Sonderanfertigung an EBIKE2020Vertrieb/MessageStartEvent");
+        logger.info("Sende Anfrage für Sonderanfertigung an EBIKE2020Vertrieb (MessageStartEvent)");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));

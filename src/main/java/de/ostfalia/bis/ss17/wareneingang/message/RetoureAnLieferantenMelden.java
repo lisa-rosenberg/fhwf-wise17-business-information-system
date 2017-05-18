@@ -14,7 +14,7 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Senden einer Retourenmeldung an Lieferant/NoMessageCatchEvent");
+        logger.info("Sende Retourenmeldung an Lieferant (NoMessageCatchEvent)");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("teilenummer", delegateExecution.getVariable("teilenummer"));

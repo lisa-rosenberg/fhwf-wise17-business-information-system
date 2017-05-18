@@ -11,6 +11,6 @@ public class LegeAuftragAn implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("TU IRGENDWAS");
+        logger.info("Lege Auftrag an");
     }
 }

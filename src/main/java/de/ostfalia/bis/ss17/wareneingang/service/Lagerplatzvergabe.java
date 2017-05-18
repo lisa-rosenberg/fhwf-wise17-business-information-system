@@ -11,6 +11,6 @@ public class Lagerplatzvergabe implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("TU IRGENDWAS");
+        logger.info("Vergebe Lagerplatz");
     }
 }
