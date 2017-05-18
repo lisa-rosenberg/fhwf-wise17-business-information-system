@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
-public class SendeAufgragsbestaetigung implements JavaDelegate {
+public class SendeAuftragsbestaetigung implements JavaDelegate {
 
-    private final static Logger logger = LoggerFactory.getLogger(SendeAufgragsbestaetigung.class);
+    private final static Logger logger = LoggerFactory.getLogger(SendeAuftragsbestaetigung.class);
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {

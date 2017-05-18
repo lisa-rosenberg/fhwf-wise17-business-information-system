@@ -24,6 +24,9 @@ Progress
     - [ ] Assignees bei User Tasks wählen
     - [ ] Form Keys (html-Links) bei User Tasks eingeben
     - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+- [ ] forms anpassen
+- [ ] Logger-Infos anpassen
+- [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 
 
 #### Kundenerfassungsprozess
@@ -35,6 +38,9 @@ Progress
     - [ ] Assignees bei User Tasks wählen
     - [ ] Form Keys (html-Links) bei User Tasks eingeben
     - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+- [ ] forms anpassen
+- [ ] Logger-Infos anpassen
+- [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 
 ### Bug-Tracking
 - BUG-1: x

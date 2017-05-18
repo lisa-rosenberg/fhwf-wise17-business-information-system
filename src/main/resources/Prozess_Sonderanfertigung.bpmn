@@ -58,7 +58,7 @@
       <bpmn:incoming>SequenceFlow_15dnzjw</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="SequenceFlow_076rt57" sourceRef="Task_0wyc0p8" targetRef="EndEvent_0ume7m4" />
-    <bpmn:sendTask id="Task_0wyc0p8" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAufgragsbestaetigung">
+    <bpmn:sendTask id="Task_0wyc0p8" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAuftragsbestaetigung">
       <bpmn:incoming>SequenceFlow_0lflx1l</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_076rt57</bpmn:outgoing>
     </bpmn:sendTask>
