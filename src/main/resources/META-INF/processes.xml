@@ -4,7 +4,7 @@
 
 <process-application
         xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
->
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
     <process-archive name="Normale Bestellung">
         <process-engine>default</process-engine>
@@ -13,4 +13,21 @@
             <property name="isScanForProcessDefinitions">true</property>
         </properties>
     </process-archive>
+
+    <process-archive name="Sonderanfertigung">
+        <process-engine>default</process-engine>
+        <properties>
+            <property name="isDeleteUponUndeploy">true</property>
+            <property name="isScanForProcessDefinitions">true</property>
+        </properties>
+    </process-archive>
+
+    <process-archive name="Wareneingang">
+        <process-engine>default</process-engine>
+        <properties>
+            <property name="isDeleteUponUndeploy">true</property>
+            <property name="isScanForProcessDefinitions">true</property>
+        </properties>
+    </process-archive>
+
 </process-application>

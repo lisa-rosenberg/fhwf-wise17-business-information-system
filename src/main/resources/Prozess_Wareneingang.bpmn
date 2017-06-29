@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_123e87b">
-    <bpmn:participant id="Participant_15la9t8" name="Wareneingang" processRef="Process_1" />
-    <bpmn:participant id="Participant_05savs7" name="Lager" processRef="Process_1o219gu" />
+    <bpmn:participant id="wareneingang" name="Wareneingang" processRef="wareneingang-kontrollieren" />
+    <bpmn:participant id="lager" name="Lager" processRef="lager-lagert-ware-ein-und-verbucht-sie" />
     <bpmn:messageFlow id="MessageFlow_0wzgtr5" sourceRef="Task_1nkxjln" targetRef="StartEvent_0h1qyov" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" name="Wareneingang kontrollieren" isExecutable="true">
+  <bpmn:process id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" isExecutable="true">
     <bpmn:sequenceFlow id="SequenceFlow_1rjprfq" sourceRef="Task_19ora2y" targetRef="EndEvent_1xntpcn" />
     <bpmn:sequenceFlow id="SequenceFlow_0069w94" sourceRef="Task_1nkxjln" targetRef="EndEvent_0j00ctg" />
     <bpmn:sequenceFlow id="SequenceFlow_0ie0tuj" sourceRef="ExclusiveGateway_1k25r8x" targetRef="Task_1nkxjln" />
@@ -88,7 +88,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0qvy8lj" sourceRef="Task_0zqnwzw" targetRef="ExclusiveGateway_1k25r8x" />
     <bpmn:sequenceFlow id="SequenceFlow_0tg85ki" sourceRef="Task_13qilzv" targetRef="ExclusiveGateway_1f9d1ek" />
   </bpmn:process>
-  <bpmn:process id="Process_1o219gu" name="Lager lagert Ware ein und verbucht sie" isExecutable="true">
+  <bpmn:process id="lager-lagert-ware-ein-und-verbucht-sie" name="Lager lagert Ware ein und verbucht sie" isExecutable="true">
     <bpmn:startEvent id="StartEvent_0h1qyov">
       <bpmn:outgoing>SequenceFlow_1yi2fce</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1bpyopv" />
@@ -122,7 +122,7 @@
   <bpmn:message id="Message_0l6xzl7" name="Neuer Wareneingang" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_123e87b">
-      <bpmndi:BPMNShape id="Participant_15la9t8_di" bpmnElement="Participant_15la9t8">
+      <bpmndi:BPMNShape id="Participant_15la9t8_di" bpmnElement="wareneingang">
         <dc:Bounds x="143" y="62" width="1118" height="469" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1sfuuaa_di" bpmnElement="StartEvent_1">
@@ -276,7 +276,7 @@
           <dc:Bounds x="1018" y="124" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Participant_05savs7_di" bpmnElement="Participant_05savs7">
+      <bpmndi:BPMNShape id="Participant_05savs7_di" bpmnElement="lager">
         <dc:Bounds x="143" y="-314" width="1108" height="348" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_0lfjxjb_di" bpmnElement="StartEvent_0h1qyov">

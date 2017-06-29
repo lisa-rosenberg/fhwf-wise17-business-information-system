@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_1w4fx9a">
-    <bpmn:participant id="Participant_0jzvieu" name="Kunde" processRef="Process_1" />
-    <bpmn:participant id="Participant_1i54sql" name="EBIKE2020" processRef="Process_0q6ikc5" />
+    <bpmn:participant id="kunde" name="Kunde" processRef="kunde-fragt-an" />
+    <bpmn:participant id="ebike2020" name="EBIKE2020" processRef="ebike2020-bearbeitet-sonderanfertigungs-anfrage" />
     <bpmn:messageFlow id="MessageFlow_057l0y7" sourceRef="Task_0hhi479" targetRef="StartEvent_1hcggi8" />
     <bpmn:messageFlow id="MessageFlow_1u6hdl6" sourceRef="Task_0y2ypni" targetRef="IntermediateThrowEvent_14y1j3d" />
     <bpmn:messageFlow id="MessageFlow_0woke1h" sourceRef="Task_1jpa49c" targetRef="IntermediateThrowEvent_19y8wr0" />
     <bpmn:messageFlow id="MessageFlow_0297gcy" sourceRef="Task_0wyc0p8" targetRef="IntermediateThrowEvent_1r0eame" />
   </bpmn:collaboration>
-  <bpmn:process id="Process_1" name="Kunde fragt an" isExecutable="true">
+  <bpmn:process id="kunde-fragt-an" name="Kunde fragt an" isExecutable="true">
     <bpmn:exclusiveGateway id="ExclusiveGateway_0i77b3d" default="SequenceFlow_15dnzjw">
       <bpmn:incoming>SequenceFlow_1e68uwp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0lflx1l</bpmn:outgoing>
@@ -66,7 +66,7 @@
       <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
-  <bpmn:process id="Process_0q6ikc5" name="EBIKEE2020 bearbeitet Sonderanfertigungs-Anfrage" isExecutable="false">
+  <bpmn:process id="ebike2020-bearbeitet-sonderanfertigungs-anfrage" name="EBIKE2020 bearbeitet Sonderanfertigungs-Anfrage" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="Lane_167bas5" name="Vertrieb">
         <bpmn:flowNodeRef>EndEvent_1aighu4</bpmn:flowNodeRef>
@@ -189,7 +189,7 @@
   <bpmn:message id="Message_0s0x92p" name="Neue Anfrage" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1w4fx9a">
-      <bpmndi:BPMNShape id="Participant_0jzvieu_di" bpmnElement="Participant_0jzvieu">
+      <bpmndi:BPMNShape id="Participant_0jzvieu_di" bpmnElement="kunde">
         <dc:Bounds x="-20" y="-26" width="1702" height="248" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
@@ -214,7 +214,7 @@
           <dc:Bounds x="46" y="111" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="Participant_1i54sql_di" bpmnElement="Participant_1i54sql">
+      <bpmndi:BPMNShape id="Participant_1i54sql_di" bpmnElement="ebike2020">
         <dc:Bounds x="-20" y="229" width="1701" height="514" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Lane_167bas5_di" bpmnElement="Lane_167bas5">
