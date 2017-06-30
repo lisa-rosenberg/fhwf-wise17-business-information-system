@@ -10,7 +10,7 @@
         <version>1.0</version>
     </parent>
 
-    <artifactId>bis-gruppe-4-wareneingang</artifactId>
+    <artifactId>wareneingang</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
