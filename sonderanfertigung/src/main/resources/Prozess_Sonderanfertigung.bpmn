@@ -170,7 +170,7 @@
       <bpmn:incoming>SequenceFlow_1dl9pu1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0whuzx4</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">200</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT200H</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="IntermediateThrowEvent_1r0eame">
@@ -183,7 +183,7 @@
       <bpmn:messageEventDefinition />
     </bpmn:startEvent>
     <bpmn:association id="Association_1ni72mt" sourceRef="IntermediateThrowEvent_1ccfq2v" targetRef="TextAnnotation_0yjt5er" />
-    <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>200 was? TODO!</bpmn:text>
+    <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>200 Stunden</bpmn:text>
 </bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:message id="Message_0s0x92p" name="Neue Anfrage" />
