@@ -50,7 +50,7 @@
       <bpmn:outgoing>SequenceFlow_1wpl5rh</bpmn:outgoing>
       <bpmn:messageEventDefinition />
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="Task_12glc5a" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/sa_Pruefe_Angebot.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_12glc5a" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/Pruefe_Angebot.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1wpl5rh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1e68uwp</bpmn:outgoing>
     </bpmn:userTask>
@@ -113,15 +113,15 @@
     <bpmn:sequenceFlow id="SequenceFlow_07oqxg2" name="machbar" sourceRef="ExclusiveGateway_0yqwdbc" targetRef="Task_0deja8j" />
     <bpmn:sequenceFlow id="SequenceFlow_0whuzx4" sourceRef="IntermediateThrowEvent_1ccfq2v" targetRef="Task_1o8ghle" />
     <bpmn:sequenceFlow id="SequenceFlow_1k19amh" sourceRef="Task_0y2ypni" targetRef="EndEvent_18jdonk" />
-    <bpmn:userTask id="Task_1k6khlo" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/sa_Pruefung_auf_bautechnische_Umsetzbarkeit.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_1k6khlo" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/Pruefung_auf_bautechnische_Umsetzbarkeit.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0dvprvr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lecgg5</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0deja8j" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/sa_Erstelle Arbeitsplan_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_0deja8j" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/Erstelle Arbeitsplan_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_07oqxg2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07887ny</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="Task_0hap6g8" name="Ermittle Preise für Zusatzkomponenten" camunda:formKey="embedded:app:forms/sa_Ermittle_Preise_fuer_Zusatzkomponenten.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_0hap6g8" name="Ermittle Preise für Zusatzkomponenten" camunda:formKey="embedded:app:forms/Ermittle_Preise_fuer_Zusatzkomponenten.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_07887ny</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qyxu2w</bpmn:outgoing>
     </bpmn:userTask>
@@ -152,7 +152,7 @@
     <bpmn:endEvent id="EndEvent_18jdonk">
       <bpmn:incoming>SequenceFlow_1k19amh</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="Task_0zvdrbd" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/sa_Erstellung_der_Anforderungen_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="Task_0zvdrbd" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/Erstellung_der_Anforderungen_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0fq5zkc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dvprvr</bpmn:outgoing>
     </bpmn:userTask>

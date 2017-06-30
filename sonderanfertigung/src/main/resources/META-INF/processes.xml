@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!-- Default Werte, wenn die Datei leer gelassen wird -->
+
+<process-application
+        xmlns="http://www.camunda.org/schema/1.0/ProcessApplication"
+>
+
+    <process-archive name="Sonderanfertigung">
+        <process-engine>default</process-engine>
+        <properties>
+            <property name="isDeleteUponUndeploy">true</property>
+            <property name="isScanForProcessDefinitions">true</property>
+        </properties>
+    </process-archive>
+
+</process-application>

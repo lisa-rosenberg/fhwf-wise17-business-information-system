@@ -72,3 +72,7 @@ Progress
     - bei Wareneingangskontrolle müssen zwei Felder bei der Form gesetzt werden:
         - Menge
         - IO/NIO (in Ordnung/nicht in Ordnung)
+        
+### Questions
+
+- Prozess_Sonderanfertigung.bpmn: Welche Zeiteinheit soll 200 sein? Bis Klärung als Stunden formatiert.

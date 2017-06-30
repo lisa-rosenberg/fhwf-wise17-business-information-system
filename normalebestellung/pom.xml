@@ -4,15 +4,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.ostfalia.bis.ss17</groupId>
-    <artifactId>gruppe-4</artifactId>
+    <parent>
+        <artifactId>gruppe-4</artifactId>
+        <groupId>de.ostfalia.bis.ss17</groupId>
+        <version>1.0</version>
+    </parent>
+
+    <artifactId>bis-gruppe-4-normalebestellung</artifactId>
     <version>1.0</version>
-    <modules>
-        <module>wareneingang</module>
-        <module>normalebestellung</module>
-        <module>sonderanfertigung</module>
-    </modules>
-    <packaging>pom</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
