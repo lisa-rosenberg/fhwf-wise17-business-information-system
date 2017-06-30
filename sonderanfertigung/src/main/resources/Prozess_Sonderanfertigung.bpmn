@@ -27,7 +27,7 @@
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-kunde-absage-erhalten">
       <bpmn:incoming>SequenceFlow_0p9cnte</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0yv2mg2</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_1unqujt" />
     </bpmn:intermediateCatchEvent>
     <bpmn:eventBasedGateway id="exclusive-gateway-kunde-anfrage-status">
       <bpmn:incoming>SequenceFlow_18cxtan</bpmn:incoming>
@@ -48,7 +48,7 @@
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-zusage-erhalten">
       <bpmn:incoming>SequenceFlow_0ncm4kz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1wpl5rh</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0jxodfd" />
     </bpmn:intermediateCatchEvent>
     <bpmn:userTask id="pruefe-angebot" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/Pruefe_Angebot.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1wpl5rh</bpmn:incoming>
@@ -176,18 +176,20 @@
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt">
       <bpmn:incoming>SequenceFlow_1i6o1xo</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0xz71rc</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_0ggpewj" />
     </bpmn:intermediateCatchEvent>
     <bpmn:startEvent id="start-event-vertrieb">
       <bpmn:outgoing>SequenceFlow_0fq5zkc</bpmn:outgoing>
-      <bpmn:messageEventDefinition />
+      <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
     <bpmn:association id="Association_1ni72mt" sourceRef="duration-intermediate-catch-event-vertrieb-zeitablauf" targetRef="TextAnnotation_0yjt5er" />
     <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>200 Stunden</bpmn:text>
 </bpmn:textAnnotation>
   </bpmn:process>
-  <bpmn:message id="Message_0s0x92p" name="Neue Anfrage" />
-  <bpmn:message id="Message_17q57vd" />
+  <bpmn:message id="Message_1cvpgkf" name="Neue Anfrage erhalten" />
+  <bpmn:message id="Message_0jxodfd" name="Angebot erhalten" />
+  <bpmn:message id="Message_1unqujt" name="Absage erhalten" />
+  <bpmn:message id="Message_0ggpewj" name="Auftragsbestätigung erhalten" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1w4fx9a">
       <bpmndi:BPMNShape id="Participant_0jzvieu_di" bpmnElement="kunde">
