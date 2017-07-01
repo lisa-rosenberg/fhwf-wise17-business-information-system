@@ -13,7 +13,9 @@
     <bpmn:sequenceFlow id="SequenceFlow_1gvn1by" name="Fehlmenge" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${fehlmenge > 0}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_15k2dha" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen" />
+    <bpmn:sequenceFlow id="SequenceFlow_15k2dha" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${fehlmenge}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0rkcif0" sourceRef="exclusive-gateway-retoure-melden" targetRef="retoure-an-lieferanten-melden" />
     <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="retourenschein-erstellen" targetRef="exclusive-gateway-retoure-melden" />
     <bpmn:sequenceFlow id="SequenceFlow_03uhljm" sourceRef="parallel-gateway-fehlmenge" targetRef="exclusive-gateway-retoure-melden" />
