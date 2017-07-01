@@ -178,7 +178,7 @@
       <bpmn:outgoing>SequenceFlow_0xz71rc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0ggpewj" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:startEvent id="start-event-vertrieb" camunda:formKey="embedded:app:forms/sonderanfertigungsbearbeitung.html">
+    <bpmn:startEvent id="start-event-vertrieb" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html">
       <bpmn:outgoing>SequenceFlow_0fq5zkc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
