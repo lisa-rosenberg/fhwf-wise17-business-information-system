@@ -63,7 +63,7 @@ local.properties
 
 # User-specific stuff:
 .idea/
-.iml
+*.iml
 normalebestellung/target/
 sonderanfertigung/target/
 wareneingang/target/

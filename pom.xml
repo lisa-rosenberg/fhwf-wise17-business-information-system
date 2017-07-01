@@ -11,6 +11,7 @@
         <module>wareneingang</module>
         <module>normalebestellung</module>
         <module>sonderanfertigung</module>
+        <module>loanapproval</module>
     </modules>
     <packaging>pom</packaging>
 
