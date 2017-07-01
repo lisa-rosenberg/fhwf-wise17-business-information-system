@@ -1,0 +1,140 @@
+<form name="sonderanfertigungsanfrage"
+      class="form-horizontal"
+      role="form">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Kundennummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="kundeId"
+                   type="text"
+                   name="kundeId"
+                   required/>
+        </div>
+    </div>
+
+    <p>Geben Sie hier Ihre Wünsche für Ihre E-Bike-Sonderanfertigung an.</p>
+
+    <div class="form-group">
+
+        <label class="control-label col-md-2">Rädergröße</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="raeder"
+                    type="text"
+                    name="raeder"
+                    required>
+                <option value="25zoll">25 Zoll</option>
+                <option value="26zoll">26 Zoll</option>
+                <option value="27zoll">27 Zoll</option>
+                <option value="28zoll">28 Zoll</option>
+                <option value="29zoll">29 Zoll</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">Rahmengröße</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="rahmen"
+                    type="text"
+                    name="rahmen"
+                    required>
+                <option value="xs">XS</option>
+                <option value="s">S</option>
+                <option value="m">M</option>
+                <option value="l">L</option>
+                <option value="xl">XL</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">Gabelart</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="gabel"
+                    type="text"
+                    name="gabel"
+                    required>
+                <option value="starrgabel">Starrgabel</option>
+                <option value="federgabel">Federgabel</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">E-Bike-Farbe</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="farbe"
+                    type="text"
+                    name="farbe"
+                    required>
+                <option value="schwarz">Schwarz</option>
+                <option value="weiss">Weiß</option>
+                <option value="grau">Grau</option>
+                <option value="silber">Silber</option>
+                <option value="gold">Gold</option>
+                <option value="rot">Rot</option>
+                <option value="gruen">Grün</option>
+                <option value="blau">Blau</option>
+                <option value="gelb">Gelb</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">Motorgröße</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="motor"
+                    type="text"
+                    name="motor"
+                    required>
+                <option value="250w">250 W</option>
+                <option value="500w">500 W</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">Akkugröße</label>
+        <div class="col-md-10">
+            <select class="form-control"
+                    cam-variable-type="String"
+                    cam-variable-name="akku"
+                    type="text"
+                    name="akku"
+                    required>
+                <option value="300wh">300 Wh</option>
+                <option value="500wh">500 Wh</option>
+                <option value="600wh">600 Wh</option>
+                <option value="nz">nicht zutreffend</option>
+            </select>
+        </div>
+
+        <label class="control-label col-md-2">Sonderwünsche</label>
+        <div class="col-md-10">
+            <textarea class="form-control"
+                      cam-variable-type="String"
+                      cam-variable-name="sonder"
+                      type="text"
+                      name="sonder"
+                      rows="10"
+                      cols="50"></textarea>
+        </div>
+
+        <label class="control-label col-md-2">Anzahl</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="menge"
+                   type="text"
+                   name="menge"
+                   required/>
+        </div>
+    </div>
+</form>

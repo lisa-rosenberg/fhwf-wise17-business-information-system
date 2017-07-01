@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_1w4fx9a">
-    <bpmn:participant id="kunde" name="Kunde" processRef="kunde-fragt-an" />
-    <bpmn:participant id="ebike2020" name="EBIKE2020" processRef="ebike2020-bearbeitet-sonderanfertigungs-anfrage" />
+    <bpmn:participant id="kunde" name="Kunde" processRef="sonderanfertigungsanfrage" />
+    <bpmn:participant id="ebike2020" name="EBIKE2020" processRef="sonderanfertigungsbearbeitung" />
     <bpmn:messageFlow id="MessageFlow_057l0y7" sourceRef="anfrage-fuer-eine-sonderanfertigung-senden" targetRef="start-event-vertrieb" />
     <bpmn:messageFlow id="MessageFlow_1u6hdl6" sourceRef="sende-abfrage-an-kunden" targetRef="message-intermediate-catch-event-kunde-absage-erhalten" />
     <bpmn:messageFlow id="MessageFlow_0woke1h" sourceRef="erstelle-und-versende-angebot" targetRef="message-intermediate-catch-event-zusage-erhalten" />
     <bpmn:messageFlow id="MessageFlow_0297gcy" sourceRef="sende-auftragsbestaetigung" targetRef="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt" />
   </bpmn:collaboration>
-  <bpmn:process id="kunde-fragt-an" name="Kunde fragt an" isExecutable="true">
+  <bpmn:process id="sonderanfertigungsanfrage" name="Sondernanfertigungsanfrage" isExecutable="true">
     <bpmn:exclusiveGateway id="exclusive-gateway-kunde-angebot-pruefen" default="SequenceFlow_15dnzjw">
       <bpmn:incoming>SequenceFlow_1e68uwp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0lflx1l</bpmn:outgoing>
@@ -38,19 +38,19 @@
       <bpmn:incoming>SequenceFlow_18fsyes</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_18cxtan</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:startEvent id="startevent-kunde">
+    <bpmn:startEvent id="start-event-kunde" camunda:formKey="embedded:app:forms/sonderanfertigungsanfrage.html">
       <bpmn:outgoing>SequenceFlow_18fsyes</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0yv2mg2" sourceRef="message-intermediate-catch-event-kunde-absage-erhalten" targetRef="end-event-kunde-absage-erhalten" />
     <bpmn:sequenceFlow id="SequenceFlow_0p9cnte" name="Absage" sourceRef="exclusive-gateway-kunde-anfrage-status" targetRef="message-intermediate-catch-event-kunde-absage-erhalten" />
     <bpmn:sequenceFlow id="SequenceFlow_18cxtan" sourceRef="anfrage-fuer-eine-sonderanfertigung-senden" targetRef="exclusive-gateway-kunde-anfrage-status" />
-    <bpmn:sequenceFlow id="SequenceFlow_18fsyes" sourceRef="startevent-kunde" targetRef="anfrage-fuer-eine-sonderanfertigung-senden" />
+    <bpmn:sequenceFlow id="SequenceFlow_18fsyes" sourceRef="start-event-kunde" targetRef="anfrage-fuer-eine-sonderanfertigung-senden" />
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-zusage-erhalten">
       <bpmn:incoming>SequenceFlow_0ncm4kz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1wpl5rh</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0jxodfd" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="pruefe-angebot" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/Pruefe_Angebot.html" camunda:assignee="demo">
+    <bpmn:userTask id="pruefe-angebot" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/pruefe_angebot.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1wpl5rh</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1e68uwp</bpmn:outgoing>
     </bpmn:userTask>
@@ -66,7 +66,7 @@
       <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
     </bpmn:endEvent>
   </bpmn:process>
-  <bpmn:process id="ebike2020-bearbeitet-sonderanfertigungs-anfrage" name="EBIKE2020 bearbeitet Sonderanfertigungs-Anfrage" isExecutable="true">
+  <bpmn:process id="sonderanfertigungsbearbeitung" name="Sonderanfertigungsbearbeitung" isExecutable="true">
     <bpmn:laneSet>
       <bpmn:lane id="vertrieb" name="Vertrieb">
         <bpmn:flowNodeRef>end-event-angebot-angelegt</bpmn:flowNodeRef>
@@ -113,15 +113,15 @@
     <bpmn:sequenceFlow id="SequenceFlow_07oqxg2" name="machbar" sourceRef="exclusive-gateway-produktion-umsetzung-pruefen" targetRef="erstelle-arbeitsplan-fuer-die-sonderanfertigung" />
     <bpmn:sequenceFlow id="SequenceFlow_0whuzx4" sourceRef="duration-intermediate-catch-event-vertrieb-zeitablauf" targetRef="loesche-angebot" />
     <bpmn:sequenceFlow id="SequenceFlow_1k19amh" sourceRef="sende-abfrage-an-kunden" targetRef="end-event-vertrieb-absage-gesendet" />
-    <bpmn:userTask id="pruefung-auf-bautechnische-umsetzbarkeit" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/Pruefung_auf_bautechnische_Umsetzbarkeit.html" camunda:assignee="demo">
+    <bpmn:userTask id="pruefung-auf-bautechnische-umsetzbarkeit" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/pruefung_auf_bautechnische_umsetzbarkeit.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0dvprvr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lecgg5</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="erstelle-arbeitsplan-fuer-die-sonderanfertigung" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/Erstelle Arbeitsplan_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="erstelle-arbeitsplan-fuer-die-sonderanfertigung" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstelle_arbeitsplan_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_07oqxg2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07887ny</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="ermittle-preise-fuer-zusatzkomponenten" name="Ermittle Preise für Zusatzkomponenten" camunda:formKey="embedded:app:forms/Ermittle_Preise_fuer_Zusatzkomponenten.html" camunda:assignee="demo">
+    <bpmn:userTask id="ermittle-preise-fuer-zusatzkomponenten" name="Ermittle Preise für Zusatzkomponenten" camunda:formKey="embedded:app:forms/ermittle_preise_fuer_zusatzkomponenten.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_07887ny</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qyxu2w</bpmn:outgoing>
     </bpmn:userTask>
@@ -152,7 +152,7 @@
     <bpmn:endEvent id="end-event-vertrieb-absage-gesendet">
       <bpmn:incoming>SequenceFlow_1k19amh</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/Erstellung_der_Anforderungen_fuer_die_Sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0fq5zkc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dvprvr</bpmn:outgoing>
     </bpmn:userTask>
@@ -178,7 +178,7 @@
       <bpmn:outgoing>SequenceFlow_0xz71rc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0ggpewj" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:startEvent id="start-event-vertrieb">
+    <bpmn:startEvent id="start-event-vertrieb" camunda:formKey="embedded:app:forms/sonderanfertigungsbearbeitung.html">
       <bpmn:outgoing>SequenceFlow_0fq5zkc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
@@ -195,7 +195,7 @@
       <bpmndi:BPMNShape id="Participant_0jzvieu_di" bpmnElement="kunde">
         <dc:Bounds x="-20" y="-26" width="1702" height="248" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="startevent-kunde">
+      <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="start-event-kunde">
         <dc:Bounds x="30" y="108" width="36" height="36" />
         <bpmndi:BPMNLabel>
           <dc:Bounds x="3" y="144" width="90" height="0" />

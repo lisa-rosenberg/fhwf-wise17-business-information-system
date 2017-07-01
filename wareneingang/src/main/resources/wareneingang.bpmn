@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_123e87b">
-    <bpmn:participant id="wareneingang" name="Wareneingang" processRef="wareneingang-kontrollieren" />
-    <bpmn:participant id="lager" name="Lager" processRef="lager-lagert-ware-ein-und-verbucht-sie" />
+    <bpmn:participant id="wareneingang" name="Wareneingang" processRef="wareneingangskontrolle" />
+    <bpmn:participant id="lager" name="Lager" processRef="wareneinlagerung" />
     <bpmn:messageFlow id="MessageFlow_0wzgtr5" sourceRef="einlagerungsauftrag-an-lager-senden" targetRef="star-event-lager" />
   </bpmn:collaboration>
-  <bpmn:process id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" isExecutable="true">
+  <bpmn:process id="wareneingangskontrolle" name="Wareneingangskontrolle" isExecutable="true">
     <bpmn:sequenceFlow id="SequenceFlow_1rjprfq" sourceRef="retoure-an-lieferanten-melden" targetRef="end-event-wareneingang-retoure-gemeldet" />
     <bpmn:sequenceFlow id="SequenceFlow_0069w94" sourceRef="einlagerungsauftrag-an-lager-senden" targetRef="end-event-wareneingang-einlagerungsauftrag-gesendet" />
     <bpmn:sequenceFlow id="SequenceFlow_0ie0tuj" sourceRef="exclusive-gateway-einlagerungsauftrag-senden" targetRef="einlagerungsauftrag-an-lager-senden" />
@@ -23,8 +23,8 @@
     <bpmn:sequenceFlow id="SequenceFlow_0742d0c" name="Ware_NIO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="retourenschein-erstellen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!wareIo}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0k02yhk" sourceRef="wareneingangskontrolle" targetRef="exclusive-gateway-wareneingang-ware-kontrollieren" />
-    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="wareneingangskontrolle" />
+    <bpmn:sequenceFlow id="SequenceFlow_0k02yhk" sourceRef="wareneingang-kontrollieren" targetRef="exclusive-gateway-wareneingang-ware-kontrollieren" />
+    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="wareneingang-kontrollieren" />
     <bpmn:sendTask id="einlagerungsauftrag-an-lager-senden" name="Einlagerungsauftrag an Lager senden" camunda:class="de.ostfalia.bis.ss17.wareneingang.message.EinlagerungsauftragAnLagerSenden">
       <bpmn:incoming>SequenceFlow_0ie0tuj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0069w94</bpmn:outgoing>
@@ -69,11 +69,11 @@
       <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="wareneingangskontrolle" name="Wareneingangskontrolle" camunda:formKey="embedded:app:forms/Wareneingangskontrolle.html" camunda:assignee="demo">
+    <bpmn:userTask id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" camunda:formKey="embedded:app:forms/wareneingang_kontrollieren.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k02yhk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:startEvent id="start-event-wareneingang">
+    <bpmn:startEvent id="start-event-wareneingang" camunda:formKey="embedded:app:forms/wareneingangskontrolle.html">
       <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
     </bpmn:startEvent>
@@ -90,8 +90,8 @@
     <bpmn:sequenceFlow id="SequenceFlow_0qvy8lj" sourceRef="auftragsstatus-anpassen-fertig" targetRef="exclusive-gateway-einlagerungsauftrag-senden" />
     <bpmn:sequenceFlow id="SequenceFlow_0tg85ki" sourceRef="fehlmenge-im-auftrag-erfassen" targetRef="parallel-gateway-fehlmenge" />
   </bpmn:process>
-  <bpmn:process id="lager-lagert-ware-ein-und-verbucht-sie" name="Lager lagert Ware ein und verbucht sie" isExecutable="true">
-    <bpmn:startEvent id="star-event-lager">
+  <bpmn:process id="wareneinlagerung" name="Wareneinlagerung" isExecutable="true">
+    <bpmn:startEvent id="star-event-lager" camunda:formKey="embedded:app:forms/wareneinlagerung.html">
       <bpmn:outgoing>SequenceFlow_1yi2fce</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1bpyopv" />
     </bpmn:startEvent>
@@ -102,11 +102,11 @@
       <bpmn:outgoing>SequenceFlow_1szsxv2</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1szsxv2" sourceRef="lagerplatzvergabe" targetRef="transport-zum-lagerfach" />
-    <bpmn:userTask id="transport-zum-lagerfach" name="Transport zum Lagerfach" camunda:formKey="embedded:app:forms/Transport_zum_Lagerfach.html" camunda:assignee="demo">
+    <bpmn:userTask id="transport-zum-lagerfach" name="Transport zum Lagerfach" camunda:formKey="embedded:app:forms/transport_zum_lagerfach.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1szsxv2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bo8pjj</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="ware-im-we-abholen" name="Ware im WE abholen" camunda:formKey="embedded:app:forms/Ware_im_WE_abholen.html" camunda:assignee="demo">
+    <bpmn:userTask id="ware-im-we-abholen" name="Ware im WE abholen" camunda:formKey="embedded:app:forms/ware_im_we_abholen.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1yi2fce</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0llmkls</bpmn:outgoing>
     </bpmn:userTask>
@@ -140,7 +140,7 @@
           <dc:Bounds x="203" y="364" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="UserTask_0bd2hai_di" bpmnElement="wareneingangskontrolle">
+      <bpmndi:BPMNShape id="UserTask_0bd2hai_di" bpmnElement="wareneingang-kontrollieren">
         <dc:Bounds x="263" y="339" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_03med7d_di" bpmnElement="exclusive-gateway-wareneingang-ware-kontrollieren" isMarkerVisible="true">
