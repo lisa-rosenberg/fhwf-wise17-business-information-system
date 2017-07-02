@@ -19,44 +19,45 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Führe Produktkalkulation aus");
 
+        // TODO Float to Double
         final String raeder = (String) delegateExecution.getVariable("raeder");
         final Integer raederTNR = (Integer) delegateExecution.getVariable("raederTNR");
-        final Float raederPreis = (Float) delegateExecution.getVariable("raederPreis");
+        final Float raederPreis = ((Double) delegateExecution.getVariable("raederPreis")).floatValue();
         final Integer raederDS = (Integer) delegateExecution.getVariable("raederDS");
         final Integer raederSPP = (Integer) delegateExecution.getVariable("raederSPP");
         final Float raederGesamtpreis;
 
         final String rahmen = (String) delegateExecution.getVariable("rahmen");
         final Integer rahmenTNR = (Integer) delegateExecution.getVariable("rahmenTNR");
-        final Float rahmenPreis = (Float) delegateExecution.getVariable("rahmenPreis");
+        final Float rahmenPreis = ((Double) delegateExecution.getVariable("rahmenPreis")).floatValue();
         final Integer rahmenDS = (Integer) delegateExecution.getVariable("rahmenDS");
         final Integer rahmenSPP = (Integer) delegateExecution.getVariable("rahmenDS");
         final Float rahmenGesamtpreis;
 
         final String gabel = (String) delegateExecution.getVariable("gabel");
         final Integer gabelTNR = (Integer) delegateExecution.getVariable("gabelTNR");
-        final Float gabelPreis = (Float) delegateExecution.getVariable("gabelPreis");
+        final Float gabelPreis = ((Double) delegateExecution.getVariable("gabelPreis")).floatValue();
         final Integer gabelDS = (Integer) delegateExecution.getVariable("gabelDS");
         final Integer gabelSPP = (Integer) delegateExecution.getVariable("gabelDS");
         final Float gabelGesamtpreis;
 
         final String farbe = (String) delegateExecution.getVariable("farbe");
         final Integer farbeTNR = (Integer) delegateExecution.getVariable("farbeTNR");
-        final Float farbePreis = (Float) delegateExecution.getVariable("farbePreis");
+        final Float farbePreis = ((Double) delegateExecution.getVariable("farbePreis")).floatValue();
         final Integer farbeDS = (Integer) delegateExecution.getVariable("farbeDS");
         final Integer farbeSPP = (Integer) delegateExecution.getVariable("farbeSPP");
         final Float farbeGesamtpreis;
 
         final String motor = (String) delegateExecution.getVariable("motor");
         final Integer motorTNR = (Integer) delegateExecution.getVariable("motorTNR");
-        final Float motorPreis = (Float) delegateExecution.getVariable("motorPreis");
+        final Float motorPreis = ((Double) delegateExecution.getVariable("motorPreis")).floatValue();
         final Integer motorDS = (Integer) delegateExecution.getVariable("motorDS");
         final Integer motorSPP = (Integer) delegateExecution.getVariable("motorSPP");
         final Float motorGesamtpreis;
 
         final String akku = (String) delegateExecution.getVariable("akku");
         final Integer akkuTNR = (Integer) delegateExecution.getVariable("akkuTNR");
-        final Float akkuPreis = (Float) delegateExecution.getVariable("akkuPreis");
+        final Float akkuPreis = ((Double) delegateExecution.getVariable("akkuPreis")).floatValue();
         final Integer akkuDS = (Integer) delegateExecution.getVariable("akkuDS");
         final Integer akkuSPP = (Integer) delegateExecution.getVariable("akkuSPP");
         final Float akkuGesamtpreis;
@@ -67,8 +68,8 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
 
         final Integer menge = (Integer) delegateExecution.getVariable("menge");
 
-        final Float preisEinzeln;
-        final Float preisZwischen;
+        final Double preisEinzeln;
+        final Double preisZwischen;
         final Double preisMwSt;
         final Double preisGesamt;
 
@@ -76,7 +77,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/test", "mysql", "mysql");
+                "jdbc:mysql://localhost/BIS", "root", "mysql");
 
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "SELECT COUNT(*) FROM teil WHERE TNR = ?");
@@ -223,9 +224,9 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         kleinteileGesamtpreis = menge * kleinteilePreis;
         connection.close();
 
-        preisEinzeln = raederPreis + rahmenPreis + gabelPreis + farbePreis + motorPreis + akkuPreis + kleinteilePreis;
-        preisZwischen = raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
-                + akkuGesamtpreis + kleinteileGesamtpreis;
+        preisEinzeln = (double) (raederPreis + rahmenPreis + gabelPreis + farbePreis + motorPreis + akkuPreis + kleinteilePreis);
+        preisZwischen = (double) (raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
+                + akkuGesamtpreis + kleinteileGesamtpreis);
         preisMwSt = preisZwischen * 0.19;
         preisGesamt = preisZwischen + preisMwSt;
 
