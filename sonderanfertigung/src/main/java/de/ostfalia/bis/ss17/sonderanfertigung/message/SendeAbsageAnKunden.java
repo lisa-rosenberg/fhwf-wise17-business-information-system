@@ -20,6 +20,10 @@ public class SendeAbsageAnKunden implements JavaDelegate {
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Absage", messageContent);
+
+        runtimeService.createMessageCorrelation("Neue Absage")
+                .processInstanceId((String) delegateExecution.getVariable("prozess"))
+                .setVariables(messageContent)
+                .correlateAllWithResult();
     }
 }

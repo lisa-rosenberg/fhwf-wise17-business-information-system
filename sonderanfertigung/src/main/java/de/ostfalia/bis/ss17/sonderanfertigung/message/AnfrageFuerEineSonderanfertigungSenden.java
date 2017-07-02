@@ -17,6 +17,7 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
         logger.info("Sende Anfrage für Sonderanfertigung an EBIKE2020Vertrieb");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
+        messageContent.put("prozess", delegateExecution.getProcessInstanceId());
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
         messageContent.put("raeder", delegateExecution.getVariable("raeder"));
         messageContent.put("rahmen", delegateExecution.getVariable("rahmen"));
@@ -28,6 +29,8 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
         messageContent.put("menge", delegateExecution.getVariable("menge"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.startProcessInstanceByMessage("Neue Sonderanfertigungsanfrage", messageContent);
+        runtimeService.createMessageCorrelation("Neue Sonderanfertigungsanfrage")
+                .setVariables(messageContent)
+                .correlateStartMessage();
     }
 }

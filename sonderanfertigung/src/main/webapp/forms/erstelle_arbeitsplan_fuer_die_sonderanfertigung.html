@@ -3,6 +3,18 @@
       role="form">
 
     <div class="form-group">
+        <label class="control-label col-md-2">Prozess-ID</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="prozess"
+                   type="text"
+                   name="prozess"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
         <label class="control-label col-md-2">Kundennummer</label>
         <div class="col-md-10">
             <input class="form-control"
@@ -14,8 +26,6 @@
         </div>
     </div>
 
-    <p>E-Bike-Sonderanfertigunganfrage</p>
-
     <div class="form-group">
 
         <label class="control-label col-md-2">Räder</label>
@@ -25,57 +35,117 @@
                    cam-variable-name="raeder"
                    type="text"
                    name="raeder"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Räder-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="raeder-teilenummer"
+                       type="text"
+                       name="raeder-teilenummer"
+                       required/>
+            </div>
         </div>
 
-        <label class="control-label col-md-2">Rahmengröße</label>
+        <label class="control-label col-md-2">Rahmen</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
                    cam-variable-name="rahmen"
                    type="text"
                    name="rahmen"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Rahmen-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="rahmen"
+                       type="text"
+                       name="rahmen"
+                       required/>
+            </div>
         </div>
 
-        <label class="control-label col-md-2">Gabelart</label>
+        <label class="control-label col-md-2">Gabel</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
                    cam-variable-name="gabel"
                    type="text"
                    name="gabel"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Gabel-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="gabel"
+                       type="text"
+                       name="gabel"
+                       required/>
+            </div>
         </div>
 
-        <label class="control-label col-md-2">E-Bike-Farbe</label>
+        <label class="control-label col-md-2">Farbe</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
                    cam-variable-name="farbe"
                    type="text"
                    name="farbe"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Farbe-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="farbe"
+                       type="text"
+                       name="farbe"
+                       required/>
+            </div>
         </div>
 
-        <label class="control-label col-md-2">Motorgröße</label>
+        <label class="control-label col-md-2">Motor</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
                    cam-variable-name="motor"
                    type="text"
                    name="motor"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Motor-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="motor"
+                       type="text"
+                       name="motor"
+                       readonly="true"/>
+            </div>
         </div>
 
-        <label class="control-label col-md-2">Akkugröße</label>
+        <label class="control-label col-md-2">Akku</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
                    cam-variable-name="akku"
                    type="text"
                    name="akku"
-                   readonly="true"/>
+                   required/>
+
+            <label class="control-label col-md-2">Akku-Teilenummer</label>
+            <div class="col-md-10">
+                <input class="form-control"
+                       cam-variable-type="Integer"
+                       cam-variable-name="akku"
+                       type="text"
+                       name="akku"
+                       required/>
+            </div>
         </div>
 
         <label class="control-label col-md-2">Sonderwünsche</label>
