@@ -21,91 +21,91 @@
         <label class="control-label col-md-2">Räder</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type=String
                     cam-variable-name="raeder"
                     type="text"
                     name="raeder"
                     required>
-                <option value="7001">Drahtreifen 26"</option>
-                <option value="7002">Drahtreifen 27.5"</option>
-                <option value="7003">Drahtreifen 29"</option>
-                <option value="7000">nicht zutreffend</option>
+                <option value="7001-drahtreifen26zoll">Drahtreifen 26"</option>
+                <option value="7002-drahtreifen275zoll">Drahtreifen 27.5"</option>
+                <option value="7003-drahtreifen29zoll">Drahtreifen 29"</option>
+                <option value="7000-nz">nicht zutreffend</option>
             </select>
         </div>
 
         <label class="control-label col-md-2">Rahmengröße</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type="String"
                     cam-variable-name="rahmen"
                     type="text"
                     name="rahmen"
                     required>
-                <option value="3001">XS</option>
-                <option value="3002">S</option>
-                <option value="3003">M</option>
-                <option value="3004">L</option>
-                <option value="3005">XL</option>
-                <option value="3000">nicht zutreffend</option>
+                <option value="3001-xs">XS</option>
+                <option value="3002-s">S</option>
+                <option value="3003-m">M</option>
+                <option value="3004-l">L</option>
+                <option value="3005-xl">XL</option>
+                <option value="3000-nz">nicht zutreffend</option>
             </select>
         </div>
 
         <label class="control-label col-md-2">Gabelart</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type="String"
                     cam-variable-name="gabel"
                     type="text"
                     name="gabel"
                     required>
-                <option value="4001">Starrgabel</option>
-                <option value="4002">Federgabel</option>
-                <option value="4000">nicht zutreffend</option>
+                <option value="4001-starrgabel">Starrgabel</option>
+                <option value="4002-federgabel">Federgabel</option>
+                <option value="4000-nz">nicht zutreffend</option>
             </select>
         </div>
 
         <label class="control-label col-md-2">E-Bike-Farbe</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type="String"
                     cam-variable-name="farbe"
                     type="text"
                     name="farbe"
                     required>
-                <option value="5001">Schwarz</option>
-                <option value="5002">Rot</option>
-                <option value="5003">Blau</option>
-                <option value="5004">Silber</option>
-                <option value="5000">nicht zutreffend</option>
+                <option value="5001-schwarz">Schwarz</option>
+                <option value="5002-rot">Rot</option>
+                <option value="5003-blau">Blau</option>
+                <option value="5004-silber">Silber</option>
+                <option value="5000-nz">nicht zutreffend</option>
             </select>
         </div>
 
         <label class="control-label col-md-2">Motorgröße</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type="String"
                     cam-variable-name="motor"
                     type="text"
                     name="motor"
                     required>
-                <option value="1001">250 W</option>
-                <option value="1002">500 W</option>
-                <option value="1000">nicht zutreffend</option>
+                <option value="1001-250w">250 W</option>
+                <option value="1002-500w">500 W</option>
+                <option value="1000-nz">nicht zutreffend</option>
             </select>
         </div>
 
         <label class="control-label col-md-2">Akkugröße</label>
         <div class="col-md-10">
             <select class="form-control"
-                    cam-variable-type="Integer"
+                    cam-variable-type="String"
                     cam-variable-name="akku"
                     type="text"
                     name="akku"
                     required>
-                <option value="2001">300 Wh</option>
-                <option value="2002">500 Wh</option>
-                <option value="2003">600 Wh</option>
-                <option value="2000">nicht zutreffend</option>
+                <option value="2001-300wh">300 Wh</option>
+                <option value="2002-500wh">500 Wh</option>
+                <option value="2003-600wh">600 Wh</option>
+                <option value="2000-nz">nicht zutreffend</option>
             </select>
         </div>
 
@@ -127,7 +127,8 @@
                    cam-variable-name="menge"
                    type="text"
                    name="menge"
-                   required/>
+                   required>1
+            <input/>
         </div>
 
     </div>

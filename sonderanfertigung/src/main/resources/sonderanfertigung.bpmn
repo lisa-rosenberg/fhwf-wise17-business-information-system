@@ -29,7 +29,7 @@
       <bpmn:outgoing>SequenceFlow_0yv2mg2</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1unqujt" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:eventBasedGateway id="exclusive-gateway-kunde-anfrage-status">
+    <bpmn:eventBasedGateway id="exclusive-gateway-kunde-anfrage-status" name="Warte auf Antwort">
       <bpmn:incoming>SequenceFlow_18cxtan</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0p9cnte</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0ncm4kz</bpmn:outgoing>
@@ -153,12 +153,6 @@
       <bpmn:incoming>SequenceFlow_1k19amh</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
-      <bpmn:extensionElements>
-        <camunda:inputOutput>
-          <camunda:inputParameter name="kunde"><![CDATA[kunde
-]]></camunda:inputParameter>
-        </camunda:inputOutput>
-      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0fq5zkc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dvprvr</bpmn:outgoing>
     </bpmn:userTask>
@@ -166,7 +160,7 @@
       <bpmn:incoming>SequenceFlow_06uno7r</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0xzd1xy</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:eventBasedGateway id="exclusivegateway-vertrieb-1">
+    <bpmn:eventBasedGateway id="exclusivegateway-vertrieb-1" name="Warte auf Antwort">
       <bpmn:incoming>SequenceFlow_0xzd1xy</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1i6o1xo</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1dl9pu1</bpmn:outgoing>
@@ -193,9 +187,9 @@
 </bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:message id="Message_1cvpgkf" name="Neue Sonderanfertigungsanfrage" />
-  <bpmn:message id="Message_0jxodfd" name="Angebot erhalten" />
+  <bpmn:message id="Message_0jxodfd" name="Neues Angebot" />
   <bpmn:message id="Message_1unqujt" name="Neue Absage" />
-  <bpmn:message id="Message_0ggpewj" name="Auftragsbestätigung erhalten" />
+  <bpmn:message id="Message_0ggpewj" name="Neue Auftragsbestätigung" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1w4fx9a">
       <bpmndi:BPMNShape id="Participant_0jzvieu_di" bpmnElement="kunde">
@@ -263,7 +257,7 @@
       <bpmndi:BPMNShape id="ExclusiveGateway_0yqwdbc_di" bpmnElement="exclusive-gateway-produktion-umsetzung-pruefen" isMarkerVisible="true">
         <dc:Bounds x="420" y="484" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="445" y="534" width="0" height="0" />
+          <dc:Bounds x="401" y="534" width="89" height="36" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1lecgg5_di" bpmnElement="SequenceFlow_1lecgg5">
@@ -308,7 +302,7 @@
       <bpmndi:BPMNShape id="EventBasedGateway_0p98w53_di" bpmnElement="exclusive-gateway-kunde-anfrage-status">
         <dc:Bounds x="336" y="101" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="316" y="151" width="90" height="0" />
+          <dc:Bounds x="318" y="151" width="87" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0p9cnte_di" bpmnElement="SequenceFlow_0p9cnte">
@@ -539,7 +533,7 @@
       <bpmndi:BPMNShape id="EventBasedGateway_18rnket_di" bpmnElement="exclusivegateway-vertrieb-1">
         <dc:Bounds x="1128" y="311" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1108" y="361" width="0" height="13" />
+          <dc:Bounds x="1184" y="330" width="87" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1dl9pu1_di" bpmnElement="SequenceFlow_1dl9pu1">
