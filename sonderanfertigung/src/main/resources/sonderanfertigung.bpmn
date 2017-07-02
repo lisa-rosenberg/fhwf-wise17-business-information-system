@@ -153,6 +153,12 @@
       <bpmn:incoming>SequenceFlow_1k19amh</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:inputParameter name="kunde"><![CDATA[kunde
+]]></camunda:inputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
       <bpmn:incoming>SequenceFlow_0fq5zkc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dvprvr</bpmn:outgoing>
     </bpmn:userTask>
@@ -178,7 +184,7 @@
       <bpmn:outgoing>SequenceFlow_0xz71rc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0ggpewj" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:startEvent id="start-event-vertrieb" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html">
+    <bpmn:startEvent id="start-event-vertrieb">
       <bpmn:outgoing>SequenceFlow_0fq5zkc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
@@ -186,9 +192,9 @@
     <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>200 Stunden</bpmn:text>
 </bpmn:textAnnotation>
   </bpmn:process>
-  <bpmn:message id="Message_1cvpgkf" name="Neue Anfrage erhalten" />
+  <bpmn:message id="Message_1cvpgkf" name="Neue Sonderanfertigungsanfrage" />
   <bpmn:message id="Message_0jxodfd" name="Angebot erhalten" />
-  <bpmn:message id="Message_1unqujt" name="Absage erhalten" />
+  <bpmn:message id="Message_1unqujt" name="Neue Absage" />
   <bpmn:message id="Message_0ggpewj" name="Auftragsbestätigung erhalten" />
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
     <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="Collaboration_1w4fx9a">

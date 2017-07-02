@@ -9,7 +9,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_048xdrf" sourceRef="StartEvent_1" targetRef="Task_10kcpm6" />
     <bpmn:sequenceFlow id="SequenceFlow_1entig2" sourceRef="Task_10kcpm6" targetRef="IntermediateThrowEvent_0llag1d" />
     <bpmn:sequenceFlow id="SequenceFlow_1idr6ez" sourceRef="IntermediateThrowEvent_0llag1d" targetRef="EndEvent_0hl7r3a" />
-    <bpmn:startEvent id="StartEvent_1" camunda:formKey="embedded:app:forms/bestellung.html">
+    <bpmn:startEvent id="StartEvent_1">
       <bpmn:outgoing>SequenceFlow_048xdrf</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:userTask id="Task_10kcpm6" name="Bestellung eingeben" camunda:formKey="embedded:app:forms/bestellung.html" camunda:assignee="demo">
