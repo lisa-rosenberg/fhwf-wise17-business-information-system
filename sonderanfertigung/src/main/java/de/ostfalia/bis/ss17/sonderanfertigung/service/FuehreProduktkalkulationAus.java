@@ -65,10 +65,12 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         final Float kleinteilePreis;
         final Float kleinteileGesamtpreis;
 
-        final Integer anzahl = (Integer) delegateExecution.getVariable("anzahl");
+        final Integer menge = (Integer) delegateExecution.getVariable("menge");
 
         final Float preisEinzeln;
-        final Float preisGesamt;
+        final Float preisZwischen;
+        final Double preisMwSt;
+        final Double preisGesamt;
 
         /* Schreibe fehlende Teile in die Datenbank */
 
@@ -208,22 +210,24 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
 
         /* Führe Produktkalkulation durch */
 
-        raederGesamtpreis = anzahl * raederPreis;
-        rahmenGesamtpreis = anzahl * rahmenPreis;
-        gabelGesamtpreis = anzahl * gabelPreis;
-        farbeGesamtpreis = anzahl * farbePreis;
-        motorGesamtpreis = anzahl * motorPreis;
-        akkuGesamtpreis = anzahl * akkuPreis;
+        raederGesamtpreis = menge * raederPreis;
+        rahmenGesamtpreis = menge * rahmenPreis;
+        gabelGesamtpreis = menge * gabelPreis;
+        farbeGesamtpreis = menge * farbePreis;
+        motorGesamtpreis = menge * motorPreis;
+        akkuGesamtpreis = menge * akkuPreis;
 
         preparedStatement = connection.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
         kleinteilePreis = preparedStatement.executeQuery().getFloat(1);
-        kleinteileGesamtpreis = anzahl * kleinteilePreis;
+        kleinteileGesamtpreis = menge * kleinteilePreis;
         connection.close();
 
         preisEinzeln = raederPreis + rahmenPreis + gabelPreis + farbePreis + motorPreis + akkuPreis + kleinteilePreis;
-        preisGesamt = raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
+        preisZwischen = raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
                 + akkuGesamtpreis + kleinteileGesamtpreis;
+        preisMwSt = preisZwischen * 0.19;
+        preisGesamt = preisZwischen + preisMwSt;
 
         /* Gebe Ergebnisse weiter */
 
@@ -237,6 +241,8 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         delegateExecution.setVariable("kleinteilePreis", kleinteilePreis);
         delegateExecution.setVariable("kleinteileGesamtpreis", kleinteileGesamtpreis);
         delegateExecution.setVariable("preisEinzeln", preisEinzeln);
+        delegateExecution.setVariable("preisEinzeln", preisZwischen);
+        delegateExecution.setVariable("preisGesamt", preisMwSt);
         delegateExecution.setVariable("preisGesamt", preisGesamt);
     }
 }

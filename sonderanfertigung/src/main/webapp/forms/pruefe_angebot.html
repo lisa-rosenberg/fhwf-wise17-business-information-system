@@ -1,10 +1,269 @@
-<form name="pruefe_angebot">
+<form name="pruefe_angebot"
+      class="form-horizontal"
+      role="form">
+
     <div class="form-group">
-        <label>Kunde</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="kunde">
+        <label class="control-label col-md-2">Kundennummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="kunde"
+                   type="text"
+                   name="kunde"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Angebotnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="angebot"
+                   type="text"
+                   name="angebot"
+                   readonly="true"/>
+        </div>
     </div>
+
+    <p></p>
+    <p>Vielen Dank für Ihre Anfrage.</p>
+    <p>Wir freuen uns, Ihnen folgendes Angebot machen zu können:</p>
+    <p></p>
+
+    <p>Gewählte E-Bike-Optionen</p>
+
     <div class="form-group">
-        <label>Preis</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="preis">
+        <label class="control-label col-md-2">Räder</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="raeder"
+                   type="text"
+                   name="raeder"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="raederPreis"
+                   type="text"
+                   name="raederPreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Rahmen</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="rahmen"
+                   type="text"
+                   name="rahmen"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="rahmenPreis"
+                   type="text"
+                   name="rahmenPreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Gabel</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="gabel"
+                   type="text"
+                   name="gabel"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="gabelPreis"
+                   type="text"
+                   name="gabelPreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">E-Bike-Farbe</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="farbe"
+                   type="text"
+                   name="farbe"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="farbePreis"
+                   type="text"
+                   name="farbePreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Motor</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="motor"
+                   type="text"
+                   name="motor"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="motorPreis"
+                   type="text"
+                   name="motorPreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Akku</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="akku"
+                   type="text"
+                   name="akku"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="akkuPreis"
+                   type="text"
+                   name="akkuPreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Kleinteile</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="kleinteile"
+                   type="text"
+                   name="kleinteile"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Einzelpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="kleinteilePreis"
+                   type="text"
+                   name="kleinteilePreis"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Anzahl</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="menge"
+                   type="text"
+                   name="menge"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <p>Preiskalkulation</p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Preis pro E-Bike (ohne MwSt.)</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="preisEinzeln"
+                   type="text"
+                   name="preisEinzeln"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Anzahl</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="menge"
+                   type="text"
+                   name="menge"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Zwischensumme</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="preisZwischen"
+                   type="text"
+                   name="preisZwischen"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">19% MwSt.</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="preisMwSt"
+                   type="text"
+                   name="preisMwSt"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Gesamtbetrag</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="preisGesamt"
+                   type="text"
+                   name="preisGesamt"
+                   readonly="true"/>
+        </div>
+    </div>
+
+        <div class="form-group">
+            <div class="col-md-10 col-md-offset-2">
+                <div class="checkbox">
+                    <label>
+                        <input cam-variable-name="angebotAkzeptieren"
+                               cam-variable-type="Boolean"
+                               type="checkbox"
+                               name="angebotAkzeptieren"
+                               class="form-control" />
+                        Möchten Sie dieses Angebot annehmen?
+                    </label>
+                </div>
+            </div>
+        </div>
     </div>
 </form>
