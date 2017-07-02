@@ -1,4 +1,232 @@
-<form name="ermittle_preise_fuer_zusatzkomponenten">
+<form name="ermittle_preise_fuer_zusatzkomponenten"
+      class="form-horizontal"
+      role="form">
+
     <div class="form-group">
+        <label class="control-label col-md-2">Prozess-ID</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="prozess"
+                   type="text"
+                   name="prozess"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Kundennummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="kunde"
+                   type="text"
+                   name="kunde"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Räder</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="raeder"
+                   type="text"
+                   name="raeder"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="raederTNR"
+                   type="text"
+                   name="raederTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="raederPreis"
+                   type="text"
+                   name="raederPreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Rahmen</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="rahmen"
+                   type="text"
+                   name="rahmen"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="rahmenTNR"
+                   type="text"
+                   name="rahmenTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="rahmenPreis"
+                   type="text"
+                   name="rahmenPreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Gabel</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="gabel"
+                   type="text"
+                   name="gabel"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="gabelTNR"
+                   type="text"
+                   name="gabelTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="gabelPreis"
+                   type="text"
+                   name="gabelPreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Farbe</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="farbe"
+                   type="text"
+                   name="farbe"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="farbeTNR"
+                   type="text"
+                   name="farbeTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="farbePreis"
+                   type="text"
+                   name="farbePreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Motor</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="motor"
+                   type="text"
+                   name="motor"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="motorTNR"
+                   type="text"
+                   name="motorTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="motorPreis"
+                   type="text"
+                   name="motorPreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Akku</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="akku"
+                   type="text"
+                   name="akku"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="akkuTNR"
+                   type="text"
+                   name="akkuTNR"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Standardpreis</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="akkuPreis"
+                   type="text"
+                   name="akkuPreis"
+                   required/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Anzahl</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="menge"
+                   type="text"
+                   name="menge"
+                   readonly="true"/>
+        </div>
+    </div>
+
     </div>
 </form>

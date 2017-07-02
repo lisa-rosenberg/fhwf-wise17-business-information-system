@@ -33,14 +33,16 @@ Progress
 - [ ] BPMN anpassen
     - [x] Pool-Einstellungen setzen
     - [x] Java-Klassen bei Service- und Message-Tasks/-Throw Events hinterlegen
-    - [ ] Namen bei Abzweigungen nach Gateways wählen
-    - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
-    - [ ] Assignees bei User Tasks wählen
+    - [x] Namen bei Abzweigungen nach Gateways wählen
+    - [x] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
+    - [x] Assignees bei User Tasks wählen
+        - [ ] (optional) Group Assignees
     - [x] Form Keys (html-Links) bei User Tasks eingeben
-    - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+    - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
 - [ ] forms anpassen
 - [ ] Logger-Infos anpassen
-- [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
+- [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
+- [ ] (optional) JavaScript für Optimierung von html-Forms einsetzen
 
 ### Bug-Tracking
 - BUG-1: x
@@ -75,4 +77,5 @@ Progress
         
 ### Questions
 
-- Prozess_Sonderanfertigung.bpmn: Welche Zeiteinheit soll 200 sein? Bis Klärung als Stunden formatiert.
+- [ ] Prozess_Sonderanfertigung.bpmn: Welche Zeiteinheit soll 200 sein? Bis Klärung als Stunden formatiert.
+- [ ] erstelle_arbeitsplan_fuer_die_sonderanfertigung.html: Was soll hier genau passieren?
