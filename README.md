@@ -7,6 +7,7 @@ Reference
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
 - Abgabe        `07. Juli 2017`
+- Präsentation  `06. Juli 2017, ca. 16:00 Uhr`
 
 #### Rahmenbedingungen
 - Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
