@@ -7,7 +7,7 @@ Reference
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
 - Abgabe        `07. Juli 2017`
-- Präsentation  `06. Juli 2017, ca. 16:00 Uhr`
+- Präsentation  `06. Juli 2017, 16:00 Uhr`
 
 #### Rahmenbedingungen
 - Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
@@ -44,6 +44,7 @@ Progress
 - [ ] Logger-Infos anpassen
 - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 - [ ] (optional) JavaScript für Optimierung von html-Forms einsetzen
+- [ ] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
 
 ### Bug-Tracking
 - BUG-1: x
@@ -80,3 +81,4 @@ Progress
 
 - [ ] Prozess_Sonderanfertigung.bpmn: Welche Zeiteinheit soll 200 sein? Bis Klärung als Stunden formatiert.
 - [ ] erstelle_arbeitsplan_fuer_die_sonderanfertigung.html: Was soll hier genau passieren?
+- [ ] Kleinteile pro Fahrrad - ein oder zwei Mal? Stückliste-PDF suggeriert doppelte Einberechnung.
