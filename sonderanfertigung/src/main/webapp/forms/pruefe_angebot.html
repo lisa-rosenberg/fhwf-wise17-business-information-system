@@ -2,6 +2,8 @@
       class="form-horizontal"
       role="form">
 
+    <p><b>ANGEBOT</b></p>
+
     <div class="form-group">
         <label class="control-label col-md-2">Kundennummer</label>
         <div class="col-md-10">
@@ -24,15 +26,12 @@
         </div>
     </div>
 
-    <p></p>
-    <p>Vielen Dank für Ihre Anfrage.</p>
-    <p>Wir freuen uns, Ihnen folgendes Angebot machen zu können:</p>
-    <p></p>
+    <p>Vielen Dank f&uuml;r Ihre Anfrage. Wir freuen uns, Ihnen folgendes Angebot machen zu k&ouml;nnen:</p>
 
-    <p>Gewählte E-Bike-Optionen</p>
+    <p><u>Gew&auml;hlte E-Bike-Optionen</u></p>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Räder</label>
+        <label class="control-label col-md-2">R&auml;der</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
@@ -54,7 +53,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Rahmen</label>
+        <label class="control-label col-md-2">Rahmengr&ouml;&szlig;e</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
@@ -120,7 +119,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Motor</label>
+        <label class="control-label col-md-2">Motorleistung</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
@@ -142,7 +141,7 @@
     </div>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Akku</label>
+        <label class="control-label col-md-2">Akkuleistung</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
@@ -197,26 +196,16 @@
         </div>
     </div>
 
-    <p>Preiskalkulation</p>
+    <p><u>Preiszusammenstellung</u></p>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Preis pro E-Bike (ohne MwSt.)</label>
+        <label class="control-label col-md-2">Preis pro E-Bike</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="Double"
                    cam-variable-name="preisEinzeln"
                    type="text"
                    name="preisEinzeln"
-                   readonly="true"/>
-        </div>
-
-        <label class="control-label col-md-2">Anzahl</label>
-        <div class="col-md-10">
-            <input class="form-control"
-                   cam-variable-type="Integer"
-                   cam-variable-name="menge"
-                   type="text"
-                   name="menge"
                    readonly="true"/>
         </div>
 
@@ -251,19 +240,19 @@
         </div>
     </div>
 
-        <div class="form-group">
-            <div class="col-md-10 col-md-offset-2">
-                <div class="checkbox">
-                    <label>
-                        <input cam-variable-name="angebotAkzeptieren"
-                               cam-variable-type="Boolean"
-                               type="checkbox"
-                               name="angebotAkzeptieren"
-                               class="form-control" />
-                        Möchten Sie dieses Angebot annehmen?
-                    </label>
-                </div>
-            </div>
+    <p>Wenn Sie das Angebot annehmen m&ouml;chten, haken Sie bitte das nachfolgende Kontrollk&auml;stchen an und klicken auf "Complete".
+        Das Angebot gilt f&uuml;r eine Woche.</p>
+
+    <div class="col-md-10 col-md-offset-2">
+        <div class="checkbox">
+            <label>
+                <input cam-variable-name="angebotAkzeptieren"
+                       cam-variable-type="Boolean"
+                       type="checkbox"
+                       name="angebotAkzeptieren"
+                       class="form-control" />
+                Ich nehme das Angebot zu den angegebenen Konditionen an.
+            </label>
         </div>
     </div>
 </form>

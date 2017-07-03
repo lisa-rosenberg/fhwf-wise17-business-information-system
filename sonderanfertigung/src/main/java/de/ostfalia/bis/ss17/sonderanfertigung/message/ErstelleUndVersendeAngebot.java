@@ -21,7 +21,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/test", "root", "root");
+                "jdbc:mysql://localhost/bis", "root", "mysql");
         connection.setAutoCommit(false);
 
         PreparedStatement preparedStatement = connection.prepareStatement(

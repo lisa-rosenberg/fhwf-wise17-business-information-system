@@ -19,7 +19,6 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Führe Produktkalkulation aus");
 
-        // TODO Float to Double
         final String raeder = (String) delegateExecution.getVariable("raeder");
         final Integer raederTNR = (Integer) delegateExecution.getVariable("raederTNR");
         final Float raederPreis = ((Double) delegateExecution.getVariable("raederPreis")).floatValue();
@@ -63,151 +62,131 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         final Float akkuGesamtpreis;
 
         final String kleinteile = "Kleinteile";
-        final Float kleinteilePreis;
-        final Float kleinteileGesamtpreis;
+        Double kleinteilePreis = null;
+        Double kleinteileGesamtpreis;
 
         final Integer menge = (Integer) delegateExecution.getVariable("menge");
 
-        final Double preisEinzeln;
-        final Double preisZwischen;
-        final Double preisMwSt;
-        final Double preisGesamt;
+        Double preisEinzeln;
+        Double preisZwischen;
+        Double preisMwSt;
+        Double preisGesamt;
 
         /* Schreibe fehlende Teile in die Datenbank */
 
         Class.forName("com.mysql.jdbc.Driver");
-        final Connection connection = DriverManager.getConnection(
-                "jdbc:mysql://localhost/BIS", "root", "mysql");
+        final Connection conn = DriverManager.getConnection(
+                "jdbc:mysql://localhost/bis", "root", "mysql");
+        conn.setAutoCommit(false);
 
-        PreparedStatement preparedStatement = connection.prepareStatement(
+        PreparedStatement stmtSelect = conn.prepareStatement(
                 "SELECT COUNT(*) FROM teil WHERE TNR = ?");
 
-        // Räder
-        preparedStatement.setInt(1, raederTNR);
+        PreparedStatement stmtInsert = conn.prepareStatement(
+                "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
+                        "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, raederTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, raeder);
-            preparedStatement.setFloat(4, raederPreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, raederDS);
-            preparedStatement.setInt(9, raederSPP);
-            preparedStatement.executeUpdate();
+        // Räder
+        stmtSelect.setInt(1, raederTNR);
+        ResultSet rs = stmtSelect.executeQuery();
+
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, raederTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, raeder);
+            stmtInsert.setFloat(4, raederPreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, raederDS);
+            stmtInsert.setInt(9, raederSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
 
         // Rahmen
-        preparedStatement.setInt(1, rahmenTNR);
+        stmtSelect.setInt(1, rahmenTNR);
+        rs = stmtSelect.executeQuery();
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, rahmenTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, rahmen);
-            preparedStatement.setFloat(4, rahmenPreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, rahmenDS);
-            preparedStatement.setInt(9, rahmenSPP);
-            preparedStatement.executeUpdate();
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, rahmenTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, rahmen);
+            stmtInsert.setFloat(4, rahmenPreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, rahmenDS);
+            stmtInsert.setInt(9, rahmenSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
 
         // Gabel
-        preparedStatement.setInt(1, gabelTNR);
+        stmtSelect.setInt(1, gabelTNR);
+        rs = stmtSelect.executeQuery();
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, gabelTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, gabel);
-            preparedStatement.setFloat(4, gabelPreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, gabelDS);
-            preparedStatement.setInt(9, gabelSPP);
-            preparedStatement.executeUpdate();
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, gabelTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, gabel);
+            stmtInsert.setFloat(4, gabelPreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, gabelDS);
+            stmtInsert.setInt(9, gabelSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
 
         // Farbe
-        preparedStatement.setInt(1, farbeTNR);
+        stmtSelect.setInt(1, farbeTNR);
+        rs = stmtSelect.executeQuery();
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, farbeTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, farbe);
-            preparedStatement.setFloat(4, farbePreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, farbeDS);
-            preparedStatement.setInt(9, farbeSPP);
-            preparedStatement.executeUpdate();
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, farbeTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, farbe);
+            stmtInsert.setFloat(4, farbePreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, farbeDS);
+            stmtInsert.setInt(9, farbeSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
 
         // Motor
-        preparedStatement.setInt(1, motorTNR);
+        stmtSelect.setInt(1, motorTNR);
+        rs = stmtSelect.executeQuery();
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, motorTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, motor);
-            preparedStatement.setFloat(4, motorPreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, motorDS);
-            preparedStatement.setInt(9, motorSPP);
-            preparedStatement.executeUpdate();
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, motorTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, motor);
+            stmtInsert.setFloat(4, motorPreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, motorDS);
+            stmtInsert.setInt(9, motorSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
 
         // Akku
-        preparedStatement.setInt(1, akkuTNR);
+        stmtSelect.setInt(1, akkuTNR);
+        rs = stmtSelect.executeQuery();
 
-        if (preparedStatement.executeQuery().getLong(1) == 0) {
-            preparedStatement.close();
-            preparedStatement = connection.prepareStatement(
-                    "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                            "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-            preparedStatement.setInt(1, akkuTNR);
-            preparedStatement.setString(2, "Rohstoff");
-            preparedStatement.setString(3, akku);
-            preparedStatement.setFloat(4, akkuPreis);
-            preparedStatement.setString(5, "ST");
-            preparedStatement.setInt(6, 1);
-            preparedStatement.setInt(7, 1);
-            preparedStatement.setInt(8, akkuDS);
-            preparedStatement.setInt(9, akkuSPP);
-            preparedStatement.executeUpdate();
+        if (rs.next() && rs.getLong(1) == 0) {
+            stmtInsert.setInt(1, akkuTNR);
+            stmtInsert.setString(2, "Rohstoff");
+            stmtInsert.setString(3, akku);
+            stmtInsert.setFloat(4, akkuPreis);
+            stmtInsert.setString(5, "ST");
+            stmtInsert.setInt(6, 1);
+            stmtInsert.setInt(7, 1);
+            stmtInsert.setInt(8, akkuDS);
+            stmtInsert.setInt(9, akkuSPP);
+            stmtInsert.executeUpdate();
         }
-        preparedStatement.close();
-        connection.commit();
 
         /* Führe Produktkalkulation durch */
 
@@ -218,17 +197,26 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         motorGesamtpreis = menge * motorPreis;
         akkuGesamtpreis = menge * akkuPreis;
 
-        preparedStatement = connection.prepareStatement(
+        stmtSelect = conn.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
-        kleinteilePreis = preparedStatement.executeQuery().getFloat(1);
+        rs = stmtSelect.executeQuery();
+
+        if (rs.next()) {
+            kleinteilePreis = (double) (rs.getFloat(1));
+        }
+
         kleinteileGesamtpreis = menge * kleinteilePreis;
-        connection.close();
 
         preisEinzeln = (double) (raederPreis + rahmenPreis + gabelPreis + farbePreis + motorPreis + akkuPreis + kleinteilePreis);
         preisZwischen = (double) (raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
                 + akkuGesamtpreis + kleinteileGesamtpreis);
         preisMwSt = preisZwischen * 0.19;
         preisGesamt = preisZwischen + preisMwSt;
+
+        rs.close();
+        stmtSelect.close();
+        stmtInsert.close();
+        conn.close();
 
         /* Gebe Ergebnisse weiter */
 
@@ -242,8 +230,8 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         delegateExecution.setVariable("kleinteilePreis", kleinteilePreis);
         delegateExecution.setVariable("kleinteileGesamtpreis", kleinteileGesamtpreis);
         delegateExecution.setVariable("preisEinzeln", preisEinzeln);
-        delegateExecution.setVariable("preisEinzeln", preisZwischen);
-        delegateExecution.setVariable("preisGesamt", preisMwSt);
+        delegateExecution.setVariable("preisZwischen", preisZwischen);
+        delegateExecution.setVariable("preisMwSt", preisMwSt);
         delegateExecution.setVariable("preisGesamt", preisGesamt);
     }
 }
