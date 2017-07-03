@@ -188,15 +188,6 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
             stmtInsert.executeUpdate();
         }
 
-        /* Führe Produktkalkulation durch */
-
-        raederGesamtpreis = menge * raederPreis;
-        rahmenGesamtpreis = menge * rahmenPreis;
-        gabelGesamtpreis = menge * gabelPreis;
-        farbeGesamtpreis = menge * farbePreis;
-        motorGesamtpreis = menge * motorPreis;
-        akkuGesamtpreis = menge * akkuPreis;
-
         stmtSelect = conn.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
         rs = stmtSelect.executeQuery();
@@ -205,11 +196,18 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
             kleinteilePreis = (double) (rs.getFloat(1));
         }
 
+        /* Führe Produktkalkulation durch */
+
+        raederGesamtpreis = menge * raederPreis;
+        rahmenGesamtpreis = menge * rahmenPreis;
+        gabelGesamtpreis = menge * gabelPreis;
+        farbeGesamtpreis = menge * farbePreis;
+        motorGesamtpreis = menge * motorPreis;
+        akkuGesamtpreis = menge * akkuPreis;
         kleinteileGesamtpreis = menge * kleinteilePreis;
 
         preisEinzeln = (double) (raederPreis + rahmenPreis + gabelPreis + farbePreis + motorPreis + akkuPreis + kleinteilePreis);
-        preisZwischen = (double) (raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis
-                + akkuGesamtpreis + kleinteileGesamtpreis);
+        preisZwischen = (double) (raederGesamtpreis + rahmenGesamtpreis + gabelGesamtpreis + farbeGesamtpreis + motorGesamtpreis + akkuGesamtpreis + kleinteileGesamtpreis);
         preisMwSt = preisZwischen * 0.19;
         preisGesamt = preisZwischen + preisMwSt;
 

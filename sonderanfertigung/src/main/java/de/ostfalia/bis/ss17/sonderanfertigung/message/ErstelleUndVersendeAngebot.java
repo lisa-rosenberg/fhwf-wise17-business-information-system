@@ -15,7 +15,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Sende Angebot an Kunde (MessageIntermediateCatchEvent)");
+        logger.info("Sende Angebot an Kunden");
 
         /* Angebotserstellung */
 
@@ -56,6 +56,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         /* Angebotsversand */
 
         final HashMap<String, Object> messageContent = new HashMap<>();
+        messageContent.put("refVertrieb", delegateExecution.getProcessInstanceId());
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
         messageContent.put("angebot", angebotId);
         messageContent.put("raeder", delegateExecution.getVariable("raeder"));
@@ -88,11 +89,13 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         messageContent.put("kleinteileGesamtpreis", delegateExecution.getVariable("kleinteileGesamtpreis"));
         messageContent.put("menge", delegateExecution.getVariable("menge"));
         messageContent.put("preisEinzeln", delegateExecution.getVariable("preisEinzeln"));
-        messageContent.put("preisGesamt", delegateExecution.getVariable("PreisGesamt"));
+        messageContent.put("preisZwischen", delegateExecution.getVariable("preisZwischen"));
+        messageContent.put("preisMwSt", delegateExecution.getVariable("preisMwSt"));
+        messageContent.put("preisGesamt", delegateExecution.getVariable("preisGesamt"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neues Angebot")
-                .processInstanceId((String) delegateExecution.getVariable("prozess"))
+                .processInstanceId((String) delegateExecution.getVariable("refKunde"))
                 .setVariables(messageContent)
                 .correlateAllWithResult();
 

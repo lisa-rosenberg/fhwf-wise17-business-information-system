@@ -8,63 +8,63 @@
     <bpmn:messageFlow id="MessageFlow_0woke1h" sourceRef="erstelle-und-versende-angebot" targetRef="message-intermediate-catch-event-zusage-erhalten" />
     <bpmn:messageFlow id="MessageFlow_0297gcy" sourceRef="sende-auftragsbestaetigung" targetRef="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt" />
   </bpmn:collaboration>
-  <bpmn:process id="sonderanfertigungsanfrage" name="Sondernanfertigungsanfrage" isExecutable="true">
-    <bpmn:exclusiveGateway id="exclusive-gateway-kunde-angebot-pruefen" default="SequenceFlow_15dnzjw">
-      <bpmn:incoming>SequenceFlow_1e68uwp</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0lflx1l</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_15dnzjw</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:sequenceFlow id="SequenceFlow_0ncm4kz" name="Zusage" sourceRef="exclusive-gateway-kunde-anfrage-status" targetRef="message-intermediate-catch-event-zusage-erhalten" />
+  <bpmn:process id="sonderanfertigungsanfrage" name="Sonderanfertigungsanfrage" isExecutable="true">
+    <bpmn:sequenceFlow id="SequenceFlow_076rt57" sourceRef="sende-auftragsbestaetigung" targetRef="end-event-kunde-auftrag-akzeptiert" />
     <bpmn:sequenceFlow id="SequenceFlow_1wpl5rh" sourceRef="message-intermediate-catch-event-zusage-erhalten" targetRef="pruefe-angebot" />
-    <bpmn:sequenceFlow id="SequenceFlow_1e68uwp" sourceRef="pruefe-angebot" targetRef="exclusive-gateway-kunde-angebot-pruefen" />
+    <bpmn:sequenceFlow id="SequenceFlow_18fsyes" sourceRef="start-event-kunde" targetRef="anfrage-fuer-eine-sonderanfertigung-senden" />
+    <bpmn:sequenceFlow id="SequenceFlow_0ncm4kz" name="Zusage" sourceRef="exclusive-gateway-kunde-anfrage-status" targetRef="message-intermediate-catch-event-zusage-erhalten" />
+    <bpmn:sequenceFlow id="SequenceFlow_18cxtan" sourceRef="anfrage-fuer-eine-sonderanfertigung-senden" targetRef="exclusive-gateway-kunde-anfrage-status" />
+    <bpmn:sequenceFlow id="SequenceFlow_0p9cnte" name="Absage" sourceRef="exclusive-gateway-kunde-anfrage-status" targetRef="message-intermediate-catch-event-kunde-absage-erhalten" />
+    <bpmn:sequenceFlow id="SequenceFlow_0yv2mg2" sourceRef="message-intermediate-catch-event-kunde-absage-erhalten" targetRef="end-event-kunde-absage-erhalten" />
+    <bpmn:sequenceFlow id="SequenceFlow_15dnzjw" name="Angebot ablehnen" sourceRef="exclusive-gateway-kunde-angebot-pruefen" targetRef="end-event-kunde-angebot-abgelehnt" />
     <bpmn:sequenceFlow id="SequenceFlow_0lflx1l" name="Angebot akzeptieren" sourceRef="exclusive-gateway-kunde-angebot-pruefen" targetRef="sende-auftragsbestaetigung">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${angebotAkzeptieren}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_15dnzjw" name="Angebot ablehnen" sourceRef="exclusive-gateway-kunde-angebot-pruefen" targetRef="end-event-kunde-angebot-abgelehnt" />
-    <bpmn:endEvent id="end-event-kunde-absage-erhalten">
-      <bpmn:incoming>SequenceFlow_0yv2mg2</bpmn:incoming>
+    <bpmn:sequenceFlow id="SequenceFlow_1e68uwp" sourceRef="pruefe-angebot" targetRef="exclusive-gateway-kunde-angebot-pruefen" />
+    <bpmn:endEvent id="end-event-kunde-auftrag-akzeptiert">
+      <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-kunde-absage-erhalten">
-      <bpmn:incoming>SequenceFlow_0p9cnte</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0yv2mg2</bpmn:outgoing>
-      <bpmn:messageEventDefinition messageRef="Message_1unqujt" />
-    </bpmn:intermediateCatchEvent>
-    <bpmn:eventBasedGateway id="exclusive-gateway-kunde-anfrage-status" name="Warte auf Antwort">
-      <bpmn:incoming>SequenceFlow_18cxtan</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0p9cnte</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0ncm4kz</bpmn:outgoing>
-    </bpmn:eventBasedGateway>
-    <bpmn:sendTask id="anfrage-fuer-eine-sonderanfertigung-senden" name="Anfrage für eine Sonderanfertigung senden" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.AnfrageFuerEineSonderanfertigungSenden">
-      <bpmn:incoming>SequenceFlow_18fsyes</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_18cxtan</bpmn:outgoing>
+    <bpmn:sendTask id="sende-auftragsbestaetigung" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAuftragsbestaetigung">
+      <bpmn:incoming>SequenceFlow_0lflx1l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_076rt57</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:startEvent id="start-event-kunde" camunda:formKey="embedded:app:forms/sonderanfertigungsanfrage.html">
-      <bpmn:outgoing>SequenceFlow_18fsyes</bpmn:outgoing>
-    </bpmn:startEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0yv2mg2" sourceRef="message-intermediate-catch-event-kunde-absage-erhalten" targetRef="end-event-kunde-absage-erhalten" />
-    <bpmn:sequenceFlow id="SequenceFlow_0p9cnte" name="Absage" sourceRef="exclusive-gateway-kunde-anfrage-status" targetRef="message-intermediate-catch-event-kunde-absage-erhalten" />
-    <bpmn:sequenceFlow id="SequenceFlow_18cxtan" sourceRef="anfrage-fuer-eine-sonderanfertigung-senden" targetRef="exclusive-gateway-kunde-anfrage-status" />
-    <bpmn:sequenceFlow id="SequenceFlow_18fsyes" sourceRef="start-event-kunde" targetRef="anfrage-fuer-eine-sonderanfertigung-senden" />
+    <bpmn:endEvent id="end-event-kunde-angebot-abgelehnt">
+      <bpmn:incoming>SequenceFlow_15dnzjw</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:userTask id="pruefe-angebot" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/pruefe_angebot.html" camunda:assignee="demo">
+      <bpmn:incoming>SequenceFlow_1wpl5rh</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1e68uwp</bpmn:outgoing>
+    </bpmn:userTask>
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-zusage-erhalten">
       <bpmn:incoming>SequenceFlow_0ncm4kz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1wpl5rh</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0jxodfd" />
     </bpmn:intermediateCatchEvent>
-    <bpmn:userTask id="pruefe-angebot" name="Prüfe Angebot" camunda:formKey="embedded:app:forms/pruefe_angebot.html" camunda:assignee="demo">
-      <bpmn:incoming>SequenceFlow_1wpl5rh</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1e68uwp</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:endEvent id="end-event-kunde-angebot-abgelehnt">
-      <bpmn:incoming>SequenceFlow_15dnzjw</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_076rt57" sourceRef="sende-auftragsbestaetigung" targetRef="end-event-kunde-auftrag-akzeptiert" />
-    <bpmn:sendTask id="sende-auftragsbestaetigung" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAuftragsbestaetigung">
-      <bpmn:incoming>SequenceFlow_0lflx1l</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_076rt57</bpmn:outgoing>
+    <bpmn:startEvent id="start-event-kunde" camunda:formKey="embedded:app:forms/sonderanfertigungsanfrage.html">
+      <bpmn:outgoing>SequenceFlow_18fsyes</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:sendTask id="anfrage-fuer-eine-sonderanfertigung-senden" name="Anfrage für eine Sonderanfertigung senden" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.AnfrageFuerEineSonderanfertigungSenden">
+      <bpmn:incoming>SequenceFlow_18fsyes</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_18cxtan</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:endEvent id="end-event-kunde-auftrag-akzeptiert">
-      <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
+    <bpmn:eventBasedGateway id="exclusive-gateway-kunde-anfrage-status" name="Warte auf Antwort">
+      <bpmn:incoming>SequenceFlow_18cxtan</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0p9cnte</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0ncm4kz</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-kunde-absage-erhalten">
+      <bpmn:incoming>SequenceFlow_0p9cnte</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0yv2mg2</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_1unqujt" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:endEvent id="end-event-kunde-absage-erhalten">
+      <bpmn:incoming>SequenceFlow_0yv2mg2</bpmn:incoming>
     </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="exclusive-gateway-kunde-angebot-pruefen" default="SequenceFlow_15dnzjw">
+      <bpmn:incoming>SequenceFlow_1e68uwp</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0lflx1l</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_15dnzjw</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
   </bpmn:process>
   <bpmn:process id="sonderanfertigungsbearbeitung" name="Sonderanfertigungsbearbeitung" isExecutable="true">
     <bpmn:laneSet>
@@ -170,7 +170,7 @@
       <bpmn:incoming>SequenceFlow_1dl9pu1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0whuzx4</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT200H</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt">
@@ -235,7 +235,7 @@
         <di:waypoint xsi:type="dc:Point" x="87" y="205" />
         <di:waypoint xsi:type="dc:Point" x="87" y="318" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="84.5" y="190" width="90" height="0" />
+          <dc:Bounds x="85" y="190" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0fq5zkc_di" bpmnElement="SequenceFlow_0fq5zkc">
@@ -280,7 +280,7 @@
         <di:waypoint xsi:type="dc:Point" x="538" y="296" />
         <di:waypoint xsi:type="dc:Point" x="537" y="143" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="492.5" y="204.5" width="90" height="0" />
+          <dc:Bounds x="493" y="205" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="SendTask_195pnjb_di" bpmnElement="sende-abfrage-an-kunden">
@@ -302,7 +302,7 @@
       <bpmndi:BPMNShape id="EventBasedGateway_0p98w53_di" bpmnElement="exclusive-gateway-kunde-anfrage-status">
         <dc:Bounds x="336" y="101" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="318" y="151" width="87" height="12" />
+          <dc:Bounds x="318" y="151" width="88" height="12" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0p9cnte_di" bpmnElement="SequenceFlow_0p9cnte">
@@ -366,7 +366,7 @@
         <di:waypoint xsi:type="dc:Point" x="712" y="242" />
         <di:waypoint xsi:type="dc:Point" x="712" y="44" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="814.5" y="227" width="90" height="0" />
+          <dc:Bounds x="815" y="227" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0ncm4kz_di" bpmnElement="SequenceFlow_0ncm4kz">
@@ -381,20 +381,20 @@
         <di:waypoint xsi:type="dc:Point" x="726" y="27" />
         <di:waypoint xsi:type="dc:Point" x="803" y="27" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="719.5" y="12" width="90" height="0" />
+          <dc:Bounds x="720" y="12" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0i77b3d_di" bpmnElement="exclusive-gateway-kunde-angebot-pruefen" isMarkerVisible="true">
         <dc:Bounds x="986" y="2" width="50" height="50" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1011" y="52" width="0" height="0" />
+          <dc:Bounds x="966" y="52" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1e68uwp_di" bpmnElement="SequenceFlow_1e68uwp">
         <di:waypoint xsi:type="dc:Point" x="903" y="27" />
         <di:waypoint xsi:type="dc:Point" x="986" y="27" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="899.5" y="12" width="90" height="0" />
+          <dc:Bounds x="900" y="12" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0lflx1l_di" bpmnElement="SequenceFlow_0lflx1l">
@@ -402,7 +402,7 @@
         <di:waypoint xsi:type="dc:Point" x="1011" y="119" />
         <di:waypoint xsi:type="dc:Point" x="1226" y="119" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="1056.0526805027284" y="84" width="57" height="25" />
+          <dc:Bounds x="1056" y="84" width="57" height="25" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0xzd1xy_di" bpmnElement="SequenceFlow_0xzd1xy">

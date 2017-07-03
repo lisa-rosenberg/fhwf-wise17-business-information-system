@@ -14,12 +14,16 @@ public class SendeAuftragsbestaetigung implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Sende Auftragsbestätigung an EBIKE2020Vertrieb (MessageIntermediateCatchEvent)");
+        logger.info("Sende Auftragsbestätigung an EBIKE2020-Vertrieb");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
+        messageContent.put("angebot", delegateExecution.getVariable("angebot"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Bestellung", messageContent);
+        runtimeService.createMessageCorrelation("Neue Auftragsbestätigung")
+                .processInstanceId((String) delegateExecution.getVariable("refVertrieb"))
+                .setVariables(messageContent)
+                .correlateAllWithResult();
     }
 }

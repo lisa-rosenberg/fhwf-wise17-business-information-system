@@ -145,7 +145,7 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
         /* Absenden der Sonderanfertigungsanfrage */
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("prozess", delegateExecution.getProcessInstanceId());
+        messageContent.put("refKunde", delegateExecution.getProcessInstanceId());
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
         messageContent.put("raeder", raeder);
         messageContent.put("raederTNR", delegateExecution.getVariable("raederTNR"));
