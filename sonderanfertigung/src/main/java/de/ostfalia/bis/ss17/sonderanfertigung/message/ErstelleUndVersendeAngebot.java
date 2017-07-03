@@ -20,45 +20,40 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         /* Angebotserstellung */
 
         Class.forName("com.mysql.jdbc.Driver");
-        final Connection connection = DriverManager.getConnection(
+        final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
-        connection.setAutoCommit(false);
+        conn.setAutoCommit(false);
 
-        PreparedStatement preparedStatement = connection.prepareStatement(
+        PreparedStatement stmtSelect = conn.prepareStatement(
                 "SELECT MAX(ANGEBOTSNR) FROM angebot");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        final Integer maxAngebotId;
-        if (resultSet.next()) {
-            maxAngebotId = resultSet.getInt(1);
+        ResultSet rs = stmtSelect.executeQuery();
+        Integer angebot;
+        if (rs.next()) {
+            angebot = rs.getInt(1);
+            angebot++;
         } else {
-            maxAngebotId = null;
+            angebot = 1;
         }
 
-        final int angebotId;
-        if (maxAngebotId == null) {
-            angebotId = 1;
-        } else {
-            angebotId = maxAngebotId + 1;
-        }
-
-        resultSet.close();
-        preparedStatement.close();
-
-        preparedStatement = connection.prepareStatement(
+        PreparedStatement stmtInsert = conn.prepareStatement(
                 "INSERT INTO angebot(ANGEBOTSNR,VERTRIEBSBEREICHNR,STATUS,DATUM) VALUES(?,?,?,?)");
-        preparedStatement.setInt(1, angebotId);
-        preparedStatement.setInt(2, 1);
-        preparedStatement.setString(3, "offen");
-        preparedStatement.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-        preparedStatement.executeUpdate();
-        preparedStatement.close();
+        stmtInsert.setInt(1, angebot);
+        stmtInsert.setInt(2, 1);
+        stmtInsert.setString(3, "offen");
+        stmtInsert.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+        stmtInsert.executeUpdate();
+
+        rs.close();
+        stmtSelect.close();
+        stmtInsert.close();
+        conn.close();
 
         /* Angebotsversand */
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("refVertrieb", delegateExecution.getProcessInstanceId());
         messageContent.put("kunde", delegateExecution.getVariable("kunde"));
-        messageContent.put("angebot", angebotId);
+        messageContent.put("angebot", angebot);
         messageContent.put("raeder", delegateExecution.getVariable("raeder"));
         messageContent.put("raederTNR", delegateExecution.getVariable("raederTNR"));
         messageContent.put("raederPreis", delegateExecution.getVariable("raederPreis"));

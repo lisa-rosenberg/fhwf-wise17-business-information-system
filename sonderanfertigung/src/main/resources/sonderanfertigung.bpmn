@@ -170,7 +170,7 @@
       <bpmn:incoming>SequenceFlow_1dl9pu1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0whuzx4</bpmn:outgoing>
       <bpmn:timerEventDefinition>
-        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT1M</bpmn:timeDuration>
+        <bpmn:timeDuration xsi:type="bpmn:tFormalExpression">P7D</bpmn:timeDuration>
       </bpmn:timerEventDefinition>
     </bpmn:intermediateCatchEvent>
     <bpmn:intermediateCatchEvent id="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt">
@@ -183,7 +183,7 @@
       <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
     <bpmn:association id="Association_1ni72mt" sourceRef="duration-intermediate-catch-event-vertrieb-zeitablauf" targetRef="TextAnnotation_0yjt5er" />
-    <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>200 Stunden</bpmn:text>
+    <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>7 Tage</bpmn:text>
 </bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:message id="Message_1cvpgkf" name="Neue Sonderanfertigungsanfrage" />
@@ -551,11 +551,11 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="TextAnnotation_0yjt5er_di" bpmnElement="TextAnnotation_0yjt5er">
-        <dc:Bounds x="1325" y="313" width="98" height="30" />
+        <dc:Bounds x="1313" y="321" width="98" height="30" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="Association_1ni72mt_di" bpmnElement="Association_1ni72mt">
         <di:waypoint xsi:type="dc:Point" x="1298" y="374" />
-        <di:waypoint xsi:type="dc:Point" x="1349" y="343" />
+        <di:waypoint xsi:type="dc:Point" x="1337" y="351" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="IntermediateCatchEvent_15dwm7l_di" bpmnElement="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt">
         <dc:Bounds x="1265" y="266" width="36" height="36" />

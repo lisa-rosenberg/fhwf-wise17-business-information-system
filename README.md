@@ -40,11 +40,12 @@ Progress
         - [ ] (optional) Group Assignees
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+    - [ ] (optional) BPMN weiter anpassen, passende Tasks zwischenschalten
 - [ ] forms anpassen
-- [ ] Logger-Infos anpassen
+- [x] Logger-Infos anpassen
 - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 - [ ] (optional) JavaScript für Optimierung von html-Forms einsetzen
-- [ ] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
+- [x] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
 
 ### Bug-Tracking
 - BUG-1: x
