@@ -44,7 +44,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         stmtInsert.setInt(2, 1);
         stmtInsert.setString(3, "offen");
         stmtInsert.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
-        stmtInsert.setInt(2, kundeId);
+        stmtInsert.setInt(5, kundeId);
         stmtInsert.executeUpdate();
         conn.commit();
 
