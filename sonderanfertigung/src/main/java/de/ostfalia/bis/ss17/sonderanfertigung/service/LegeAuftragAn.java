@@ -23,6 +23,7 @@ public class LegeAuftragAn implements JavaDelegate {
         PreparedStatement stmt = conn.prepareStatement(
                 "SELECT MAX(BESTELLNR) FROM bestellung_vertrieb");
         ResultSet rs = stmt.executeQuery();
+
         Integer auftrag;
         if (rs.next()) {
             auftrag = rs.getInt(1);
@@ -38,6 +39,7 @@ public class LegeAuftragAn implements JavaDelegate {
         stmt.setInt(3, 1);
         stmt.executeUpdate();
 
+        conn.commit();
         rs.close();
         stmt.close();
         conn.close();

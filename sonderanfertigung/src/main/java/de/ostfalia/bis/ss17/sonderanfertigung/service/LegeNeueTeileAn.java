@@ -178,6 +178,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.executeUpdate();
         }
 
+        conn.commit();
         rs.close();
         stmtSelect.close();
         stmtInsert.close();

@@ -24,8 +24,11 @@ public class LoescheAngebot implements JavaDelegate {
 
         PreparedStatement stmt = conn.prepareStatement(
                 "DELETE FROM angebot WHERE ANGEBOTSNR = ?");
+
         stmt.setInt(1, angebot);
         stmt.executeQuery();
+
+        conn.commit();
         stmt.close();
         conn.close();
     }

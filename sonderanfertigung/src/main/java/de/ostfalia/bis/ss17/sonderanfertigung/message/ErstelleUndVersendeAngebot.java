@@ -27,6 +27,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         PreparedStatement stmtSelect = conn.prepareStatement(
                 "SELECT MAX(ANGEBOTSNR) FROM angebot");
         ResultSet rs = stmtSelect.executeQuery();
+
         Integer angebot;
         if (rs.next()) {
             angebot = rs.getInt(1);
@@ -43,6 +44,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         stmtInsert.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
         stmtInsert.executeUpdate();
 
+        conn.commit();
         rs.close();
         stmtSelect.close();
         stmtInsert.close();
