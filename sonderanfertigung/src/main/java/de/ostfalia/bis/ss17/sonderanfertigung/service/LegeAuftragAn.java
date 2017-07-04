@@ -15,7 +15,7 @@ public class LegeAuftragAn implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lege Auftrag an");
 
-        //TODO Kundennummer hinterlegen
+        final Integer kundeId = (Integer) delegateExecution.getVariable("kunde");
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -35,10 +35,11 @@ public class LegeAuftragAn implements JavaDelegate {
         }
 
         stmt = conn.prepareStatement(
-                "INSERT INTO bestellung_vertrieb(BESTELLNR,STATUS,VERTRIEBSBEREICHNR) VALUES(?,?,?)");
+                "INSERT INTO bestellung_vertrieb(BESTELLNR,STATUS,VERTRIEBSBEREICHNR,KUNDENNR) VALUES(?,?,?,?)");
         stmt.setInt(1, auftrag);
         stmt.setString(2, "offen");
         stmt.setInt(3, 1);
+        stmt.setInt(1, kundeId);
         stmt.executeUpdate();
         conn.commit();
 

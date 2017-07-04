@@ -31,18 +31,15 @@ public class LegeArbeitsplanAn implements JavaDelegate {
 
         /* Lege neues Teil an */
 
-        //TODO Noch wird die teilId 0 gewählt.
-
         PreparedStatement stmt = conn.prepareStatement(
-                "SELECT MIN(t.TNR) AS NextId " +
-                        "FROM teil t " +
-                        "WHERE NOT EXISTS (SELECT NULL FROM teil n WHERE n.TNR=n.TNR+1 AND n.TNR>10000) " +
-                        "AND t.TNR>10000");
+                "SELECT MAX(TNR) FROM teil");
         ResultSet rs = stmt.executeQuery();
 
-        Integer teilId = 10000;
-        if (rs.next()) {
+        Integer teilId;
+        if (rs.next() && rs.getInt(1)>10000) {
             teilId = rs.getInt(1);
+        } else {
+            teilId = 10001;
         }
 
         stmt = conn.prepareStatement(
@@ -85,8 +82,6 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         conn.commit();
 
         /* Lege Arbeitsgänge und Kostenstellen zum Arbeitsplan an */
-
-        //TODO noch erscheinen keine Datensätze in der Datenbank
 
         stmt = conn.prepareStatement(
                 "INSERT INTO arbeitsplan_ag_ks(APLNR,AGANR,KSTNR,REIHENFOLGEINDEX) VALUES(?,?,?,?)");
