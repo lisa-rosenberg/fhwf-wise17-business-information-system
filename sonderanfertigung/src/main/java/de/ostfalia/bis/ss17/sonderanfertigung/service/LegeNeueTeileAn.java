@@ -91,6 +91,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, raederDS);
             stmtInsert.setInt(9, raederSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
         // Rahmen
@@ -108,6 +109,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, rahmenDS);
             stmtInsert.setInt(9, rahmenSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
         // Gabel
@@ -125,6 +127,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, gabelDS);
             stmtInsert.setInt(9, gabelSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
         // Farbe
@@ -142,6 +145,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, farbeDS);
             stmtInsert.setInt(9, farbeSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
         // Motor
@@ -159,6 +163,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, motorDS);
             stmtInsert.setInt(9, motorSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
         // Akku
@@ -176,9 +181,9 @@ public class LegeNeueTeileAn implements JavaDelegate {
             stmtInsert.setInt(8, akkuDS);
             stmtInsert.setInt(9, akkuSPP);
             stmtInsert.executeUpdate();
+            conn.commit();
         }
 
-        conn.commit();
         rs.close();
         stmtSelect.close();
         stmtInsert.close();

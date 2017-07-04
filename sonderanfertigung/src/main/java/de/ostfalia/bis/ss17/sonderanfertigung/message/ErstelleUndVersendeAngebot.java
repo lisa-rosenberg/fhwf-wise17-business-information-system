@@ -17,6 +17,8 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Angebot an Kunden");
 
+        final Integer kundeId = (Integer) delegateExecution.getVariable("kunde");
+
         /* Angebotserstellung */
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -37,14 +39,15 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         }
 
         PreparedStatement stmtInsert = conn.prepareStatement(
-                "INSERT INTO angebot(ANGEBOTSNR,VERTRIEBSBEREICHNR,STATUS,DATUM) VALUES(?,?,?,?)");
+                "INSERT INTO angebot(ANGEBOTSNR,VERTRIEBSBEREICHNR,STATUS,DATUM) VALUES(?,?,?,?,?)");
         stmtInsert.setInt(1, angebot);
         stmtInsert.setInt(2, 1);
         stmtInsert.setString(3, "offen");
         stmtInsert.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+        stmtInsert.setInt(2, kundeId);
         stmtInsert.executeUpdate();
-
         conn.commit();
+
         rs.close();
         stmtSelect.close();
         stmtInsert.close();

@@ -15,6 +15,8 @@ public class LoescheAngebot implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lösche Angebot");
 
+        //TODO Löschen von dem angelegten Sonderanfertigungs-Teil und Arbeitsplan
+
         final Integer angebot = (Integer) delegateExecution.getVariable("angebot");
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -27,8 +29,8 @@ public class LoescheAngebot implements JavaDelegate {
 
         stmt.setInt(1, angebot);
         stmt.executeQuery();
-
         conn.commit();
+
         stmt.close();
         conn.close();
     }

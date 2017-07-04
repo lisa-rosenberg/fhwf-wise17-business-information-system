@@ -14,7 +14,8 @@
         </div>
     </div>
 
-    <p>Bitte tragen Sie passende Teilenummern f&uuml;r die neuen Teile ein erstellen Sie Arbeitspl&auml;ne f&uuml;r die einzelnen Komponenten.</p>
+    <p>Bitte erstellen Sie den Arbeitsplan f&uuml;r die Sonderanfertigung.</p>
+    <p><u>Anforderungen der Sonderanfertigung:</u></p>
 
     <div class="form-group">
         <label class="control-label col-md-2">R&auml;der</label>
@@ -24,7 +25,7 @@
                    cam-variable-name="raeder"
                    type="text"
                    name="raeder"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -34,7 +35,7 @@
                    cam-variable-name="raederTNR"
                    type="text"
                    name="raederTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
@@ -46,7 +47,7 @@
                    cam-variable-name="rahmen"
                    type="text"
                    name="rahmen"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -56,7 +57,7 @@
                    cam-variable-name="rahmenTNR"
                    type="text"
                    name="rahmenTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
@@ -68,7 +69,7 @@
                    cam-variable-name="gabel"
                    type="text"
                    name="gabel"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -78,7 +79,7 @@
                    cam-variable-name="gabelTNR"
                    type="text"
                    name="gabelTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
@@ -90,7 +91,7 @@
                    cam-variable-name="farbe"
                    type="text"
                    name="farbe"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -100,7 +101,7 @@
                    cam-variable-name="farbeTNR"
                    type="text"
                    name="farbeTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
@@ -112,7 +113,7 @@
                    cam-variable-name="motor"
                    type="text"
                    name="motor"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -122,7 +123,7 @@
                    cam-variable-name="motorTNR"
                    type="text"
                    name="motorTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
@@ -134,7 +135,7 @@
                    cam-variable-name="akku"
                    type="text"
                    name="akku"
-                   required/>
+                   readonly="true"/>
         </div>
 
         <label class="control-label col-md-2">TNR</label>
@@ -144,21 +145,21 @@
                    cam-variable-name="akkuTNR"
                    type="text"
                    name="akkuTNR"
-                   required/>
+                   readonly="true"/>
         </div>
     </div>
 
     <div class="form-group">
         <label class="control-label col-md-2">Sonderw&uuml;nsche</label>
         <div class="col-md-10">
-            <textarea class="form-control"
-                      cam-variable-type="String"
-                      cam-variable-name="sonder"
-                      type="text"
-                      name="sonder"
-                      rows="10"
-                      cols="50"
-                      readonly="true"></textarea>
+                <textarea class="form-control"
+                          cam-variable-type="String"
+                          cam-variable-name="sonder"
+                          type="text"
+                          name="sonder"
+                          rows="10"
+                          cols="50"
+                          readonly="true"></textarea>
         </div>
     </div>
 
@@ -173,4 +174,96 @@
                    readonly="true"/>
         </div>
     </div>
+
+
+    <p><u>Arbeitsplan:</u></p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Bezeichnung f&uuml;r Sonderanfertigung</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="sonderanfertigung"
+                   type="text"
+                   name="sonderanfertigung"
+                   required/>
+        </div>
+    </div>
+
+    <label class="control-label col-md-2">Durchzuf&uuml;hrende Arbeiten:</label>
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="lackierung"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="lackierung"
+                           class="form-control"
+                           checked
+                           disabled="true"/>
+                    Lackierung
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="rahmenmontage"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="rahmenmontage"
+                           class="form-control"
+                           checked
+                           disabled="true"/>
+                    Rahmenmontage
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="motorenmontage"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="motorenmontage"
+                           class="form-control"
+                           checked
+                           disabled="true"/>
+                    Motorenmontage
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="radmontage"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="radmontage"
+                           class="form-control"
+                           checked
+                           disabled="true"/>
+                    Radmontage
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="nachbearbeitung"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="nachbearbeitung"
+                           class="form-control"/>
+                    Nachbearbeitung
+                </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input cam-variable-name="qualitaetskontrolle"
+                           cam-variable-type="Boolean"
+                           type="checkbox"
+                           name="qualitaetskontrolle"
+                           class="form-control"
+                           checked
+                           disabled="true"/>
+                    Qualit&auml;tskontrolle
+                </label>
+            </div>
+        </div>
+    </div>
+
 </form>

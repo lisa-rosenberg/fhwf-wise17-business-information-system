@@ -15,6 +15,8 @@ public class LegeAuftragAn implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lege Auftrag an");
 
+        //TODO Kundennummer hinterlegen
+
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
@@ -38,8 +40,8 @@ public class LegeAuftragAn implements JavaDelegate {
         stmt.setString(2, "offen");
         stmt.setInt(3, 1);
         stmt.executeUpdate();
-
         conn.commit();
+
         rs.close();
         stmt.close();
         conn.close();
