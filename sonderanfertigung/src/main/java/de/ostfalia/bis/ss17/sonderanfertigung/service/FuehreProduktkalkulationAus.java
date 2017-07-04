@@ -37,7 +37,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         final Float akkuPreis = ((Double) delegateExecution.getVariable("akkuPreis")).floatValue();
         final Float akkuGesamtpreis;
 
-        final String kleinteile = "Kleinteile";
+        final String kleinteileBez = "Kleinteile";
         Double kleinteilePreis = null;
         Double kleinteileGesamtpreis;
 
@@ -89,7 +89,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         delegateExecution.setVariable("farbeGesamtpreis", farbeGesamtpreis);
         delegateExecution.setVariable("motorGesamtpreis", motorGesamtpreis);
         delegateExecution.setVariable("akkuGesamtpreis", akkuGesamtpreis);
-        delegateExecution.setVariable("kleinteile", kleinteile);
+        delegateExecution.setVariable("kleinteileBez", kleinteileBez);
         delegateExecution.setVariable("kleinteilePreis", kleinteilePreis);
         delegateExecution.setVariable("kleinteileGesamtpreis", kleinteileGesamtpreis);
         delegateExecution.setVariable("preisEinzeln", preisEinzeln);

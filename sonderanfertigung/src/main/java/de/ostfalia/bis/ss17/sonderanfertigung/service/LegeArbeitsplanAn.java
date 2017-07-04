@@ -21,7 +21,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lege Arbeitsplan an");
 
-        final String sonderanfertigung = (String) delegateExecution.getVariable("sonderanfertigung");
+        final String sonderanfertigungBez = (String) delegateExecution.getVariable("sonderanfertigungBez");
         final Boolean nachbearbeitung = (Boolean) delegateExecution.getVariable("nachbearbeitung");
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -48,7 +48,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
 
         stmt.setInt(1, teilId);
         stmt.setString(2, "Sonderanfertigung");
-        stmt.setString(3, sonderanfertigung);
+        stmt.setString(3, sonderanfertigungBez);
         stmt.setString(4, "ST");
         stmt.setInt(5, 1);
         stmt.setInt(6, 1);

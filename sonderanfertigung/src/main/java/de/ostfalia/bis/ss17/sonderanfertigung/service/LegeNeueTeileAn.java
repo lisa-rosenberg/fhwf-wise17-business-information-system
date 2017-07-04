@@ -26,38 +26,38 @@ public class LegeNeueTeileAn implements JavaDelegate {
 
         logger.info("Führe Produktkalkulation aus");
 
-        final String raeder = (String) delegateExecution.getVariable("raeder");
-        final Integer raederTNR = (Integer) delegateExecution.getVariable("raederTNR");
+        final Integer raederId = (Integer) delegateExecution.getVariable("raederId");
+        final String raederBez = (String) delegateExecution.getVariable("raederBez");
         final Float raederPreis = ((Double) delegateExecution.getVariable("raederPreis")).floatValue();
         final Integer raederDS = (Integer) delegateExecution.getVariable("raederDS");
         final Integer raederSPP = (Integer) delegateExecution.getVariable("raederSPP");
 
-        final String rahmen = (String) delegateExecution.getVariable("rahmen");
-        final Integer rahmenTNR = (Integer) delegateExecution.getVariable("rahmenTNR");
+        final Integer rahmenId = (Integer) delegateExecution.getVariable("rahmenId");
+        final String rahmenBez = (String) delegateExecution.getVariable("rahmenBez");
         final Float rahmenPreis = ((Double) delegateExecution.getVariable("rahmenPreis")).floatValue();
         final Integer rahmenDS = (Integer) delegateExecution.getVariable("rahmenDS");
         final Integer rahmenSPP = (Integer) delegateExecution.getVariable("rahmenDS");
 
-        final String gabel = (String) delegateExecution.getVariable("gabel");
-        final Integer gabelTNR = (Integer) delegateExecution.getVariable("gabelTNR");
+        final Integer gabelId = (Integer) delegateExecution.getVariable("gabelId");
+        final String gabelBez = (String) delegateExecution.getVariable("gabelBez");
         final Float gabelPreis = ((Double) delegateExecution.getVariable("gabelPreis")).floatValue();
         final Integer gabelDS = (Integer) delegateExecution.getVariable("gabelDS");
         final Integer gabelSPP = (Integer) delegateExecution.getVariable("gabelDS");
 
-        final String farbe = (String) delegateExecution.getVariable("farbe");
-        final Integer farbeTNR = (Integer) delegateExecution.getVariable("farbeTNR");
+        final Integer farbeId = (Integer) delegateExecution.getVariable("farbeId");
+        final String farbeBez = (String) delegateExecution.getVariable("farbeBez");
         final Float farbePreis = ((Double) delegateExecution.getVariable("farbePreis")).floatValue();
         final Integer farbeDS = (Integer) delegateExecution.getVariable("farbeDS");
         final Integer farbeSPP = (Integer) delegateExecution.getVariable("farbeSPP");
 
-        final String motor = (String) delegateExecution.getVariable("motor");
-        final Integer motorTNR = (Integer) delegateExecution.getVariable("motorTNR");
+        final Integer motorId = (Integer) delegateExecution.getVariable("motorId");
+        final String motorBez = (String) delegateExecution.getVariable("motorBez");
         final Float motorPreis = ((Double) delegateExecution.getVariable("motorPreis")).floatValue();
         final Integer motorDS = (Integer) delegateExecution.getVariable("motorDS");
         final Integer motorSPP = (Integer) delegateExecution.getVariable("motorSPP");
 
-        final String akku = (String) delegateExecution.getVariable("akku");
-        final Integer akkuTNR = (Integer) delegateExecution.getVariable("akkuTNR");
+        final Integer akkuId = (Integer) delegateExecution.getVariable("akkuId");
+        final String akkuBez = (String) delegateExecution.getVariable("akkuBez");
         final Float akkuPreis = ((Double) delegateExecution.getVariable("akkuPreis")).floatValue();
         final Integer akkuDS = (Integer) delegateExecution.getVariable("akkuDS");
         final Integer akkuSPP = (Integer) delegateExecution.getVariable("akkuSPP");
@@ -77,13 +77,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
                         "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
 
         // Räder
-        stmtSelect.setInt(1, raederTNR);
+        stmtSelect.setInt(1, raederId);
         ResultSet rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, raederTNR);
+            stmtInsert.setInt(1, raederId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, raeder);
+            stmtInsert.setString(3, raederBez);
             stmtInsert.setFloat(4, raederPreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);
@@ -95,13 +95,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
         }
 
         // Rahmen
-        stmtSelect.setInt(1, rahmenTNR);
+        stmtSelect.setInt(1, rahmenId);
         rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, rahmenTNR);
+            stmtInsert.setInt(1, rahmenId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, rahmen);
+            stmtInsert.setString(3, rahmenBez);
             stmtInsert.setFloat(4, rahmenPreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);
@@ -113,13 +113,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
         }
 
         // Gabel
-        stmtSelect.setInt(1, gabelTNR);
+        stmtSelect.setInt(1, gabelId);
         rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, gabelTNR);
+            stmtInsert.setInt(1, gabelId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, gabel);
+            stmtInsert.setString(3, gabelBez);
             stmtInsert.setFloat(4, gabelPreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);
@@ -131,13 +131,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
         }
 
         // Farbe
-        stmtSelect.setInt(1, farbeTNR);
+        stmtSelect.setInt(1, farbeId);
         rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, farbeTNR);
+            stmtInsert.setInt(1, farbeId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, farbe);
+            stmtInsert.setString(3, farbeBez);
             stmtInsert.setFloat(4, farbePreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);
@@ -149,13 +149,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
         }
 
         // Motor
-        stmtSelect.setInt(1, motorTNR);
+        stmtSelect.setInt(1, motorId);
         rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, motorTNR);
+            stmtInsert.setInt(1, motorId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, motor);
+            stmtInsert.setString(3, motorBez);
             stmtInsert.setFloat(4, motorPreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);
@@ -167,13 +167,13 @@ public class LegeNeueTeileAn implements JavaDelegate {
         }
 
         // Akku
-        stmtSelect.setInt(1, akkuTNR);
+        stmtSelect.setInt(1, akkuId);
         rs = stmtSelect.executeQuery();
 
         if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, akkuTNR);
+            stmtInsert.setInt(1, akkuId);
             stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, akku);
+            stmtInsert.setString(3, akkuBez);
             stmtInsert.setFloat(4, akkuPreis);
             stmtInsert.setString(5, "ST");
             stmtInsert.setInt(6, 1);

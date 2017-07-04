@@ -16,8 +16,9 @@ public class LoescheAngebot implements JavaDelegate {
         logger.info("Lösche Angebot");
 
         //TODO Löschen von dem angelegten Sonderanfertigungs-Teil und Arbeitsplan
+        //TODO Löschen des angelegten Auftrages funktioniert noch nicht?
 
-        final Integer angebot = (Integer) delegateExecution.getVariable("angebot");
+        final Integer angebotId = (Integer) delegateExecution.getVariable("angebotId");
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -27,7 +28,7 @@ public class LoescheAngebot implements JavaDelegate {
         PreparedStatement stmt = conn.prepareStatement(
                 "DELETE FROM angebot WHERE ANGEBOTSNR = ?");
 
-        stmt.setInt(1, angebot);
+        stmt.setInt(1, angebotId);
         stmt.executeQuery();
         conn.commit();
 

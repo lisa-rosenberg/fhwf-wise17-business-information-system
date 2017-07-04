@@ -17,7 +17,7 @@ public class SendeAbsageAnKunden implements JavaDelegate {
         logger.info("Sende Absage an Kunden");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("kunde", delegateExecution.getVariable("kunde"));
+        messageContent.put("kundeId", delegateExecution.getVariable("kundeId"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
 

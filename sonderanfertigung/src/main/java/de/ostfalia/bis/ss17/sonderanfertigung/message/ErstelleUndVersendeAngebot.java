@@ -17,7 +17,7 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Angebot an Kunden");
 
-        final Integer kundeId = (Integer) delegateExecution.getVariable("kunde");
+        final Integer kundeId = (Integer) delegateExecution.getVariable("kundeId");
 
         /* Angebotserstellung */
 
@@ -30,17 +30,17 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
                 "SELECT MAX(ANGEBOTSNR) FROM angebot");
         ResultSet rs = stmtSelect.executeQuery();
 
-        Integer angebot;
+        Integer angebotId;
         if (rs.next()) {
-            angebot = rs.getInt(1);
-            angebot++;
+            angebotId = rs.getInt(1);
+            angebotId++;
         } else {
-            angebot = 1;
+            angebotId = 1;
         }
 
         PreparedStatement stmtInsert = conn.prepareStatement(
-                "INSERT INTO angebot(ANGEBOTSNR,VERTRIEBSBEREICHNR,STATUS,DATUM) VALUES(?,?,?,?,?)");
-        stmtInsert.setInt(1, angebot);
+                "INSERT INTO angebot(ANGEBOTSNR,VERTRIEBSBEREICHNR,STATUS,DATUM,KUNDENNR) VALUES(?,?,?,?,?)");
+        stmtInsert.setInt(1, angebotId);
         stmtInsert.setInt(2, 1);
         stmtInsert.setString(3, "offen");
         stmtInsert.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
@@ -57,34 +57,34 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("refVertrieb", delegateExecution.getProcessInstanceId());
-        messageContent.put("kunde", delegateExecution.getVariable("kunde"));
-        messageContent.put("angebot", angebot);
-        messageContent.put("raeder", delegateExecution.getVariable("raeder"));
-        messageContent.put("raederTNR", delegateExecution.getVariable("raederTNR"));
+        messageContent.put("kundeId", delegateExecution.getVariable("kundeId"));
+        messageContent.put("angebotId", angebotId);
+        messageContent.put("raederId", delegateExecution.getVariable("raederId"));
+        messageContent.put("raederBez", delegateExecution.getVariable("raederBez"));
         messageContent.put("raederPreis", delegateExecution.getVariable("raederPreis"));
         messageContent.put("raederGesamtpreis", delegateExecution.getVariable("raederGesamtpreis"));
-        messageContent.put("rahmen", delegateExecution.getVariable("rahmen"));
-        messageContent.put("rahmenTNR", delegateExecution.getVariable("rahmenTNR"));
+        messageContent.put("rahmenId", delegateExecution.getVariable("rahmenId"));
+        messageContent.put("rahmenBez", delegateExecution.getVariable("rahmenBez"));
         messageContent.put("rahmenPreis", delegateExecution.getVariable("rahmenPreis"));
         messageContent.put("rahmenGesamtpreis", delegateExecution.getVariable("rahmenGesamtpreis"));
-        messageContent.put("gabel", delegateExecution.getVariable("gabel"));
-        messageContent.put("gabelTNR", delegateExecution.getVariable("gabelTNR"));
+        messageContent.put("gabelId", delegateExecution.getVariable("gabelId"));
+        messageContent.put("gabelBez", delegateExecution.getVariable("gabelBez"));
         messageContent.put("gabelPreis", delegateExecution.getVariable("gabelPreis"));
         messageContent.put("gabelGesamtpreis", delegateExecution.getVariable("gabelGesamtpreis"));
-        messageContent.put("farbe", delegateExecution.getVariable("farbe"));
-        messageContent.put("farbeTNR", delegateExecution.getVariable("farbeTNR"));
+        messageContent.put("farbeId", delegateExecution.getVariable("farbeId"));
+        messageContent.put("farbeBez", delegateExecution.getVariable("farbeBez"));
         messageContent.put("farbePreis", delegateExecution.getVariable("farbePreis"));
         messageContent.put("farbeGesamtpreis", delegateExecution.getVariable("farbeGesamtpreis"));
-        messageContent.put("motor", delegateExecution.getVariable("motor"));
-        messageContent.put("motorTNR", delegateExecution.getVariable("motorTNR"));
+        messageContent.put("motorId", delegateExecution.getVariable("motorId"));
+        messageContent.put("motorBez", delegateExecution.getVariable("motorBez"));
         messageContent.put("motorPreis", delegateExecution.getVariable("motorPreis"));
         messageContent.put("motorGesamtpreis", delegateExecution.getVariable("motorGesamtpreis"));
-        messageContent.put("akku", delegateExecution.getVariable("akku"));
-        messageContent.put("akkuTNR", delegateExecution.getVariable("akkuTNR"));
+        messageContent.put("akkuId", delegateExecution.getVariable("akkuId"));
+        messageContent.put("akkuBez", delegateExecution.getVariable("akkuBez"));
         messageContent.put("akkuPreis", delegateExecution.getVariable("akkuPreis"));
         messageContent.put("akkuGesamtpreis", delegateExecution.getVariable("akkuGesamtpreis"));
-        messageContent.put("kleinteile", delegateExecution.getVariable("kleinteile"));
-        messageContent.put("kleinteileTNR", delegateExecution.getVariable("kleinteileTNR"));
+        messageContent.put("kleinteileId", delegateExecution.getVariable("kleinteileId"));
+        messageContent.put("kleinteileBez", delegateExecution.getVariable("kleinteileBez"));
         messageContent.put("kleinteilePreis", delegateExecution.getVariable("kleinteilePreis"));
         messageContent.put("kleinteileGesamtpreis", delegateExecution.getVariable("kleinteileGesamtpreis"));
         messageContent.put("menge", delegateExecution.getVariable("menge"));

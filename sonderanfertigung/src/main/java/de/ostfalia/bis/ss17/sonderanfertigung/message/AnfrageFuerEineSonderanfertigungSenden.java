@@ -21,38 +21,38 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Anfrage für Sonderanfertigung an EBIKE2020-Vertrieb");
 
-        String raeder = null;
-        Integer raederTNR = (Integer) delegateExecution.getVariable("raederTNR");
+        Integer raederId = (Integer) delegateExecution.getVariable("raederId");
+        String raederBez = null;
         Double raederPreis = null;
         Integer raederDS = null;
         Integer raederSPP = null;
 
-        String rahmen = null;
-        Integer rahmenTNR = (Integer) delegateExecution.getVariable("rahmenTNR");
+        Integer rahmenId = (Integer) delegateExecution.getVariable("rahmenId");
+        String rahmenBez = null;
         Double rahmenPreis = null;
         Integer rahmenDS = null;
         Integer rahmenSPP = null;
 
-        String gabel = null;
-        Integer gabelTNR = (Integer) delegateExecution.getVariable("gabelTNR");
+        Integer gabelId = (Integer) delegateExecution.getVariable("gabelId");
+        String gabelBez = null;
         Double gabelPreis = null;
         Integer gabelDS = null;
         Integer gabelSPP = null;
 
-        String farbe = null;
-        Integer farbeTNR = (Integer) delegateExecution.getVariable("farbeTNR");
+        Integer farbeId = (Integer) delegateExecution.getVariable("farbeId");
+        String farbeBez = null;
         Double farbePreis = null;
         Integer farbeDS = null;
         Integer farbeSPP = null;
 
-        String motor = null;
-        Integer motorTNR = (Integer) delegateExecution.getVariable("motorTNR");
+        Integer motorId = (Integer) delegateExecution.getVariable("motorId");
+        String motorBez = null;
         Double motorPreis = null;
         Integer motorDS = null;
         Integer motorSPP = null;
 
-        String akku = null;
-        Integer akkuTNR = (Integer) delegateExecution.getVariable("akkuTNR");
+        Integer akkuId = (Integer) delegateExecution.getVariable("akkuId");
+        String akkuBez = null;
         Double akkuPreis = null;
         Integer akkuDS = null;
         Integer akkuSPP = null;
@@ -67,75 +67,75 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
                 "SELECT * FROM teil WHERE TNR = ?");
 
         // Räder
-        stmt.setInt(1, raederTNR);
+        stmt.setInt(1, raederId);
         ResultSet rs = stmt.executeQuery();
         if (rs.next()) {
-            raeder = rs.getString("BEZEICHNUNG");
+            raederBez = rs.getString("BEZEICHNUNG");
             raederPreis = (double) (rs.getFloat("STANDARDPREIS"));
             raederDS = rs.getInt("DISPOSITIONSSTUFE");
             raederSPP = rs.getInt("stueck_pro_pal");
         } else {
-            raederTNR = null;
+            raederId = null;
         }
 
         // Rahmen
-        stmt.setInt(1, rahmenTNR);
+        stmt.setInt(1, rahmenId);
         rs = stmt.executeQuery();
         if (rs.next()) {
-            rahmen = rs.getString("BEZEICHNUNG");
+            rahmenBez = rs.getString("BEZEICHNUNG");
             rahmenPreis = (double) (rs.getFloat("STANDARDPREIS"));
             rahmenDS = rs.getInt("DISPOSITIONSSTUFE");
             rahmenSPP = rs.getInt("stueck_pro_pal");
         } else {
-            rahmenTNR = null;
+            rahmenId = null;
         }
 
         // Gabel
-        stmt.setInt(1, gabelTNR);
+        stmt.setInt(1, gabelId);
         rs = stmt.executeQuery();
         if (rs.next()) {
-            gabel = rs.getString("BEZEICHNUNG");
+            gabelBez = rs.getString("BEZEICHNUNG");
             gabelPreis = (double) (rs.getFloat("STANDARDPREIS"));
             gabelDS = rs.getInt("DISPOSITIONSSTUFE");
             gabelSPP = rs.getInt("stueck_pro_pal");
         } else {
-            gabelTNR = null;
+            gabelId = null;
         }
 
         // Farbe
-        stmt.setInt(1, farbeTNR);
+        stmt.setInt(1, farbeId);
         rs = stmt.executeQuery();
         if (rs.next()) {
-            farbe = rs.getString("BEZEICHNUNG");
+            farbeBez = rs.getString("BEZEICHNUNG");
             farbePreis = (double) (rs.getFloat("STANDARDPREIS"));
             farbeDS = rs.getInt("DISPOSITIONSSTUFE");
             farbeSPP = rs.getInt("stueck_pro_pal");
         } else {
-            farbeTNR = null;
+            farbeId = null;
         }
 
         // Motor
-        stmt.setInt(1, motorTNR);
+        stmt.setInt(1, motorId);
         rs = stmt.executeQuery();
         if (rs.next()) {
-            motor = rs.getString("BEZEICHNUNG");
+            motorBez = rs.getString("BEZEICHNUNG");
             motorPreis = (double) (rs.getFloat("STANDARDPREIS"));
             motorDS = rs.getInt("DISPOSITIONSSTUFE");
             motorSPP = rs.getInt("stueck_pro_pal");
         } else {
-            motorTNR = null;
+            motorId = null;
         }
 
         // Akku
-        stmt.setInt(1, akkuTNR);
+        stmt.setInt(1, akkuId);
         rs = stmt.executeQuery();
         if (rs.next()) {
-            akku = rs.getString("BEZEICHNUNG");
+            akkuBez = rs.getString("BEZEICHNUNG");
             akkuPreis = (double) (rs.getFloat("STANDARDPREIS"));
             akkuDS = rs.getInt("DISPOSITIONSSTUFE");
             akkuSPP = rs.getInt("stueck_pro_pal");
         } else {
-            akkuTNR = null;
+            akkuId = null;
         }
 
         rs.close();
@@ -146,34 +146,34 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
 
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("refKunde", delegateExecution.getProcessInstanceId());
-        messageContent.put("kunde", delegateExecution.getVariable("kunde"));
-        messageContent.put("raeder", raeder);
-        messageContent.put("raederTNR", raederTNR);
+        messageContent.put("kundeId", delegateExecution.getVariable("kundeId"));
+        messageContent.put("raederId", raederId);
+        messageContent.put("raederBez", raederBez);
         messageContent.put("raederPreis", raederPreis);
         messageContent.put("raederDS", raederDS);
         messageContent.put("raederSPP", raederSPP);
-        messageContent.put("rahmen", rahmen);
-        messageContent.put("rahmenTNR", rahmenTNR);
+        messageContent.put("rahmenId", rahmenId);
+        messageContent.put("rahmenBez", rahmenBez);
         messageContent.put("rahmenPreis", rahmenPreis);
         messageContent.put("rahmenDS", rahmenDS);
         messageContent.put("rahmenSPP", rahmenSPP);
-        messageContent.put("gabel", gabel);
-        messageContent.put("gabelTNR", gabelTNR);
+        messageContent.put("gabelId", gabelId);
+        messageContent.put("gabelBez", gabelBez);
         messageContent.put("gabelPreis", gabelPreis);
         messageContent.put("gabelDS", gabelDS);
         messageContent.put("gabelSPP", gabelSPP);
-        messageContent.put("farbe", farbe);
-        messageContent.put("farbeTNR", farbeTNR);
+        messageContent.put("farbeId", farbeId);
+        messageContent.put("farbeBez", farbeBez);
         messageContent.put("farbePreis", farbePreis);
         messageContent.put("farbeDS", farbeDS);
         messageContent.put("farbeSPP", farbeSPP);
-        messageContent.put("motor", motor);
-        messageContent.put("motorTNR", motorTNR);
+        messageContent.put("motorId", motorId);
+        messageContent.put("motorBez", motorBez);
         messageContent.put("motorPreis", motorPreis);
         messageContent.put("motorDS", motorDS);
         messageContent.put("motorSPP", motorSPP);
-        messageContent.put("akku", akku);
-        messageContent.put("akkuTNR", akkuTNR);
+        messageContent.put("akkuId", akkuId);
+        messageContent.put("akkuBez", akkuBez);
         messageContent.put("akkuPreis", akkuPreis);
         messageContent.put("akkuDS", akkuDS);
         messageContent.put("akkuSPP", akkuSPP);

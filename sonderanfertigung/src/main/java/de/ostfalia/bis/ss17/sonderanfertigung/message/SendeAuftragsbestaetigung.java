@@ -17,8 +17,8 @@ public class SendeAuftragsbestaetigung implements JavaDelegate {
         logger.info("Sende Auftragsbestätigung an EBIKE2020-Vertrieb");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("kunde", delegateExecution.getVariable("kunde"));
-        messageContent.put("angebot", delegateExecution.getVariable("angebot"));
+        messageContent.put("kundeId", delegateExecution.getVariable("kundeId"));
+        messageContent.put("angebotId", delegateExecution.getVariable("angebotId"));
 
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neue Auftragsbestätigung")

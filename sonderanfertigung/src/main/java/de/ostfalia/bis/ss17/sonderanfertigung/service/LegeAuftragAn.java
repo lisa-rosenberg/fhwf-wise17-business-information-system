@@ -15,7 +15,7 @@ public class LegeAuftragAn implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lege Auftrag an");
 
-        final Integer kundeId = (Integer) delegateExecution.getVariable("kunde");
+        final Integer kundeId = (Integer) delegateExecution.getVariable("kundeId");
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -26,20 +26,20 @@ public class LegeAuftragAn implements JavaDelegate {
                 "SELECT MAX(BESTELLNR) FROM bestellung_vertrieb");
         ResultSet rs = stmt.executeQuery();
 
-        Integer auftrag;
+        Integer auftragId;
         if (rs.next()) {
-            auftrag = rs.getInt(1);
-            auftrag++;
+            auftragId = rs.getInt(1);
+            auftragId++;
         } else {
-            auftrag = 1;
+            auftragId = 1;
         }
 
         stmt = conn.prepareStatement(
                 "INSERT INTO bestellung_vertrieb(BESTELLNR,STATUS,VERTRIEBSBEREICHNR,KUNDENNR) VALUES(?,?,?,?)");
-        stmt.setInt(1, auftrag);
+        stmt.setInt(1, auftragId);
         stmt.setString(2, "offen");
         stmt.setInt(3, 1);
-        stmt.setInt(1, kundeId);
+        stmt.setInt(4, kundeId);
         stmt.executeUpdate();
         conn.commit();
 
