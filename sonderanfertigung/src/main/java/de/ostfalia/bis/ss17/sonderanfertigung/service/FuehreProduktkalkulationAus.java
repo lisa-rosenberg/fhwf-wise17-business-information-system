@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-@SuppressWarnings("Duplicates")
+@SuppressWarnings({"Duplicates", "ConstantConditions"})
 public class FuehreProduktkalkulationAus implements JavaDelegate {
 
     private final static Logger logger = LoggerFactory.getLogger(FuehreProduktkalkulationAus.class);
@@ -19,46 +19,22 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Führe Produktkalkulation aus");
 
-        final String raeder = (String) delegateExecution.getVariable("raeder");
-        final Integer raederTNR = (Integer) delegateExecution.getVariable("raederTNR");
         final Float raederPreis = ((Double) delegateExecution.getVariable("raederPreis")).floatValue();
-        final Integer raederDS = (Integer) delegateExecution.getVariable("raederDS");
-        final Integer raederSPP = (Integer) delegateExecution.getVariable("raederSPP");
         final Float raederGesamtpreis;
 
-        final String rahmen = (String) delegateExecution.getVariable("rahmen");
-        final Integer rahmenTNR = (Integer) delegateExecution.getVariable("rahmenTNR");
         final Float rahmenPreis = ((Double) delegateExecution.getVariable("rahmenPreis")).floatValue();
-        final Integer rahmenDS = (Integer) delegateExecution.getVariable("rahmenDS");
-        final Integer rahmenSPP = (Integer) delegateExecution.getVariable("rahmenDS");
         final Float rahmenGesamtpreis;
 
-        final String gabel = (String) delegateExecution.getVariable("gabel");
-        final Integer gabelTNR = (Integer) delegateExecution.getVariable("gabelTNR");
         final Float gabelPreis = ((Double) delegateExecution.getVariable("gabelPreis")).floatValue();
-        final Integer gabelDS = (Integer) delegateExecution.getVariable("gabelDS");
-        final Integer gabelSPP = (Integer) delegateExecution.getVariable("gabelDS");
         final Float gabelGesamtpreis;
 
-        final String farbe = (String) delegateExecution.getVariable("farbe");
-        final Integer farbeTNR = (Integer) delegateExecution.getVariable("farbeTNR");
         final Float farbePreis = ((Double) delegateExecution.getVariable("farbePreis")).floatValue();
-        final Integer farbeDS = (Integer) delegateExecution.getVariable("farbeDS");
-        final Integer farbeSPP = (Integer) delegateExecution.getVariable("farbeSPP");
         final Float farbeGesamtpreis;
 
-        final String motor = (String) delegateExecution.getVariable("motor");
-        final Integer motorTNR = (Integer) delegateExecution.getVariable("motorTNR");
         final Float motorPreis = ((Double) delegateExecution.getVariable("motorPreis")).floatValue();
-        final Integer motorDS = (Integer) delegateExecution.getVariable("motorDS");
-        final Integer motorSPP = (Integer) delegateExecution.getVariable("motorSPP");
         final Float motorGesamtpreis;
 
-        final String akku = (String) delegateExecution.getVariable("akku");
-        final Integer akkuTNR = (Integer) delegateExecution.getVariable("akkuTNR");
         final Float akkuPreis = ((Double) delegateExecution.getVariable("akkuPreis")).floatValue();
-        final Integer akkuDS = (Integer) delegateExecution.getVariable("akkuDS");
-        final Integer akkuSPP = (Integer) delegateExecution.getVariable("akkuSPP");
         final Float akkuGesamtpreis;
 
         final String kleinteile = "Kleinteile";
@@ -72,7 +48,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         Double preisMwSt;
         Double preisGesamt;
 
-        /* Schreibe fehlende Teile in die Datenbank */
+        /* Hole fehlende Daten */
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -80,117 +56,8 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         conn.setAutoCommit(false);
 
         PreparedStatement stmtSelect = conn.prepareStatement(
-                "SELECT COUNT(*) FROM teil WHERE TNR = ?");
-
-        PreparedStatement stmtInsert = conn.prepareStatement(
-                "INSERT INTO teil(TNR,ART,BEZEICHNUNG,STANDARDPREIS,BASISMENGENEINHEIT,PRODGRUPPENNR," +
-                        "SPARTENR,DISPOSITIONSSTUFE,stueck_pro_pal) VALUES(?,?,?,?,?,?,?,?,?)");
-
-        // Räder
-        stmtSelect.setInt(1, raederTNR);
-        ResultSet rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, raederTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, raeder);
-            stmtInsert.setFloat(4, raederPreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, raederDS);
-            stmtInsert.setInt(9, raederSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        // Rahmen
-        stmtSelect.setInt(1, rahmenTNR);
-        rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, rahmenTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, rahmen);
-            stmtInsert.setFloat(4, rahmenPreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, rahmenDS);
-            stmtInsert.setInt(9, rahmenSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        // Gabel
-        stmtSelect.setInt(1, gabelTNR);
-        rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, gabelTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, gabel);
-            stmtInsert.setFloat(4, gabelPreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, gabelDS);
-            stmtInsert.setInt(9, gabelSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        // Farbe
-        stmtSelect.setInt(1, farbeTNR);
-        rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, farbeTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, farbe);
-            stmtInsert.setFloat(4, farbePreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, farbeDS);
-            stmtInsert.setInt(9, farbeSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        // Motor
-        stmtSelect.setInt(1, motorTNR);
-        rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, motorTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, motor);
-            stmtInsert.setFloat(4, motorPreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, motorDS);
-            stmtInsert.setInt(9, motorSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        // Akku
-        stmtSelect.setInt(1, akkuTNR);
-        rs = stmtSelect.executeQuery();
-
-        if (rs.next() && rs.getLong(1) == 0) {
-            stmtInsert.setInt(1, akkuTNR);
-            stmtInsert.setString(2, "Rohstoff");
-            stmtInsert.setString(3, akku);
-            stmtInsert.setFloat(4, akkuPreis);
-            stmtInsert.setString(5, "ST");
-            stmtInsert.setInt(6, 1);
-            stmtInsert.setInt(7, 1);
-            stmtInsert.setInt(8, akkuDS);
-            stmtInsert.setInt(9, akkuSPP);
-            stmtInsert.executeUpdate();
-        }
-
-        stmtSelect = conn.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
-        rs = stmtSelect.executeQuery();
+        ResultSet rs = stmtSelect.executeQuery();
 
         if (rs.next()) {
             kleinteilePreis = (double) (rs.getFloat(1));
@@ -213,7 +80,6 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
 
         rs.close();
         stmtSelect.close();
-        stmtInsert.close();
         conn.close();
 
         /* Gebe Ergebnisse weiter */

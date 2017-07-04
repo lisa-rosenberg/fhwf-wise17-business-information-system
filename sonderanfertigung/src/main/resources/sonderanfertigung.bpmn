@@ -21,13 +21,6 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${angebotAkzeptieren}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_1e68uwp" sourceRef="pruefe-angebot" targetRef="exclusive-gateway-kunde-angebot-pruefen" />
-    <bpmn:endEvent id="end-event-kunde-auftrag-akzeptiert">
-      <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sendTask id="sende-auftragsbestaetigung" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAuftragsbestaetigung">
-      <bpmn:incoming>SequenceFlow_0lflx1l</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_076rt57</bpmn:outgoing>
-    </bpmn:sendTask>
     <bpmn:endEvent id="end-event-kunde-angebot-abgelehnt">
       <bpmn:incoming>SequenceFlow_15dnzjw</bpmn:incoming>
     </bpmn:endEvent>
@@ -65,6 +58,13 @@
       <bpmn:outgoing>SequenceFlow_0lflx1l</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_15dnzjw</bpmn:outgoing>
     </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="end-event-kunde-auftrag-akzeptiert">
+      <bpmn:incoming>SequenceFlow_076rt57</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="sende-auftragsbestaetigung" name="Sende Auftragsbestätigung" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAuftragsbestaetigung">
+      <bpmn:incoming>SequenceFlow_0lflx1l</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_076rt57</bpmn:outgoing>
+    </bpmn:sendTask>
   </bpmn:process>
   <bpmn:process id="sonderanfertigungsbearbeitung" name="Sonderanfertigungsbearbeitung" isExecutable="true">
     <bpmn:laneSet>
@@ -84,7 +84,8 @@
         <bpmn:flowNodeRef>start-event-vertrieb</bpmn:flowNodeRef>
       </bpmn:lane>
       <bpmn:lane id="beschaffung" name="Beschaffung">
-        <bpmn:flowNodeRef>ermittle-preise-fuer-zusatzkomponenten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>ermittle-fehlende-daten-fuer-zusatzkomponenten</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>lege-neue-teile-an</bpmn:flowNodeRef>
         <bpmn:childLaneSet xsi:type="bpmn:tLaneSet" />
       </bpmn:lane>
       <bpmn:lane id="produktion" name="Produktion">
@@ -103,12 +104,12 @@
     <bpmn:sequenceFlow id="SequenceFlow_1p00z2x" name="nicht_machbar" sourceRef="exclusive-gateway-produktion-umsetzung-pruefen" targetRef="sende-abfrage-an-kunden">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!machbar}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0qyxu2w" sourceRef="ermittle-preise-fuer-zusatzkomponenten" targetRef="fuehre-produktkalulation-aus" />
+    <bpmn:sequenceFlow id="SequenceFlow_0qyxu2w" sourceRef="ermittle-fehlende-daten-fuer-zusatzkomponenten" targetRef="lege-neue-teile-an" />
     <bpmn:sequenceFlow id="SequenceFlow_06uno7r" sourceRef="fuehre-produktkalulation-aus" targetRef="erstelle-und-versende-angebot" />
     <bpmn:sequenceFlow id="SequenceFlow_0xzd1xy" sourceRef="erstelle-und-versende-angebot" targetRef="exclusivegateway-vertrieb-1" />
     <bpmn:sequenceFlow id="SequenceFlow_1i6o1xo" name="Auftrag bestätigt" sourceRef="exclusivegateway-vertrieb-1" targetRef="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt" />
     <bpmn:sequenceFlow id="SequenceFlow_0xz71rc" sourceRef="message-intermediate-catch-event-vertrieb-auftrag-bestaetigt" targetRef="lege-auftrag-an" />
-    <bpmn:sequenceFlow id="SequenceFlow_07887ny" sourceRef="erstelle-arbeitsplan-fuer-die-sonderanfertigung" targetRef="ermittle-preise-fuer-zusatzkomponenten" />
+    <bpmn:sequenceFlow id="SequenceFlow_07887ny" sourceRef="erstelle-arbeitsplan-fuer-die-sonderanfertigung" targetRef="ermittle-fehlende-daten-fuer-zusatzkomponenten" />
     <bpmn:sequenceFlow id="SequenceFlow_1lecgg5" sourceRef="pruefung-auf-bautechnische-umsetzbarkeit" targetRef="exclusive-gateway-produktion-umsetzung-pruefen" />
     <bpmn:sequenceFlow id="SequenceFlow_07oqxg2" name="machbar" sourceRef="exclusive-gateway-produktion-umsetzung-pruefen" targetRef="erstelle-arbeitsplan-fuer-die-sonderanfertigung" />
     <bpmn:sequenceFlow id="SequenceFlow_0whuzx4" sourceRef="duration-intermediate-catch-event-vertrieb-zeitablauf" targetRef="loesche-angebot" />
@@ -120,10 +121,6 @@
     <bpmn:userTask id="erstelle-arbeitsplan-fuer-die-sonderanfertigung" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstelle_arbeitsplan_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_07oqxg2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07887ny</bpmn:outgoing>
-    </bpmn:userTask>
-    <bpmn:userTask id="ermittle-preise-fuer-zusatzkomponenten" name="Ermittle Preise für Zusatzkomponenten" camunda:formKey="embedded:app:forms/ermittle_preise_fuer_zusatzkomponenten.html" camunda:assignee="demo">
-      <bpmn:incoming>SequenceFlow_07887ny</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0qyxu2w</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:endEvent id="end-event-angebot-angelegt">
       <bpmn:incoming>SequenceFlow_0rnxzdd</bpmn:incoming>
@@ -142,7 +139,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0rnxzdd" sourceRef="lege-auftrag-an" targetRef="end-event-angebot-angelegt" />
     <bpmn:sequenceFlow id="SequenceFlow_10q4rh4" sourceRef="loesche-angebot" targetRef="end-event-vertrieb-angebot-geloescht" />
     <bpmn:serviceTask id="fuehre-produktkalulation-aus" name="Führe Produktkalulation aus" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.service.FuehreProduktkalkulationAus">
-      <bpmn:incoming>SequenceFlow_0qyxu2w</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1d99h22</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_06uno7r</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sendTask id="sende-abfrage-an-kunden" name="Sende Absage an Kunden" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.message.SendeAbsageAnKunden">
@@ -182,6 +179,15 @@
       <bpmn:outgoing>SequenceFlow_0fq5zkc</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_1cvpgkf" />
     </bpmn:startEvent>
+    <bpmn:sequenceFlow id="SequenceFlow_1d99h22" sourceRef="lege-neue-teile-an" targetRef="fuehre-produktkalulation-aus" />
+    <bpmn:userTask id="ermittle-fehlende-daten-fuer-zusatzkomponenten" name="Ermittle fehlende Daten für Zusatzkomponenten" camunda:formKey="embedded:app:forms/ermittle_fehlende_daten_fuer_zusatzkomponenten.html" camunda:assignee="demo">
+      <bpmn:incoming>SequenceFlow_07887ny</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0qyxu2w</bpmn:outgoing>
+    </bpmn:userTask>
+    <bpmn:serviceTask id="lege-neue-teile-an" name="Lege neue Teile an" camunda:class="de.ostfalia.bis.ss17.sonderanfertigung.service.LegeNeueTeileAn">
+      <bpmn:incoming>SequenceFlow_0qyxu2w</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1d99h22</bpmn:outgoing>
+    </bpmn:serviceTask>
     <bpmn:association id="Association_1ni72mt" sourceRef="duration-intermediate-catch-event-vertrieb-zeitablauf" targetRef="TextAnnotation_0yjt5er" />
     <bpmn:textAnnotation id="TextAnnotation_0yjt5er">    <bpmn:text>7 Tage</bpmn:text>
 </bpmn:textAnnotation>
@@ -251,7 +257,7 @@
         <di:waypoint xsi:type="dc:Point" x="261" y="509" />
         <di:waypoint xsi:type="dc:Point" x="280" y="509" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="231" y="422.5" width="90" height="0" />
+          <dc:Bounds x="231" y="423" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ExclusiveGateway_0yqwdbc_di" bpmnElement="exclusive-gateway-produktion-umsetzung-pruefen" isMarkerVisible="true">
@@ -328,20 +334,19 @@
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_07887ny_di" bpmnElement="SequenceFlow_07887ny">
         <di:waypoint xsi:type="dc:Point" x="654" y="549" />
-        <di:waypoint xsi:type="dc:Point" x="654" y="582" />
-        <di:waypoint xsi:type="dc:Point" x="654" y="582" />
-        <di:waypoint xsi:type="dc:Point" x="654" y="618" />
+        <di:waypoint xsi:type="dc:Point" x="654" y="594" />
+        <di:waypoint xsi:type="dc:Point" x="419" y="594" />
+        <di:waypoint xsi:type="dc:Point" x="419" y="658" />
+        <di:waypoint xsi:type="dc:Point" x="447" y="658" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="624" y="582" width="90" height="0" />
+          <dc:Bounds x="491.5" y="579" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0qyxu2w_di" bpmnElement="SequenceFlow_0qyxu2w">
-        <di:waypoint xsi:type="dc:Point" x="704" y="658" />
-        <di:waypoint xsi:type="dc:Point" x="764" y="658" />
-        <di:waypoint xsi:type="dc:Point" x="764" y="336" />
-        <di:waypoint xsi:type="dc:Point" x="790" y="336" />
+        <di:waypoint xsi:type="dc:Point" x="547" y="658" />
+        <di:waypoint xsi:type="dc:Point" x="714" y="658" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="734" y="497" width="90" height="0" />
+          <dc:Bounds x="585.5" y="643" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_06uno7r_di" bpmnElement="SequenceFlow_06uno7r">
@@ -512,8 +517,8 @@
       <bpmndi:BPMNShape id="UserTask_1f89veq_di" bpmnElement="erstelle-arbeitsplan-fuer-die-sonderanfertigung">
         <dc:Bounds x="604" y="469" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="UserTask_1bxfng8_di" bpmnElement="ermittle-preise-fuer-zusatzkomponenten">
-        <dc:Bounds x="604" y="618" width="100" height="80" />
+      <bpmndi:BPMNShape id="UserTask_1bxfng8_di" bpmnElement="ermittle-fehlende-daten-fuer-zusatzkomponenten">
+        <dc:Bounds x="447" y="618" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ServiceTask_1pvg9iw_di" bpmnElement="fuehre-produktkalulation-aus">
         <dc:Bounds x="790" y="296" width="100" height="80" />
@@ -575,6 +580,17 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="42" y="354" width="0" height="12" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SequenceFlow_1d99h22_di" bpmnElement="SequenceFlow_1d99h22">
+        <di:waypoint xsi:type="dc:Point" x="764" y="618" />
+        <di:waypoint xsi:type="dc:Point" x="764" y="336" />
+        <di:waypoint xsi:type="dc:Point" x="790" y="336" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="779" y="470.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_0czd806_di" bpmnElement="lege-neue-teile-an">
+        <dc:Bounds x="714" y="618" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
