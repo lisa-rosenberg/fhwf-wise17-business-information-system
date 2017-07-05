@@ -15,7 +15,7 @@ public class WarenbuchungBestaende implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Buche Warenbuchung (Bestände)");
+        logger.info("Buche Warenbuchung");
 
         // DB
         Class.forName("com.mysql.jdbc.Driver");
@@ -30,7 +30,8 @@ public class WarenbuchungBestaende implements JavaDelegate {
 
         // Eintragen:
         // UPDATE bis.lagerfach SET TEIL_TNR = 7001, BESTAND_STUECK = IFNULL(BESTAND_STUECK, 0) + 20 WHERE FACHNR = 7;
-        final PreparedStatement stmt = conn.prepareStatement("UPDATE bis.lagerfach SET TEIL_TNR = ?, BESTAND_STUECK = IFNULL(BESTAND_STUECK, 0) + ? WHERE FACHNR = ?");
+        final PreparedStatement stmt = conn.prepareStatement(
+                "UPDATE bis.lagerfach SET TEIL_TNR = ?, BESTAND_STUECK = IFNULL(BESTAND_STUECK, 0) + ? WHERE FACHNR = ?");
 
         stmt.setInt(1, teilId);
         stmt.setInt(2, menge);

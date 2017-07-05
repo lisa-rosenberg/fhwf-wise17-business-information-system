@@ -54,10 +54,22 @@
                            cam-variable-type="Boolean"
                            type="checkbox"
                            name="wareIo"
+                           onchange="checkWareNIO()"
                            class="form-control" />
                     Ware in Ordnung?
                 </label>
             </div>
+        </div>
+
+        <label class="control-label col-md-2">Festgestellte M&auml;ngel</label>
+        <div class="col-md-10">
+            <textarea class="form-control"
+                      cam-variable-type="String"
+                      cam-variable-name="maengel"
+                      type="text"
+                      name="maengel"
+                      rows="10"
+                      cols="50"></textarea>
         </div>
     </div>
 
@@ -103,5 +115,11 @@
         } else {
             document.wareneingangKontrollieren.fehlmenge.value = "false";
         }
+    }
+
+    function checkWareNIO() {
+        var checkboxWareIo = document.wareneingangKontrollieren.wareIo;
+
+        document.wareneingangKontrollieren.maengel.disabled = checkboxWareIo.checked;
     }
 </script>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.8.0">
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camunda="http://camunda.org/schema/1.0/bpmn" id="Definitions_1" targetNamespace="http://bpmn.io/schema/bpmn" exporter="Camunda Modeler" exporterVersion="1.7.2">
   <bpmn:collaboration id="Collaboration_123e87b">
     <bpmn:participant id="wareneingang" name="Wareneingang" processRef="wareneingangskontrolle" />
     <bpmn:participant id="lager" name="Lager" processRef="wareneinlagerung" />
@@ -40,13 +40,9 @@
     </bpmn:sendTask>
     <bpmn:exclusiveGateway id="exclusive-gateway-retoure-melden">
       <bpmn:incoming>SequenceFlow_03uhljm</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1iqagzp</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0rkcif0</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="retourenschein-erstellen" name="Retourenschein erstellen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.RetourenscheinErstellen">
-      <bpmn:incoming>SequenceFlow_0742d0c</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="exclusive-gateway-wareneingang-ware-kontrollieren" default="SequenceFlow_0u9zksa">
       <bpmn:incoming>SequenceFlow_0k02yhk</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
@@ -85,7 +81,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0u9zksa" name="Ware_IO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="exclusive-gateway-warenmenge-kontrollieren" />
     <bpmn:sequenceFlow id="SequenceFlow_1rjprfq" sourceRef="retoure-an-lieferanten-melden" targetRef="end-event-wareneingang-retoure-gemeldet" />
     <bpmn:sequenceFlow id="SequenceFlow_0rkcif0" sourceRef="exclusive-gateway-retoure-melden" targetRef="retoure-an-lieferanten-melden" />
-    <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="retourenschein-erstellen" targetRef="exclusive-gateway-retoure-melden" />
+    <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="retourenschein-erstellen" targetRef="retourenschein-pruefen" />
     <bpmn:sequenceFlow id="SequenceFlow_0742d0c" name="Ware_NIO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="retourenschein-erstellen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!wareIo}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
@@ -101,9 +97,15 @@
       <bpmn:outgoing>SequenceFlow_15k2dha</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_06f89v5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:textAnnotation id="TextAnnotation_1p99x0x">    <bpmn:text>Hinweis: Für Demonstrationszwecke wird hier die Bestellung eingegeben, damit eine in der DB zum Bearbeiten existiert</bpmn:text>
-</bpmn:textAnnotation>
-    <bpmn:association id="Association_02v6198" sourceRef="start-event-wareneingang" targetRef="TextAnnotation_1p99x0x" />
+    <bpmn:serviceTask id="retourenschein-erstellen" name="Retourenschein erstellen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.RetourenscheinErstellen">
+      <bpmn:incoming>SequenceFlow_0742d0c</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_1iqagzp" sourceRef="retourenschein-pruefen" targetRef="exclusive-gateway-retoure-melden" />
+    <bpmn:userTask id="retourenschein-pruefen" name="Retourenschein prüfen" camunda:formKey="embedded:app:forms/retourenschein-pruefen.html" camunda:assignee="demo">
+      <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1iqagzp</bpmn:outgoing>
+    </bpmn:userTask>
   </bpmn:process>
   <bpmn:process id="wareneinlagerung" name="Wareneinlagerung" isExecutable="true">
     <bpmn:startEvent id="star-event-lager" camunda:formKey="embedded:app:forms/wareneinlagerung.html">
@@ -174,13 +176,13 @@
       <bpmndi:BPMNEdge id="SequenceFlow_0742d0c_di" bpmnElement="SequenceFlow_0742d0c">
         <di:waypoint xsi:type="dc:Point" x="568" y="400" />
         <di:waypoint xsi:type="dc:Point" x="568" y="444" />
-        <di:waypoint xsi:type="dc:Point" x="808" y="444" />
+        <di:waypoint xsi:type="dc:Point" x="636" y="444" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="585" y="452" width="52" height="12" />
+          <dc:Bounds x="554.1833333333334" y="452" width="52" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_0k5mqx7_di" bpmnElement="retourenschein-erstellen">
-        <dc:Bounds x="808" y="404" width="100" height="80" />
+        <dc:Bounds x="636" y="404" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_1vme3kr_di" bpmnElement="exclusive-gateway-retoure-melden" isMarkerVisible="true">
         <dc:Bounds x="941" y="419" width="50" height="50" />
@@ -334,10 +336,10 @@
         <dc:Bounds x="288" y="-197" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0d3pxbz_di" bpmnElement="SequenceFlow_0d3pxbz">
-        <di:waypoint xsi:type="dc:Point" x="908" y="444" />
-        <di:waypoint xsi:type="dc:Point" x="941" y="444" />
+        <di:waypoint xsi:type="dc:Point" x="736" y="444" />
+        <di:waypoint xsi:type="dc:Point" x="796" y="444" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="880" y="429" width="90" height="0" />
+          <dc:Bounds x="721" y="429" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_0bo8pjj_di" bpmnElement="SequenceFlow_0bo8pjj">
@@ -425,13 +427,16 @@
       <bpmndi:BPMNShape id="ServiceTask_013lx2x_di" bpmnElement="angaben-pruefen">
         <dc:Bounds x="286" y="111" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1p99x0x_di" bpmnElement="TextAnnotation_1p99x0x">
-        <dc:Bounds x="188" y="191" width="93" height="156" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_02v6198_di" bpmnElement="Association_02v6198">
-        <di:waypoint xsi:type="dc:Point" x="235" y="169" />
-        <di:waypoint xsi:type="dc:Point" x="235" y="191" />
+      <bpmndi:BPMNEdge id="SequenceFlow_1iqagzp_di" bpmnElement="SequenceFlow_1iqagzp">
+        <di:waypoint xsi:type="dc:Point" x="896" y="444" />
+        <di:waypoint xsi:type="dc:Point" x="941" y="444" />
+        <bpmndi:BPMNLabel>
+          <dc:Bounds x="918.5" y="422.5" width="0" height="13" />
+        </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="UserTask_1rjlx30_di" bpmnElement="retourenschein-pruefen">
+        <dc:Bounds x="796" y="404" width="100" height="80" />
+      </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

@@ -17,19 +17,20 @@ Progress
 --------
 
 #### Wareneingang
-- [ ] BPMN anpassen
+- [x] BPMN anpassen
     - [x] Pool-Einstellungen setzen
     - [x] Java-Klassen bei Service- und Message-Tasks/-Throw Events hinterlegen
     - [x] Namen bei Abzweigungen nach allen Gateways wählen
-    - [ ] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
-    - [ ] Assignees bei User Tasks wählen
+    - [x] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
+    - [x] Assignees bei User Tasks wählen
+        - (optional) Group Assignees
     - [x] Form Keys (html-Links) bei User Tasks eingeben
-    - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
-- [ ] HTML anpassen
-    - [ ] (optional) Java-Script einbetten
-- [ ] Java-Implementation
-    - [ ] Logger-Infos anpassen
-    - [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
+    - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
+- [x] HTML anpassen
+    - [x] (optional) Java-Script einbetten
+- [x] Java-Implementation
+    - [x] Logger-Infos anpassen
+    - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 
 
 #### Kundenerfassungsprozess

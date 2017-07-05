@@ -1,0 +1,107 @@
+<form name="wareneingangKontrollieren"
+      class="form-horizontal"
+      role="form">
+
+    <p>Folgender Retourenschein wird versendet:</p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Lieferantennummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="lieferantId"
+                   type="text"
+                   name="lieferantId"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Lieferant</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="lieferantName"
+                   type="text"
+                   name="lieferantName"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Adresse</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="lieferantAdresse"
+                   type="text"
+                   name="lieferantAdresse"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Telefonnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="lieferantTel"
+                   type="text"
+                   name="lieferantTel"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <p>Sehr geehrte Damen und Herren, folgende Ware wird beanstandet:</p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Auftragsnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="auftragId"
+                   type="text"
+                   name="auftragId"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Teil</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="teilBez"
+                   type="text"
+                   name="teilBez"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="teilId"
+                   type="text"
+                   name="teilId"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Festgestellte M&auml;ngel</label>
+        <div class="col-md-10">
+            <textarea class="form-control"
+                      cam-variable-type="String"
+                      cam-variable-name="maengel"
+                      type="text"
+                      name="maengel"
+                      rows="10"
+                      cols="50"
+                      readonly="true"></textarea>
+        </div>
+
+        <label class="control-label col-md-2">Bestellte Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="mengeBestellt"
+                   type="text"
+                   name="mengeBestellt"
+                   readonly="true"/>
+        </div>
+    </div>
+
+    <p>Bitte senden Sie uns die Ware im mangelfreien Zustand erneut zu.</p>
+
+</form>

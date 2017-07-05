@@ -32,7 +32,8 @@ public class Lagerplatzvergabe implements JavaDelegate {
         boolean foundFach = false;
         Integer fachnummer = null;
         Integer gangnummer = null;
-        final PreparedStatement stmt = conn.prepareStatement("SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR = ?");
+        final PreparedStatement stmt = conn.prepareStatement(
+                "SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR = ?");
         stmt.setInt(1, teilId);
         final ResultSet rs = stmt.executeQuery();
 
@@ -49,7 +50,8 @@ public class Lagerplatzvergabe implements JavaDelegate {
         // Ansonsten erstes leeres Fach!
         // SELECT * FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1;
         if (!foundFach) {
-            final PreparedStatement stmt2 = conn.prepareStatement("SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1");
+            final PreparedStatement stmt2 = conn.prepareStatement(
+                    "SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1");
             final ResultSet rs2 = stmt2.executeQuery();
 
             if (rs2.next()) {
