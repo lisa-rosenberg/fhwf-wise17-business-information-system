@@ -29,6 +29,7 @@ public class AuftragsstatusAnpassenFertig implements JavaDelegate {
 
         stmt.setString(1, "fertig");
         stmt.setInt(2, auftragId);
+        stmt.executeUpdate();
         conn.commit();
 
         stmt.close();

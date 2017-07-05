@@ -20,8 +20,11 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
         messageContent.put("teilenummer", delegateExecution.getVariable("teilenummer"));
         messageContent.put("menge", delegateExecution.getVariable("menge"));
         messageContent.put("lieferant", delegateExecution.getVariable("lieferant"));
-
+        
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
-        runtimeService.correlateMessage("Neue Retourenmeldung", messageContent);
+        runtimeService.createMessageCorrelation("Neue Retourenmeldung")
+                .processInstanceId("" + delegateExecution.getVariable("auftragId"))
+                .setVariables(messageContent)
+                .correlateAllWithResult();
     }
 }
