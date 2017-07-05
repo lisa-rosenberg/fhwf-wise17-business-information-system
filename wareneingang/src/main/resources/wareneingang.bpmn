@@ -6,29 +6,14 @@
     <bpmn:messageFlow id="MessageFlow_0wzgtr5" sourceRef="einlagerungsauftrag-an-lager-senden" targetRef="star-event-lager" />
   </bpmn:collaboration>
   <bpmn:process id="wareneingangskontrolle" name="Wareneingangskontrolle" isExecutable="true">
-    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="angaben-pruefen" />
     <bpmn:endEvent id="end-event-wareneingang-einlagerungsauftrag-gesendet">
       <bpmn:incoming>SequenceFlow_0069w94</bpmn:incoming>
     </bpmn:endEvent>
-    <bpmn:endEvent id="end-event-wareneingang-retoure-gemeldet">
-      <bpmn:incoming>SequenceFlow_1rjprfq</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_0k02yhk" sourceRef="wareneingang-kontrollieren" targetRef="exclusive-gateway-wareneingang-ware-kontrollieren" />
     <bpmn:sequenceFlow id="SequenceFlow_0069w94" sourceRef="einlagerungsauftrag-an-lager-senden" targetRef="end-event-wareneingang-einlagerungsauftrag-gesendet" />
-    <bpmn:sequenceFlow id="SequenceFlow_1rjprfq" sourceRef="retoure-an-lieferanten-melden" targetRef="end-event-wareneingang-retoure-gemeldet" />
     <bpmn:sendTask id="einlagerungsauftrag-an-lager-senden" name="Einlagerungsauftrag an Lager senden" camunda:class="de.ostfalia.bis.ss17.wareneingang.message.EinlagerungsauftragAnLagerSenden">
       <bpmn:incoming>SequenceFlow_0ie0tuj</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0069w94</bpmn:outgoing>
     </bpmn:sendTask>
-    <bpmn:sendTask id="retoure-an-lieferanten-melden" name="Retoure an Lieferanten melden" camunda:class="de.ostfalia.bis.ss17.wareneingang.message.RetoureAnLieferantenMelden">
-      <bpmn:incoming>SequenceFlow_0rkcif0</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1rjprfq</bpmn:outgoing>
-    </bpmn:sendTask>
-    <bpmn:exclusiveGateway id="exclusive-gateway-retoure-melden">
-      <bpmn:incoming>SequenceFlow_03uhljm</bpmn:incoming>
-      <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0rkcif0</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:parallelGateway id="parallel-gateway-fehlmenge">
       <bpmn:incoming>SequenceFlow_0tg85ki</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_03uhljm</bpmn:outgoing>
@@ -48,24 +33,13 @@
       <bpmn:incoming>SequenceFlow_15k2dha</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0tg85ki</bpmn:outgoing>
     </bpmn:serviceTask>
-    <bpmn:serviceTask id="retourenschein-erstellen" name="Retourenschein erstellen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.RetourenscheinErstellen">
-      <bpmn:incoming>SequenceFlow_0742d0c</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
-    </bpmn:serviceTask>
     <bpmn:exclusiveGateway id="exclusive-gateway-warenmenge-kontrollieren" default="SequenceFlow_06f89v5">
       <bpmn:incoming>SequenceFlow_0u9zksa</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_15k2dha</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_1gvn1by</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_06f89v5</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:exclusiveGateway id="exclusive-gateway-wareneingang-ware-kontrollieren" default="SequenceFlow_0u9zksa">
-      <bpmn:incoming>SequenceFlow_0k02yhk</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
     <bpmn:sequenceFlow id="SequenceFlow_0ie0tuj" sourceRef="exclusive-gateway-einlagerungsauftrag-senden" targetRef="einlagerungsauftrag-an-lager-senden" />
-    <bpmn:sequenceFlow id="SequenceFlow_0rkcif0" sourceRef="exclusive-gateway-retoure-melden" targetRef="retoure-an-lieferanten-melden" />
-    <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="retourenschein-erstellen" targetRef="exclusive-gateway-retoure-melden" />
     <bpmn:sequenceFlow id="SequenceFlow_03uhljm" sourceRef="parallel-gateway-fehlmenge" targetRef="exclusive-gateway-retoure-melden" />
     <bpmn:sequenceFlow id="SequenceFlow_0tg85ki" sourceRef="fehlmenge-im-auftrag-erfassen" targetRef="parallel-gateway-fehlmenge" />
     <bpmn:sequenceFlow id="SequenceFlow_063fv6u" sourceRef="parallel-gateway-fehlmenge" targetRef="exclusive-gateway-einlagerungsauftrag-senden" />
@@ -77,35 +51,64 @@
     <bpmn:sequenceFlow id="SequenceFlow_15k2dha" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${fehlmenge}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0u9zksa" name="Ware_IO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="exclusive-gateway-warenmenge-kontrollieren" />
+    <bpmn:sequenceFlow id="SequenceFlow_1kpxrww" sourceRef="angaben-pruefen" targetRef="ExclusiveGateway_0kwt5zu" />
+    <bpmn:sequenceFlow id="SequenceFlow_1t5zyr8" name="Angaben_IO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="wareneingang-kontrollieren" />
+    <bpmn:sequenceFlow id="SequenceFlow_1rjprfq" sourceRef="retoure-an-lieferanten-melden" targetRef="end-event-wareneingang-retoure-gemeldet" />
+    <bpmn:sequenceFlow id="SequenceFlow_0rkcif0" sourceRef="exclusive-gateway-retoure-melden" targetRef="retoure-an-lieferanten-melden" />
+    <bpmn:sequenceFlow id="SequenceFlow_0d3pxbz" sourceRef="retourenschein-erstellen" targetRef="exclusive-gateway-retoure-melden" />
     <bpmn:sequenceFlow id="SequenceFlow_0742d0c" name="Ware_NIO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="retourenschein-erstellen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!wareIo}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_0u9zksa" name="Ware_IO" sourceRef="exclusive-gateway-wareneingang-ware-kontrollieren" targetRef="exclusive-gateway-warenmenge-kontrollieren" />
+    <bpmn:sequenceFlow id="SequenceFlow_0k02yhk" sourceRef="wareneingang-kontrollieren" targetRef="exclusive-gateway-wareneingang-ware-kontrollieren" />
+    <bpmn:endEvent id="end-event-wareneingang-retoure-gemeldet">
+      <bpmn:incoming>SequenceFlow_1rjprfq</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sendTask id="retoure-an-lieferanten-melden" name="Retoure an Lieferanten melden" camunda:class="de.ostfalia.bis.ss17.wareneingang.message.RetoureAnLieferantenMelden">
+      <bpmn:incoming>SequenceFlow_0rkcif0</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1rjprfq</bpmn:outgoing>
+    </bpmn:sendTask>
+    <bpmn:exclusiveGateway id="exclusive-gateway-retoure-melden">
+      <bpmn:incoming>SequenceFlow_03uhljm</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0rkcif0</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:serviceTask id="retourenschein-erstellen" name="Retourenschein erstellen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.RetourenscheinErstellen">
+      <bpmn:incoming>SequenceFlow_0742d0c</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:exclusiveGateway id="exclusive-gateway-wareneingang-ware-kontrollieren" default="SequenceFlow_0u9zksa">
+      <bpmn:incoming>SequenceFlow_0k02yhk</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
+      <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
     <bpmn:userTask id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" camunda:formKey="embedded:app:forms/wareneingang_kontrollieren.html" camunda:assignee="demo">
       <bpmn:incoming>SequenceFlow_1t5zyr8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k02yhk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1kpxrww" sourceRef="angaben-pruefen" targetRef="ExclusiveGateway_0kwt5zu" />
-    <bpmn:startEvent id="start-event-wareneingang" camunda:formKey="embedded:app:forms/wareneingangskontrolle.html">
-      <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
-      <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
-    </bpmn:startEvent>
-    <bpmn:serviceTask id="angaben-pruefen" name="Angaben prüfen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.AngabenPruefen">
-      <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1kpxrww</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:sequenceFlow id="SequenceFlow_1t5zyr8" name="Angaben_IO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="wareneingang-kontrollieren" />
+    <bpmn:sequenceFlow id="SequenceFlow_18shon8" name="Angaben_NIO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="EndEvent_1jgn1jz">
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!angabenIo}</bpmn:conditionExpression>
+    </bpmn:sequenceFlow>
+    <bpmn:endEvent id="EndEvent_1jgn1jz">
+      <bpmn:incoming>SequenceFlow_18shon8</bpmn:incoming>
+    </bpmn:endEvent>
     <bpmn:exclusiveGateway id="ExclusiveGateway_0kwt5zu" default="SequenceFlow_1t5zyr8">
       <bpmn:incoming>SequenceFlow_1kpxrww</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1t5zyr8</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_18shon8</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:endEvent id="EndEvent_1jgn1jz">
-      <bpmn:incoming>SequenceFlow_18shon8</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:sequenceFlow id="SequenceFlow_18shon8" name="Angaben_NIO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="EndEvent_1jgn1jz">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!angabenIo}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
+    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="angaben-pruefen" />
+    <bpmn:serviceTask id="angaben-pruefen" name="Angaben prüfen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.AngabenPruefen">
+      <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kpxrww</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:startEvent id="start-event-wareneingang" camunda:formKey="embedded:app:forms/wareneingangskontrolle.html">
+      <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
+    </bpmn:startEvent>
+    <bpmn:association id="Association_02v6198" sourceRef="start-event-wareneingang" targetRef="TextAnnotation_1p99x0x" />
+    <bpmn:textAnnotation id="TextAnnotation_1p99x0x">    <bpmn:text>Hinweis: Für Demonstrationszwecke wird hier die Bestellung eingegeben, damit eine in der DB zum Bearbeiten existiert</bpmn:text>
+</bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:process id="wareneinlagerung" name="Wareneinlagerung" isExecutable="true">
     <bpmn:startEvent id="star-event-lager" camunda:formKey="embedded:app:forms/wareneinlagerung.html">
@@ -145,18 +148,16 @@
         <dc:Bounds x="143" y="62" width="1107" height="469" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1sfuuaa_di" bpmnElement="start-event-wareneingang">
-        <dc:Bounds x="205" y="137" width="36" height="36" />
+        <dc:Bounds x="217" y="137" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="178" y="173" width="90" height="0" />
+          <dc:Bounds x="190" y="173" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0lomt49_di" bpmnElement="SequenceFlow_0lomt49">
-        <di:waypoint xsi:type="dc:Point" x="241" y="155" />
-        <di:waypoint xsi:type="dc:Point" x="262" y="155" />
-        <di:waypoint xsi:type="dc:Point" x="262" y="155" />
+        <di:waypoint xsi:type="dc:Point" x="253" y="155" />
         <di:waypoint xsi:type="dc:Point" x="286" y="155" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="232" y="155" width="90" height="0" />
+          <dc:Bounds x="224.5" y="140" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0bd2hai_di" bpmnElement="wareneingang-kontrollieren">
@@ -407,9 +408,6 @@
           <dc:Bounds x="335.5" y="200" width="0" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ServiceTask_013lx2x_di" bpmnElement="angaben-pruefen">
-        <dc:Bounds x="286" y="115" width="100" height="80" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="ExclusiveGateway_0kwt5zu_di" bpmnElement="ExclusiveGateway_0kwt5zu" isMarkerVisible="true">
         <dc:Bounds x="311" y="247.58440276406714" width="50" height="50" />
         <bpmndi:BPMNLabel>
@@ -421,7 +419,7 @@
         <di:waypoint xsi:type="dc:Point" x="336" y="379" />
         <di:waypoint xsi:type="dc:Point" x="400" y="379" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="241" y="331" width="59" height="13" />
+          <dc:Bounds x="322" y="391" width="59" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="EndEvent_1jgn1jz_di" bpmnElement="EndEvent_1jgn1jz">
@@ -436,6 +434,16 @@
         <bpmndi:BPMNLabel>
           <dc:Bounds x="359" y="238" width="67" height="13" />
         </bpmndi:BPMNLabel>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="ServiceTask_013lx2x_di" bpmnElement="angaben-pruefen">
+        <dc:Bounds x="286" y="115" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="TextAnnotation_1p99x0x_di" bpmnElement="TextAnnotation_1p99x0x">
+        <dc:Bounds x="188" y="195" width="93" height="156" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="Association_02v6198_di" bpmnElement="Association_02v6198">
+        <di:waypoint xsi:type="dc:Point" x="235" y="173" />
+        <di:waypoint xsi:type="dc:Point" x="235" y="195" />
       </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>

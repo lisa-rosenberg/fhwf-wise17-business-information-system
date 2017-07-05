@@ -5,7 +5,7 @@
     <p>Geben Sie die Auftragsdaten an.</p>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Lieferantennummer</label>
+        <label class="control-label col-md-2">Lieferant-ID</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="Integer"
@@ -46,27 +46,28 @@
                 <option value="2003">Akku 600 Wh</option>
                 <option value="0">nicht zutreffend</option>
             </select>
-
-            <label class="control-label col-md-2">Anderes Teil</label>
-            <div class="col-md-10">
-                <input class="form-control"
-                       cam-variable-type="Integer"
-                       cam-variable-name="anderesTeilId"
-                       type="text"
-                       name="anderesTeilId"/>
-            </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">Menge</label>
-            <div class="col-md-10">
-                <input class="form-control"
-                       cam-variable-type="Integer"
-                       cam-variable-name="menge"
-                       type="text"
-                       name="menge"
-                       required/>
-            </div>
+        <label class="control-label col-md-2">Alternativ: TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="anderesTeilId"
+                   type="text"
+                   name="anderesTeilId"/>
         </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Bestellte Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="mengeBestellt"
+                   type="text"
+                   name="mengeBestellt"
+                   required/>
+        </div>
+    </div>
 
 </form>

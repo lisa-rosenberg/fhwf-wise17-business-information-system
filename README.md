@@ -25,9 +25,11 @@ Progress
     - [ ] Assignees bei User Tasks wählen
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [ ] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
-- [ ] forms anpassen
-- [ ] Logger-Infos anpassen
-- [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
+- [ ] HTML anpassen
+    - [ ] (optional) Java-Script einbetten
+- [ ] Java-Implementation
+    - [ ] Logger-Infos anpassen
+    - [ ] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 
 
 #### Kundenerfassungsprozess
@@ -41,11 +43,12 @@ Progress
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
     - [x] (optional) BPMN weiter anpassen, passende Tasks zwischenschalten
-- [x] forms anpassen
-- [x] Logger-Infos anpassen
-- [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
-- [ ] (optional) JavaScript für Optimierung von html-Forms einsetzen
-- [x] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
+- [x] HTML anpassen
+    - [ ] (optional) JavaScript einbetten
+- [x] Java-Implementation
+    - [x] Logger-Infos anpassen
+    - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
+    - [x] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
 
 ### Bug-Tracking
 - BUG-1: x
@@ -69,14 +72,7 @@ Progress
         
 - Message Start Event:
     - Mit leerer Message starten, wenn keine Verbindung zu einem Message Throw Event oder Message Send Task besteht.
- 
-   
-### Notes
-
-- Process_Wareneingang:
-    - bei Wareneingangskontrolle müssen zwei Felder bei der Form gesetzt werden:
-        - Menge
-        - IO/NIO (in Ordnung/nicht in Ordnung)
+        
         
 ### Questions
 
