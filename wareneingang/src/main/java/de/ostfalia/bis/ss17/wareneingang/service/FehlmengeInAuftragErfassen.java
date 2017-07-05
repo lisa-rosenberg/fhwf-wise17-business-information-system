@@ -33,6 +33,7 @@ public class FehlmengeInAuftragErfassen implements JavaDelegate {
 
         stmt.setInt(1, mengeFehlend);
         stmt.setInt(2, auftragId);
+        stmt.executeUpdate();
         conn.commit();
 
         stmt.close();
