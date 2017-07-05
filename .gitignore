@@ -67,6 +67,7 @@ target/
 normalebestellung/target/
 sonderanfertigung/target/
 wareneingang/target/
+*.iml
 
 ## File-based project format:
 *.iws
