@@ -6,8 +6,8 @@ Reference
 
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
-- Abgabe        `07. Juli 2017`
-- Präsentation  `06. Juli 2017, 16:00 Uhr`
+- Abgabe:       `07. Juli 2017`
+- Präsentation: `06. Juli 2017, 16:00 Uhr`
 
 #### Rahmenbedingungen
 - Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
@@ -49,10 +49,6 @@ Progress
     - [x] Logger-Infos anpassen
     - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
     - [x] (optional) Bei Task "Anfrage für eine Sonderanfertigung senden" DB-Conn und Teileinfos heraussuchen
-
-### Bug-Tracking
-- BUG-1: x
-     - `x`
 
 
 ### Cheat Sheet
