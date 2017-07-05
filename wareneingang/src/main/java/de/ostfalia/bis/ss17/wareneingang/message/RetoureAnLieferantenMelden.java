@@ -16,6 +16,7 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Retourenmeldung an Lieferant");
 
+        final Integer auftragId = (Integer) delegateExecution.getVariable("auftragId");
         final Boolean fehlmenge = (Boolean) delegateExecution.getVariable("fehlmenge");
         final Boolean wareIo = (Boolean) delegateExecution.getVariable("wareIo");
 
@@ -33,6 +34,7 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
         
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neue Retourenmeldung")
+                .processInstanceId("" + auftragId)
                 .setVariables(messageContent)
                 .correlateAllWithResult();
     }

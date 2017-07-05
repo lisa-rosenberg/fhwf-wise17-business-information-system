@@ -23,7 +23,7 @@ Progress
     - [x] Namen bei Abzweigungen nach allen Gateways wählen
     - [x] Expressions/Variablen bei Abzweigungen nach Exclusive Gateways wählen
     - [x] Assignees bei User Tasks wählen
-        - (optional) Group Assignees
+        - [ ] (optional) Group Assignees
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
 - [x] HTML anpassen
