@@ -46,7 +46,7 @@
     <bpmn:sequenceFlow id="SequenceFlow_0qvy8lj" sourceRef="auftragsstatus-anpassen-fertig" targetRef="exclusive-gateway-einlagerungsauftrag-senden" />
     <bpmn:sequenceFlow id="SequenceFlow_06f89v5" name="keine Fehlmenge" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="auftragsstatus-anpassen-fertig" />
     <bpmn:sequenceFlow id="SequenceFlow_1gvn1by" name="Fehlmenge" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${fehlmenge > 0}]]></bpmn:conditionExpression>
+      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression"><![CDATA[${fehlmenge}]]></bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_15k2dha" sourceRef="exclusive-gateway-warenmenge-kontrollieren" targetRef="fehlmenge-im-auftrag-erfassen">
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${fehlmenge}</bpmn:conditionExpression>
@@ -106,9 +106,6 @@
       <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
       <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
     </bpmn:startEvent>
-    <bpmn:association id="Association_02v6198" sourceRef="start-event-wareneingang" targetRef="TextAnnotation_1p99x0x" />
-    <bpmn:textAnnotation id="TextAnnotation_1p99x0x">    <bpmn:text>Hinweis: Für Demonstrationszwecke wird hier die Bestellung eingegeben, damit eine in der DB zum Bearbeiten existiert</bpmn:text>
-</bpmn:textAnnotation>
   </bpmn:process>
   <bpmn:process id="wareneinlagerung" name="Wareneinlagerung" isExecutable="true">
     <bpmn:startEvent id="star-event-lager" camunda:formKey="embedded:app:forms/wareneinlagerung.html">
@@ -438,13 +435,6 @@
       <bpmndi:BPMNShape id="ServiceTask_013lx2x_di" bpmnElement="angaben-pruefen">
         <dc:Bounds x="286" y="115" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="TextAnnotation_1p99x0x_di" bpmnElement="TextAnnotation_1p99x0x">
-        <dc:Bounds x="188" y="195" width="93" height="156" />
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="Association_02v6198_di" bpmnElement="Association_02v6198">
-        <di:waypoint xsi:type="dc:Point" x="235" y="173" />
-        <di:waypoint xsi:type="dc:Point" x="235" y="195" />
-      </bpmndi:BPMNEdge>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
 </bpmn:definitions>

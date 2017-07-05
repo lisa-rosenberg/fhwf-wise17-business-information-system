@@ -1,4 +1,4 @@
-<form name="wareneingang-kontrollieren"
+<form name="wareneingangKontrollieren"
       class="form-horizontal"
       role="form">
 
@@ -30,7 +30,7 @@
         <label class="control-label col-md-2">Teil</label>
         <div class="col-md-10">
             <input class="form-control"
-                   cam-variable-type="Integer"
+                   cam-variable-type="String"
                    cam-variable-name="teilBez"
                    type="text"
                    name="teilBez"
@@ -54,7 +54,7 @@
                            cam-variable-type="Boolean"
                            type="checkbox"
                            name="wareIo"
-                           class="form-control"/>
+                           class="form-control" />
                     Ware in Ordnung?
                 </label>
             </div>
@@ -79,21 +79,29 @@
                    cam-variable-name="mengeGeliefert"
                    type="text"
                    name="mengeGeliefert"
-                   required/>
+                   required
+                   oninput="checkFehlmenge()"/>
         </div>
 
-        <div class="col-md-10 col-md-offset-2">
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="fehlmenge"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="fehlmenge"
-                           class="form-control"/>
-                    Fehlmenge?
-                </label>
-            </div>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Boolean"
+                   cam-variable-name="fehlmenge"
+                   type="hidden"
+                   name="fehlmenge"/>
         </div>
     </div>
-
 </form>
+
+<script type="text/javascript">
+    function checkFehlmenge() {
+        var mengeBestellt = document.wareneingangKontrollieren.mengeBestellt.value;
+        var mengeGeliefert = document.wareneingangKontrollieren.mengeGeliefert.value;
+
+        if (parseInt(mengeBestellt,10) > parseInt(mengeGeliefert,10)) {
+            document.wareneingangKontrollieren.fehlmenge.value = "true";
+        } else {
+            document.wareneingangKontrollieren.fehlmenge.value = "false";
+        }
+    }
+</script>

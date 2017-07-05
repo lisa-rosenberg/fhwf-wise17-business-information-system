@@ -21,7 +21,7 @@ public class FehlmengeInAuftragErfassen implements JavaDelegate {
         final Integer mengeBestellt = (Integer) delegateExecution.getVariable("mengeBestellt");
         final Integer mengeGeliefert = (Integer) delegateExecution.getVariable("mengeGeliefert");
 
-        Integer fehlmenge = mengeBestellt - mengeGeliefert;
+        Integer mengeFehlend = mengeBestellt - mengeGeliefert;
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -31,7 +31,7 @@ public class FehlmengeInAuftragErfassen implements JavaDelegate {
         PreparedStatement stmt = conn.prepareStatement(
                 "UPDATE beschaffungsauftrag SET fehlmenge = ? WHERE id_auftrag = ?");
 
-        stmt.setInt(1, fehlmenge);
+        stmt.setInt(1, mengeFehlend);
         stmt.setInt(2, auftragId);
         conn.commit();
 
