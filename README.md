@@ -40,7 +40,7 @@ Progress
         - [ ] (optional) Group Assignees
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
-    - [ ] (optional) BPMN weiter anpassen, passende Tasks zwischenschalten
+    - [x] (optional) BPMN weiter anpassen, passende Tasks zwischenschalten
 - [x] forms anpassen
 - [x] Logger-Infos anpassen
 - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen

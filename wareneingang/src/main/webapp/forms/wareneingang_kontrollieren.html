@@ -1,10 +1,85 @@
-<form>
+<form name="wareneingang-kontrollieren"
+      class="form-horizontal"
+      role="form">
+
+    <p>Stimmt die Lieferung mit der Bestellung &uuml;berein und befindet sich im ordnungsgem&auml;&szlig;en Zustand?</p>
+
     <div class="form-group">
-        <label>Teil</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="teilenummer">
+        <label class="control-label col-md-2">Auftragsnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="auftragId"
+                   type="text"
+                   name="auftragId"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Lieferantennummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="lieferantId"
+                   type="text"
+                   name="lieferantId"
+                   readonly="true"/>
+        </div>
     </div>
+
     <div class="form-group">
-        <label>Menge</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="menge">
+        <label class="control-label col-md-2">Teil</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="teilBez"
+                   type="text"
+                   name="teilBez"
+                   readonly="true"/>
+            </div>
+
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="teilId"
+                   type="text"
+                   name="teilId"
+                   readonly="true"/>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input cam-variable-name="wareIo"
+                       cam-variable-type="Boolean"
+                       type="checkbox"
+                       name="wareIo"
+                       class="form-control" />
+                Ware in Ordnung?
+            </label>
+        </div>
     </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="menge"
+                   type="text"
+                   name="menge"
+                   readonly="true"/>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input cam-variable-name="fehlmenge"
+                       cam-variable-type="Boolean"
+                       type="checkbox"
+                       name="fehlmenge"
+                       class="form-control" />
+                Fehlmenge?
+            </label>
+        </div>
+    </div>
+
 </form>
