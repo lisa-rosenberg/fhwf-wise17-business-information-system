@@ -111,13 +111,14 @@ public class AngabenPruefen implements JavaDelegate {
         }
 
         stmt = conn.prepareStatement(
-                "INSERT INTO beschaffungsauftrag(id_auftrag,tnr,menge,id_lieferant,status) VALUES(?,?,?,?,?)");
+                "INSERT INTO beschaffungsauftrag(id_auftrag,tnr,menge,id_lieferant,status,fehlmenge) VALUES(?,?,?,?,?,?)");
 
         stmt.setInt(1, auftragId);
         stmt.setInt(2, teilId);
         stmt.setInt(3, mengeBestellt);
         stmt.setInt(4, lieferantId);
         stmt.setString(5, "offen");
+        stmt.setInt(6, mengeBestellt);
         stmt.executeUpdate();
         conn.commit();
 

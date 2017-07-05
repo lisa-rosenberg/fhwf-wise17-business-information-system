@@ -14,16 +14,17 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
 
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
-        logger.info("Sende Retourenmeldung an Lieferant (NoMessageCatchEvent)");
+        logger.info("Sende Retourenmeldung an Lieferant");
 
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("teilenummer", delegateExecution.getVariable("teilenummer"));
-        messageContent.put("menge", delegateExecution.getVariable("menge"));
-        messageContent.put("lieferant", delegateExecution.getVariable("lieferant"));
+        messageContent.put("lieferantId", delegateExecution.getVariable("lieferantId"));
+        messageContent.put("teilId", delegateExecution.getVariable("teilId"));
+        messageContent.put("mengeBestellt", delegateExecution.getVariable("mengeBestellt"));
+        messageContent.put("mengeGeliefert", delegateExecution.getVariable("mengeGeliefert"));
+        messageContent.put("mengeFehlend", delegateExecution.getVariable("mengeFehlend"));
         
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neue Retourenmeldung")
-                .processInstanceId("" + delegateExecution.getVariable("auftragId"))
                 .setVariables(messageContent)
                 .correlateAllWithResult();
     }
