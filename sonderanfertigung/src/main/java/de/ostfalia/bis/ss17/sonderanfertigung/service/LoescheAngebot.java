@@ -15,21 +15,45 @@ public class LoescheAngebot implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Lösche Angebot");
 
-        //TODO Löschen von dem angelegten Sonderanfertigungs-Teil und Arbeitsplan
-        //TODO Löschen des angelegten Auftrages funktioniert noch nicht?
-
         final Integer angebotId = (Integer) delegateExecution.getVariable("angebotId");
+        final Integer arbeitsplanId = (Integer) delegateExecution.getVariable("arbeitsplanId");
+        final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
         conn.setAutoCommit(false);
 
+        /* Angebot löschen */
+
         PreparedStatement stmt = conn.prepareStatement(
                 "DELETE FROM angebot WHERE ANGEBOTSNR = ?");
-
         stmt.setInt(1, angebotId);
-        stmt.executeQuery();
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Arbeitsplan mit einzelnen Arbeitsgängen löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM arbeitsplan_ag_ks WHERE APLNR = ?");
+        stmt.setInt(1, arbeitsplanId);
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Arbeitsplan löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM arbeitsplan WHERE APLNR = ?");
+        stmt.setInt(1, arbeitsplanId);
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Teil für Sonderanfertigung löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM teil WHERE TNR = ?");
+        stmt.setInt(1, teilId);
+        stmt.executeUpdate();
         conn.commit();
 
         stmt.close();

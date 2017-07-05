@@ -31,7 +31,7 @@ Progress
 
 
 #### Kundenerfassungsprozess
-- [ ] BPMN anpassen
+- [x] BPMN anpassen
     - [x] Pool-Einstellungen setzen
     - [x] Java-Klassen bei Service- und Message-Tasks/-Throw Events hinterlegen
     - [x] Namen bei Abzweigungen nach Gateways wählen
@@ -41,7 +41,7 @@ Progress
     - [x] Form Keys (html-Links) bei User Tasks eingeben
     - [x] Messages bei Message-Tasks/-Throw Events und ggf. Message Start Events wählen
     - [ ] (optional) BPMN weiter anpassen, passende Tasks zwischenschalten
-- [ ] forms anpassen
+- [x] forms anpassen
 - [x] Logger-Infos anpassen
 - [x] messageContent und startProcessInstanceByMessage bei User-Task-Klassen anpassen
 - [ ] (optional) JavaScript für Optimierung von html-Forms einsetzen

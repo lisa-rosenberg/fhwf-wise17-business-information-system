@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.HashMap;
 
 /**
  * LegeArbeitsplanAn
@@ -37,7 +38,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
 
         Integer teilId;
         if (rs.next() && rs.getInt(1)>10000) {
-            teilId = rs.getInt(1);
+            teilId = rs.getInt(1) + 1;
         } else {
             teilId = 10001;
         }
@@ -86,94 +87,111 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         stmt = conn.prepareStatement(
                 "INSERT INTO arbeitsplan_ag_ks(APLNR,AGANR,KSTNR,REIHENFOLGEINDEX) VALUES(?,?,?,?)");
 
+        int i = 1;
+
         //Lackierung
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 2001);
-        stmt.setInt(4, 1);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1004);
         stmt.setInt(3, 2001);
-        stmt.setInt(4, 2);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         //Rahmenmontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1001);
-        stmt.setInt(4, 3);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1002);
         stmt.setInt(3, 1001);
-        stmt.setInt(4, 4);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         //Motorenmontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1002);
-        stmt.setInt(4, 5);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1002);
         stmt.setInt(3, 1002);
-        stmt.setInt(4, 6);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         //Radmontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1003);
-        stmt.setInt(4, 7);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1002);
         stmt.setInt(3, 1003);
-        stmt.setInt(4, 8);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
+        i++;
 
         //Nachbearbeitung
         if (nachbearbeitung) {
             stmt.setInt(1, arbeitsplanId);
             stmt.setInt(2, 1001);
             stmt.setInt(3, 1005);
-            stmt.setInt(4, 9);
+            stmt.setInt(4, i);
             stmt.executeUpdate();
             conn.commit();
+            i++;
 
             stmt.setInt(1, arbeitsplanId);
             stmt.setInt(2, 1004);
             stmt.setInt(3, 1005);
-            stmt.setInt(4, 10);
+            stmt.setInt(4, i);
             stmt.executeUpdate();
             conn.commit();
+            i++;
         }
 
         //Qualitätskontrolle
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1003);
         stmt.setInt(3, 1004);
-        stmt.setInt(4, 11);
+        stmt.setInt(4, i);
         stmt.executeUpdate();
         conn.commit();
 
         rs.close();
         stmt.close();
         conn.close();
+
+        /* Gebe Ergebnisse weiter */
+
+        delegateExecution.setVariable("teilId", teilId);
+        delegateExecution.setVariable("arbeitsplanId", arbeitsplanId);
     }
 
 }

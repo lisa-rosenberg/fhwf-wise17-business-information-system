@@ -46,5 +46,9 @@ public class LegeAuftragAn implements JavaDelegate {
         rs.close();
         stmt.close();
         conn.close();
+
+        /* Gebe Ergebnisse weiter */
+
+        delegateExecution.setVariable("auftragId", auftragId);
     }
 }

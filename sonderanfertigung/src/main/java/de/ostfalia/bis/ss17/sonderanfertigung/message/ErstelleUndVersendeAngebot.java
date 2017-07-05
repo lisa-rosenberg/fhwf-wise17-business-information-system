@@ -53,6 +53,10 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         stmtInsert.close();
         conn.close();
 
+        /* Gebe Ergebnisse weiter */
+
+        delegateExecution.setVariable("angebotId", angebotId);
+
         /* Angebotsversand */
 
         final HashMap<String, Object> messageContent = new HashMap<>();
