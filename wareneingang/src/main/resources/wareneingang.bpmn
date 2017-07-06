@@ -48,7 +48,7 @@
       <bpmn:outgoing>SequenceFlow_0742d0c</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" camunda:formKey="embedded:app:forms/wareneingang_kontrollieren.html" camunda:assignee="demo">
+    <bpmn:userTask id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" camunda:formKey="embedded:app:forms/wareneingang_kontrollieren.html" camunda:candidateGroups="wareneingang">
       <bpmn:incoming>SequenceFlow_1t5zyr8</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k02yhk</bpmn:outgoing>
     </bpmn:userTask>
@@ -102,7 +102,7 @@
       <bpmn:outgoing>SequenceFlow_0d3pxbz</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1iqagzp" sourceRef="retourenschein-pruefen" targetRef="exclusive-gateway-retoure-melden" />
-    <bpmn:userTask id="retourenschein-pruefen" name="Retourenschein prüfen" camunda:formKey="embedded:app:forms/retourenschein-pruefen.html" camunda:assignee="demo">
+    <bpmn:userTask id="retourenschein-pruefen" name="Retourenschein prüfen" camunda:formKey="embedded:app:forms/retourenschein-pruefen.html" camunda:candidateGroups="wareneingang">
       <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1iqagzp</bpmn:outgoing>
     </bpmn:userTask>
@@ -119,11 +119,11 @@
       <bpmn:outgoing>SequenceFlow_1szsxv2</bpmn:outgoing>
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_1szsxv2" sourceRef="lagerplatzvergabe" targetRef="transport-zum-lagerfach" />
-    <bpmn:userTask id="transport-zum-lagerfach" name="Transport zum Lagerfach" camunda:formKey="embedded:app:forms/transport_zum_lagerfach.html" camunda:assignee="demo">
+    <bpmn:userTask id="transport-zum-lagerfach" name="Transport zum Lagerfach" camunda:formKey="embedded:app:forms/transport_zum_lagerfach.html" camunda:candidateGroups="lager">
       <bpmn:incoming>SequenceFlow_1szsxv2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0bo8pjj</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="ware-im-we-abholen" name="Ware im WE abholen" camunda:formKey="embedded:app:forms/ware_im_we_abholen.html" camunda:assignee="demo">
+    <bpmn:userTask id="ware-im-we-abholen" name="Ware im WE abholen" camunda:formKey="embedded:app:forms/ware_im_we_abholen.html" camunda:candidateGroups="lager">
       <bpmn:incoming>SequenceFlow_1yi2fce</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0llmkls</bpmn:outgoing>
     </bpmn:userTask>

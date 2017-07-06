@@ -126,7 +126,7 @@
     </bpmn:serviceTask>
     <bpmn:sequenceFlow id="SequenceFlow_0rnxzdd" sourceRef="lege-auftrag-an" targetRef="end-event-angebot-angelegt" />
     <bpmn:sequenceFlow id="SequenceFlow_10q4rh4" sourceRef="loesche-angebot" targetRef="end-event-vertrieb-angebot-geloescht" />
-    <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="erstellung-der-anforderungen-fuer-die-sonderanfertigung" name="Erstellung der Anforderungen für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstellung_der_anforderungen_fuer_die_sonderanfertigung.html" camunda:candidateGroups="vertrieb">
       <bpmn:incoming>SequenceFlow_0fq5zkc</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0dvprvr</bpmn:outgoing>
     </bpmn:userTask>
@@ -173,16 +173,16 @@
       <bpmn:outgoing>SequenceFlow_1p00z2x</bpmn:outgoing>
       <bpmn:outgoing>SequenceFlow_07oqxg2</bpmn:outgoing>
     </bpmn:exclusiveGateway>
-    <bpmn:userTask id="pruefung-auf-bautechnische-umsetzbarkeit" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/pruefung_auf_bautechnische_umsetzbarkeit.html" camunda:assignee="demo">
+    <bpmn:userTask id="pruefung-auf-bautechnische-umsetzbarkeit" name="Prüfung auf bautechnische Umsetzbarkeit" camunda:formKey="embedded:app:forms/pruefung_auf_bautechnische_umsetzbarkeit.html" camunda:candidateGroups="produktion">
       <bpmn:incoming>SequenceFlow_0dvprvr</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1lecgg5</bpmn:outgoing>
     </bpmn:userTask>
     <bpmn:sequenceFlow id="SequenceFlow_185pnw1" sourceRef="lege-arbeitsplan-an" targetRef="ermittle-fehlende-daten-fuer-zusatzkomponenten" />
-    <bpmn:userTask id="erstelle-arbeitsplan-fuer-die-sonderanfertigung" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstelle_arbeitsplan_fuer_die_sonderanfertigung.html" camunda:assignee="demo">
+    <bpmn:userTask id="erstelle-arbeitsplan-fuer-die-sonderanfertigung" name="Erstelle Arbeitsplan für die Sonderanfertigung" camunda:formKey="embedded:app:forms/erstelle_arbeitsplan_fuer_die_sonderanfertigung.html" camunda:candidateGroups="produktion">
       <bpmn:incoming>SequenceFlow_07oqxg2</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_07887ny</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:userTask id="ermittle-fehlende-daten-fuer-zusatzkomponenten" name="Ermittle fehlende Daten für Zusatzkomponenten" camunda:formKey="embedded:app:forms/ermittle_fehlende_daten_fuer_zusatzkomponenten.html" camunda:assignee="demo">
+    <bpmn:userTask id="ermittle-fehlende-daten-fuer-zusatzkomponenten" name="Ermittle fehlende Daten für Zusatzkomponenten" camunda:formKey="embedded:app:forms/ermittle_fehlende_daten_fuer_zusatzkomponenten.html" camunda:candidateGroups="beschaffung">
       <bpmn:incoming>SequenceFlow_185pnw1</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0qyxu2w</bpmn:outgoing>
     </bpmn:userTask>
