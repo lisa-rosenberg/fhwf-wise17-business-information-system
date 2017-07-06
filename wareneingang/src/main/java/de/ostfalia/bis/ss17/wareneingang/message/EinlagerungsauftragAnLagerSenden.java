@@ -16,17 +16,14 @@ public class EinlagerungsauftragAnLagerSenden implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Einlagerungsauftrag an Lager (MessageStartEvent)");
 
-        final Integer auftragId = (Integer) delegateExecution.getVariable("auftragId");
-        final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
-        final Integer mengeGeliefert = (Integer) delegateExecution.getVariable("mengeGeliefert");
-
         final HashMap<String, Object> messageContent = new HashMap<>();
-        messageContent.put("teilId", teilId);
-        messageContent.put("menge", mengeGeliefert);
+        messageContent.put("teilId", delegateExecution.getVariable("teilId"));
+        messageContent.put("teilBez", delegateExecution.getVariable("teilBez"));
+        messageContent.put("mengeGeliefert", delegateExecution.getVariable("mengeGeliefert"));
         
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neue Einlagerung")
-                .processInstanceId("" + auftragId)
+                .processInstanceId("" + delegateExecution.getVariable("auftragId"))
                 .setVariables(messageContent)
                 .correlateAllWithResult();
     }

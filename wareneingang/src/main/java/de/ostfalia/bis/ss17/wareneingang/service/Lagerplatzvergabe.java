@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.PreparedStatement;
 
+@SuppressWarnings("Duplicates")
 public class Lagerplatzvergabe implements JavaDelegate {
 
     private final static Logger logger = LoggerFactory.getLogger(Lagerplatzvergabe.class);
@@ -18,59 +19,60 @@ public class Lagerplatzvergabe implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Vergebe Lagerplatz");
-        
-        // DB
+
+        final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
+
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
         conn.setAutoCommit(false);
-        
-        // Prozessdaten einlesen
-        final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
 
-        // Fach ermitteln
+        /* Fach ermitteln */
+
         boolean foundFach = false;
         Integer fachnummer = null;
         Integer gangnummer = null;
-        final PreparedStatement stmt = conn.prepareStatement(
-                "SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR = ?");
-        stmt.setInt(1, teilId);
-        final ResultSet rs = stmt.executeQuery();
+        Integer lagerort = null;
 
-        // Es gibt schon ein Fach mit der Teilnummer?
-        // SELECT * FROM bis.lagerfach WHERE TEIL_TNR = 7001;
+        PreparedStatement stmt = conn.prepareStatement(
+                "SELECT FACHNR, GANGNR, LAGERORT_LAGERORTNR FROM bis.lagerfach WHERE TEIL_TNR = ?");
+        stmt.setInt(1, teilId);
+        ResultSet rs = stmt.executeQuery();
+
+        // Gibt es schon ein Fach mit der Teilnummer?
         if (rs.next()) {
-        	foundFach = true;
-            // Daten auslesen
+            foundFach = true;
             fachnummer = rs.getInt("FACHNR");
             gangnummer = rs.getInt("GANGNR");
+            lagerort = rs.getInt("LAGERORT_LAGERORTNR");
         }
-        stmt.close();
 
         // Ansonsten erstes leeres Fach!
-        // SELECT * FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1;
         if (!foundFach) {
-            final PreparedStatement stmt2 = conn.prepareStatement(
-                    "SELECT FACHNR, GANGNR FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1");
-            final ResultSet rs2 = stmt2.executeQuery();
+            stmt = conn.prepareStatement(
+                    "SELECT FACHNR, GANGNR, LAGERORT_LAGERORTNR FROM bis.lagerfach WHERE TEIL_TNR IS NULL LIMIT 0,1");
+            rs = stmt.executeQuery();
 
-            if (rs2.next()) {
-            	foundFach = true;
-                // Daten auslesen
-                fachnummer = rs2.getInt("FACHNR");
-                gangnummer = rs2.getInt("GANGNR");
+            if (rs.next()) {
+                foundFach = true;
+                fachnummer = rs.getInt("FACHNR");
+                gangnummer = rs.getInt("GANGNR");
+                lagerort = rs.getInt("LAGERORT_LAGERORTNR");
             }
-            stmt2.close();
         }
-        
+
+        rs.close();
+        stmt.close();
         conn.close();
         
         if (!foundFach) {
             throw new Exception("Kein Lagerfach gefunden!");
         }
 
-        // Gebe Ergebnisse weiter
+        /* Gebe Ergebnisse weiter */
+
         delegateExecution.setVariable("fachnummer", fachnummer);
         delegateExecution.setVariable("gangnummer", gangnummer);
+        delegateExecution.setVariable("lagerort", lagerort);
     }
 }

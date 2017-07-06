@@ -1,30 +1,72 @@
-<form name="transportZumLagerfach">
+<form name="transportZumLagerfach"
+      class="form-horizontal"
+      role="form">
+
     <div class="form-group">
-        <label>TNR</label>
-        <input class="form-control"
-               cam-variable-type="Integer"
-               cam-variable-name="teilId"
-               readonly>
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="teilId"
+                   type="text"
+                   name="teilId"
+                   readonly="true">
+        </div>
+
+        <label class="control-label col-md-2">Teil</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="teilBez"
+                   type="text"
+                   name="teilBez"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Gelieferte Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="mengeGeliefert"
+                   type="text"
+                   name="mengeGeliefert"
+                   readonly="true">
+        </div>
     </div>
+
+    <p>Folgendes Lagerfach wurde f&uuml;r oben genanntes Teil zugewiesen.</p>
+
     <div class="form-group">
-        <label>Menge</label>
-        <input class="form-control"
-               cam-variable-type="Integer"
-               cam-variable-name="menge"
-               readonly>
+        <label class="control-label col-md-2">Lagerortnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="lagerort"
+                   type="text"
+                   name="lagerort"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Fachnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="fachnummer"
+                   type="text"
+                   name="fachnummer"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Gangnummer</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="gangnummer"
+                   type="text"
+                   name="gangnummer"
+                   readonly="true"/>
+        </div>
     </div>
-    <div class="form-group">
-        <label>Fachnummer</label>
-        <input class="form-control"
-               cam-variable-type="Integer"
-               cam-variable-name="fachnummer"
-               readonly>
-    </div>
-    <div class="form-group">
-        <label>Gangnummer</label>
-        <input class="form-control"
-               cam-variable-type="Integer"
-               cam-variable-name="gangnummer"
-               readonly>
-    </div>
+
+    <p>Bitte lagern Sie das Teil in das zugewiesene Fach ein.</p>
 </form>

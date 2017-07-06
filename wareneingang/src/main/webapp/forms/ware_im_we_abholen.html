@@ -1,10 +1,39 @@
-<form>
+<form name="wareImWeAbholen"
+      class="form-horizontal"
+      role="form">
+
+    <p>Bitte holen Sie folgende eingetroffene Ware vom Wareneingang ab:</p>
+
     <div class="form-group">
-        <label>TNR</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="teilId" readonly>
+        <label class="control-label col-md-2">TNR</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="teilId"
+                   type="text"
+                   name="teilId"
+                   readonly="true">
+        </div>
+
+        <label class="control-label col-md-2">Teil</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="String"
+                   cam-variable-name="teilBez"
+                   type="text"
+                   name="teilBez"
+                   readonly="true"/>
+        </div>
+
+        <label class="control-label col-md-2">Gelieferte Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="mengeGeliefert"
+                   type="text"
+                   name="mengeGeliefert"
+                   readonly="true">
+        </div>
     </div>
-    <div class="form-group">
-        <label>Menge</label>
-        <input class="form-control" cam-variable-type="Integer" cam-variable-name="menge" readonly>
-    </div>
+
 </form>
