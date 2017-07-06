@@ -49,25 +49,9 @@
       <bpmn:outgoing>SequenceFlow_0u9zksa</bpmn:outgoing>
     </bpmn:exclusiveGateway>
     <bpmn:userTask id="wareneingang-kontrollieren" name="Wareneingang kontrollieren" camunda:formKey="embedded:app:forms/wareneingang_kontrollieren.html" camunda:candidateGroups="wareneingang">
-      <bpmn:incoming>SequenceFlow_1t5zyr8</bpmn:incoming>
+      <bpmn:incoming>SequenceFlow_1kpxrww</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_0k02yhk</bpmn:outgoing>
     </bpmn:userTask>
-    <bpmn:endEvent id="EndEvent_1jgn1jz">
-      <bpmn:incoming>SequenceFlow_18shon8</bpmn:incoming>
-    </bpmn:endEvent>
-    <bpmn:exclusiveGateway id="ExclusiveGateway_0kwt5zu" default="SequenceFlow_1t5zyr8">
-      <bpmn:incoming>SequenceFlow_1kpxrww</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1t5zyr8</bpmn:outgoing>
-      <bpmn:outgoing>SequenceFlow_18shon8</bpmn:outgoing>
-    </bpmn:exclusiveGateway>
-    <bpmn:serviceTask id="angaben-pruefen" name="Angaben prüfen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.AngabenPruefen">
-      <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
-      <bpmn:outgoing>SequenceFlow_1kpxrww</bpmn:outgoing>
-    </bpmn:serviceTask>
-    <bpmn:startEvent id="start-event-wareneingang" camunda:formKey="embedded:app:forms/wareneingangskontrolle.html">
-      <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
-      <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
-    </bpmn:startEvent>
     <bpmn:sequenceFlow id="SequenceFlow_0069w94" sourceRef="einlagerungsauftrag-an-lager-senden" targetRef="end-event-wareneingang-einlagerungsauftrag-gesendet" />
     <bpmn:sequenceFlow id="SequenceFlow_0ie0tuj" sourceRef="exclusive-gateway-einlagerungsauftrag-senden" targetRef="einlagerungsauftrag-an-lager-senden" />
     <bpmn:sequenceFlow id="SequenceFlow_0tg85ki" sourceRef="fehlmenge-im-auftrag-erfassen" targetRef="parallel-gateway-fehlmenge" />
@@ -86,12 +70,7 @@
       <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!wareIo}</bpmn:conditionExpression>
     </bpmn:sequenceFlow>
     <bpmn:sequenceFlow id="SequenceFlow_0k02yhk" sourceRef="wareneingang-kontrollieren" targetRef="exclusive-gateway-wareneingang-ware-kontrollieren" />
-    <bpmn:sequenceFlow id="SequenceFlow_1t5zyr8" name="Angaben_IO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="wareneingang-kontrollieren" />
-    <bpmn:sequenceFlow id="SequenceFlow_18shon8" name="Angaben_NIO" sourceRef="ExclusiveGateway_0kwt5zu" targetRef="EndEvent_1jgn1jz">
-      <bpmn:conditionExpression xsi:type="bpmn:tFormalExpression">${!angabenIo}</bpmn:conditionExpression>
-    </bpmn:sequenceFlow>
-    <bpmn:sequenceFlow id="SequenceFlow_1kpxrww" sourceRef="angaben-pruefen" targetRef="ExclusiveGateway_0kwt5zu" />
-    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="angaben-pruefen" />
+    <bpmn:sequenceFlow id="SequenceFlow_1kpxrww" sourceRef="angaben-pruefen" targetRef="wareneingang-kontrollieren" />
     <bpmn:exclusiveGateway id="exclusive-gateway-warenmenge-kontrollieren" default="SequenceFlow_06f89v5">
       <bpmn:incoming>SequenceFlow_0u9zksa</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_15k2dha</bpmn:outgoing>
@@ -106,6 +85,15 @@
       <bpmn:incoming>SequenceFlow_0d3pxbz</bpmn:incoming>
       <bpmn:outgoing>SequenceFlow_1iqagzp</bpmn:outgoing>
     </bpmn:userTask>
+    <bpmn:startEvent id="start-event-wareneingang" camunda:formKey="embedded:app:forms/wareneingangskontrolle.html">
+      <bpmn:outgoing>SequenceFlow_0lomt49</bpmn:outgoing>
+      <bpmn:messageEventDefinition messageRef="Message_0l6xzl7" />
+    </bpmn:startEvent>
+    <bpmn:serviceTask id="angaben-pruefen" name="Angaben prüfen" camunda:class="de.ostfalia.bis.ss17.wareneingang.service.AngabenPruefen">
+      <bpmn:incoming>SequenceFlow_0lomt49</bpmn:incoming>
+      <bpmn:outgoing>SequenceFlow_1kpxrww</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="SequenceFlow_0lomt49" sourceRef="start-event-wareneingang" targetRef="angaben-pruefen" />
   </bpmn:process>
   <bpmn:process id="wareneinlagerung" name="Wareneinlagerung" isExecutable="true">
     <bpmn:startEvent id="star-event-lager" camunda:formKey="embedded:app:forms/wareneinlagerung.html">
@@ -145,16 +133,16 @@
         <dc:Bounds x="143" y="58" width="1107" height="469" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="StartEvent_1sfuuaa_di" bpmnElement="start-event-wareneingang">
-        <dc:Bounds x="217" y="133" width="36" height="36" />
+        <dc:Bounds x="188" y="357" width="36" height="36" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="190" y="169" width="90" height="0" />
+          <dc:Bounds x="161" y="393" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_0lomt49_di" bpmnElement="SequenceFlow_0lomt49">
-        <di:waypoint xsi:type="dc:Point" x="253" y="151" />
-        <di:waypoint xsi:type="dc:Point" x="286" y="151" />
+        <di:waypoint xsi:type="dc:Point" x="224" y="375" />
+        <di:waypoint xsi:type="dc:Point" x="257" y="375" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="225" y="136" width="90" height="0" />
+          <dc:Bounds x="196" y="360" width="90" height="0" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="UserTask_0bd2hai_di" bpmnElement="wareneingang-kontrollieren">
@@ -391,41 +379,14 @@
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNEdge id="SequenceFlow_1kpxrww_di" bpmnElement="SequenceFlow_1kpxrww">
-        <di:waypoint xsi:type="dc:Point" x="335" y="191" />
-        <di:waypoint xsi:type="dc:Point" x="336" y="244" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="291" y="196" width="90" height="13" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="ExclusiveGateway_0kwt5zu_di" bpmnElement="ExclusiveGateway_0kwt5zu" isMarkerVisible="true">
-        <dc:Bounds x="311" y="244" width="50" height="50" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="291" y="297" width="90" height="13" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_1t5zyr8_di" bpmnElement="SequenceFlow_1t5zyr8">
-        <di:waypoint xsi:type="dc:Point" x="336" y="294" />
-        <di:waypoint xsi:type="dc:Point" x="336" y="375" />
+        <di:waypoint xsi:type="dc:Point" x="357" y="375" />
         <di:waypoint xsi:type="dc:Point" x="400" y="375" />
         <bpmndi:BPMNLabel>
-          <dc:Bounds x="321" y="387" width="61" height="12" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNEdge>
-      <bpmndi:BPMNShape id="EndEvent_1jgn1jz_di" bpmnElement="EndEvent_1jgn1jz">
-        <dc:Bounds x="432" y="251" width="36" height="36" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="405" y="290" width="90" height="13" />
-        </bpmndi:BPMNLabel>
-      </bpmndi:BPMNShape>
-      <bpmndi:BPMNEdge id="SequenceFlow_18shon8_di" bpmnElement="SequenceFlow_18shon8">
-        <di:waypoint xsi:type="dc:Point" x="361" y="269" />
-        <di:waypoint xsi:type="dc:Point" x="432" y="269" />
-        <bpmndi:BPMNLabel>
-          <dc:Bounds x="358" y="234" width="69" height="12" />
+          <dc:Bounds x="333.5" y="353.5" width="90" height="13" />
         </bpmndi:BPMNLabel>
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="ServiceTask_013lx2x_di" bpmnElement="angaben-pruefen">
-        <dc:Bounds x="286" y="111" width="100" height="80" />
+        <dc:Bounds x="257" y="335" width="100" height="80" />
       </bpmndi:BPMNShape>
       <bpmndi:BPMNEdge id="SequenceFlow_1iqagzp_di" bpmnElement="SequenceFlow_1iqagzp">
         <di:waypoint xsi:type="dc:Point" x="896" y="444" />
