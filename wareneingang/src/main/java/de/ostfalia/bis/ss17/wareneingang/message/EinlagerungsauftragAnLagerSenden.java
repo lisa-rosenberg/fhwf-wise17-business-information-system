@@ -19,7 +19,7 @@ public class EinlagerungsauftragAnLagerSenden implements JavaDelegate {
         final HashMap<String, Object> messageContent = new HashMap<>();
         messageContent.put("teilId", delegateExecution.getVariable("teilId"));
         messageContent.put("teilBez", delegateExecution.getVariable("teilBez"));
-        messageContent.put("mengeGeliefert", delegateExecution.getVariable("mengeGeliefert"));
+        messageContent.put("mengeAngenommen", delegateExecution.getVariable("mengeAngenommen"));
         
         final RuntimeService runtimeService = delegateExecution.getProcessEngineServices().getRuntimeService();
         runtimeService.createMessageCorrelation("Neue Einlagerung")

@@ -26,7 +26,7 @@ public class RetoureAnLieferantenMelden implements JavaDelegate {
         messageContent.put("mengeBestellt", delegateExecution.getVariable("mengeBestellt"));
         messageContent.put("mengeGeliefert", delegateExecution.getVariable("mengeGeliefert"));
         if (fehlmenge) {
-            messageContent.put("mengeFehlend", delegateExecution.getVariable("mengeFehlend"));
+            messageContent.put("mengeFehl", delegateExecution.getVariable("mengeFehl"));
         }
         if (!wareIo) {
             messageContent.put("maengel", delegateExecution.getVariable("maengel"));

@@ -25,14 +25,17 @@ public class AuftragsstatusAnpassenFertig implements JavaDelegate {
         conn.setAutoCommit(false);
 
         PreparedStatement stmt = conn.prepareStatement(
-                "UPDATE beschaffungsauftrag SET status = ? WHERE id_auftrag = ?");
+                "UPDATE beschaffungsauftrag SET fehlmenge = ?, status = ? WHERE id_auftrag = ?");
 
-        stmt.setString(1, "fertig");
-        stmt.setInt(2, auftragId);
+        stmt.setInt(1, 0);
+        stmt.setString(2, "fertig");
+        stmt.setInt(3, auftragId);
         stmt.executeUpdate();
         conn.commit();
 
         stmt.close();
         conn.close();
+
+        delegateExecution.setVariable("mengeAngenommen", delegateExecution.getVariable("mengeBestellt"));
     }
 }

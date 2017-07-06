@@ -18,7 +18,7 @@ public class WarenbuchungBestaende implements JavaDelegate {
         logger.info("Buche Warenbuchung");
 
         final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
-        final Integer mengeGeliefert = (Integer) delegateExecution.getVariable("mengeGeliefert");
+        final Integer mengeAngenommen = (Integer) delegateExecution.getVariable("mengeAngenommen");
         final Integer fachnummer = (Integer) delegateExecution.getVariable("fachnummer");
 
         Class.forName("com.mysql.jdbc.Driver");
@@ -31,7 +31,7 @@ public class WarenbuchungBestaende implements JavaDelegate {
                 "UPDATE bis.lagerfach SET TEIL_TNR = ?, BESTAND_STUECK = IFNULL(BESTAND_STUECK, 0) + ? WHERE FACHNR = ?");
 
         stmt.setInt(1, teilId);
-        stmt.setInt(2, mengeGeliefert);
+        stmt.setInt(2, mengeAngenommen);
         stmt.setInt(3, fachnummer);
         stmt.executeUpdate();
         conn.commit();

@@ -110,7 +110,7 @@
         var mengeBestellt = document.wareneingangKontrollieren.mengeBestellt.value;
         var mengeGeliefert = document.wareneingangKontrollieren.mengeGeliefert.value;
 
-        if (parseInt(mengeBestellt,10) > parseInt(mengeGeliefert,10)) {
+        if (parseInt(mengeBestellt,10) !== parseInt(mengeGeliefert,10)) {
             document.wareneingangKontrollieren.fehlmenge.value = "true";
         } else {
             document.wareneingangKontrollieren.fehlmenge.value = "false";

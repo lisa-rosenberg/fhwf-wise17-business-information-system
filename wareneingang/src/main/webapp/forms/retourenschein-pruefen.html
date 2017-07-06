@@ -46,7 +46,7 @@
         </div>
     </div>
 
-    <p>Folgende Ware wird beanstandet:</p>
+    <p>Folgende Ware wird beanstandet und zur&uuml;ckgeliefert:</p>
 
     <div class="form-group">
         <label class="control-label col-md-2">Auftragsnummer</label>
@@ -79,6 +79,16 @@
                    readonly="true"/>
         </div>
 
+        <label class="control-label col-md-2">Bestellte Menge</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Integer"
+                   cam-variable-name="mengeBestellt"
+                   type="text"
+                   name="mengeBestellt"
+                   readonly="true"/>
+        </div>
+
         <label class="control-label col-md-2">Festgestellte M&auml;ngel</label>
         <div class="col-md-10">
             <textarea class="form-control"
@@ -89,16 +99,6 @@
                       rows="10"
                       cols="50"
                       readonly="true"></textarea>
-        </div>
-
-        <label class="control-label col-md-2">Bestellte Menge</label>
-        <div class="col-md-10">
-            <input class="form-control"
-                   cam-variable-type="Integer"
-                   cam-variable-name="mengeBestellt"
-                   type="text"
-                   name="mengeBestellt"
-                   readonly="true"/>
         </div>
     </div>
 
