@@ -86,6 +86,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
+        conn.setAutoCommit(false);
 
         PreparedStatement stmt = conn.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
@@ -162,6 +163,7 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         stmt.setInt(2, teilId);
         stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
         stmt.setFloat(4, (float) preisEinzeln.doubleValue());
+        stmt.executeUpdate();
         conn.commit();
 
         rs.close();
