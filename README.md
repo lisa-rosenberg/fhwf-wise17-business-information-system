@@ -75,4 +75,4 @@ Progress
 
 - [x] Prozess_Sonderanfertigung.bpmn: Welche Zeiteinheit soll 200 sein? Bis Klärung als Stunden formatiert.
 - [x] erstelle_arbeitsplan_fuer_die_sonderanfertigung.html: Was soll hier genau passieren?
-- [ ] Kleinteile pro Fahrrad - ein oder zwei Mal? Stückliste-PDF suggeriert doppelte Einberechnung.
+- [x] Kleinteile pro Fahrrad - ein oder zwei Mal? Stückliste-PDF suggeriert doppelte Einberechnung.
