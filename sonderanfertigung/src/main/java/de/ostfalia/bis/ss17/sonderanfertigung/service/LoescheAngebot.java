@@ -40,11 +40,35 @@ public class LoescheAngebot implements JavaDelegate {
         stmt.executeUpdate();
         conn.commit();
 
+         /* Bezugsgrößenzuordnung löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM bezugsgroessenzuordnung WHERE APLNR = ?");
+        stmt.setInt(1, arbeitsplanId);
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Produktkalkulation löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM kalkulation WHERE APLNR = ?");
+        stmt.setInt(1, arbeitsplanId);
+        stmt.executeUpdate();
+        conn.commit();
+
         /* Arbeitsplan löschen */
 
         stmt = conn.prepareStatement(
                 "DELETE FROM arbeitsplan WHERE APLNR = ?");
         stmt.setInt(1, arbeitsplanId);
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Stueckliste löschen */
+
+        stmt = conn.prepareStatement(
+                "DELETE FROM stueckliste WHERE TEIL_PRODUKT = ?");
+        stmt.setInt(1, teilId);
         stmt.executeUpdate();
         conn.commit();
 

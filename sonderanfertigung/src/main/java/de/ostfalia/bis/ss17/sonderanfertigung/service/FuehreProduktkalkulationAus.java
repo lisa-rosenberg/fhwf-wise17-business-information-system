@@ -5,10 +5,7 @@ import org.camunda.bpm.engine.delegate.JavaDelegate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 
 @SuppressWarnings({"Duplicates", "ConstantConditions"})
 public class FuehreProduktkalkulationAus implements JavaDelegate {
@@ -18,6 +15,9 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Führe Produktkalkulation aus");
+
+        final Integer arbeitsplanId = (Integer) delegateExecution.getVariable("arbeitsplanId");
+        final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
 
         final Float raederPreis = ((Double) delegateExecution.getVariable("raederPreis")).floatValue();
         final Float rahmenPreis = ((Double) delegateExecution.getVariable("rahmenPreis")).floatValue();
@@ -87,9 +87,9 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
 
-        PreparedStatement stmtSelect = conn.prepareStatement(
+        PreparedStatement stmt = conn.prepareStatement(
                 "SELECT STANDARDPREIS FROM teil WHERE TNR = 6001");
-        ResultSet rs = stmtSelect.executeQuery();
+        ResultSet rs = stmt.executeQuery();
 
         if (rs.next()) {
             kleinteilePreis = (double) (rs.getFloat(1));
@@ -154,14 +154,24 @@ public class FuehreProduktkalkulationAus implements JavaDelegate {
         preisMwSt = preisZwischen * 0.19;
         preisGesamt = preisZwischen + preisMwSt;
 
+        /* Speichere Produktkalkulation */
+
+        stmt = conn.prepareStatement(
+                "INSERT INTO kalkulation(APLNR,TNR,DATUM,HERSTELLKOSTEN) VALUES(?,?,?,?)");
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, teilId);
+        stmt.setTimestamp(3, new Timestamp(System.currentTimeMillis()));
+        stmt.setFloat(4, (float) preisEinzeln.doubleValue());
+        conn.commit();
+
         rs.close();
-        stmtSelect.close();
+        stmt.close();
         conn.close();
 
         /* Gebe Ergebnisse weiter */
 
-        delegateExecution.setVariable("personalkostenEinzeln", personalkostenEinzeln);
-        delegateExecution.setVariable("produktionskostenEinzeln", produktionskostenEinzeln);
+        delegateExecution.setVariable("personalkostenEinzeln", (Double) personalkostenEinzeln.doubleValue());
+        delegateExecution.setVariable("produktionskostenEinzeln", (Double) produktionskostenEinzeln.doubleValue());
         delegateExecution.setVariable("kleinteileBez", kleinteileBez);
         delegateExecution.setVariable("kleinteilePreis", kleinteilePreis);
         delegateExecution.setVariable("preisEinzeln", preisEinzeln);
