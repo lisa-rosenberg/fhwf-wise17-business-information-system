@@ -23,7 +23,28 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         logger.info("Lege Arbeitsplan an");
 
         final String sonderanfertigungBez = (String) delegateExecution.getVariable("sonderanfertigungBez");
-        final Boolean nachbearbeitung = (Boolean) delegateExecution.getVariable("nachbearbeitung");
+
+        final Integer raederId = (Integer) delegateExecution.getVariable("raederId");
+        final Integer rahmenId = (Integer) delegateExecution.getVariable("rahmenId");
+        final Integer gabelId = (Integer) delegateExecution.getVariable("gabelId");
+        final Integer farbeId = (Integer) delegateExecution.getVariable("farbeId");
+        final Integer motorId = (Integer) delegateExecution.getVariable("motorId");
+        final Integer akkuId = (Integer) delegateExecution.getVariable("akkuId");
+
+        final Float lackPersonalMaterial = ((Double) delegateExecution.getVariable("lackPersonalMaterial")).floatValue();
+        final Float lackRuestLackierung = ((Double) delegateExecution.getVariable("lackRuestLackierung")).floatValue();
+        final Float lackMaschinenLackierung = ((Double) delegateExecution.getVariable("lackMaschinenLackierung")).floatValue();
+
+        final Float rahmenPersonalMaterial = ((Double) delegateExecution.getVariable("rahmenPersonalMaterial")).floatValue();
+        final Float rahmenPersonalMontage = ((Double) delegateExecution.getVariable("rahmenPersonalMontage")).floatValue();
+
+        final Float motorPersonalMaterial = ((Double) delegateExecution.getVariable("motorPersonalMaterial")).floatValue();
+        final Float motorPersonalMontage = ((Double) delegateExecution.getVariable("motorPersonalMontage")).floatValue();
+
+        final Float raederPersonalMaterial = ((Double) delegateExecution.getVariable("raederPersonalMaterial")).floatValue();
+        final Float raederPersonalMontage = ((Double) delegateExecution.getVariable("raederPersonalMontage")).floatValue();
+
+        final Float qualiPersonalEndkontrolle = ((Double) delegateExecution.getVariable("qualiPersonalEndkontrolle")).floatValue();
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
@@ -58,6 +79,59 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         stmt.executeUpdate();
         conn.commit();
 
+        /* Lege Stückliste für Teil an */
+
+        stmt = conn.prepareStatement(
+                "INSERT INTO stueckliste(TEIL_PRODUKT,TEIL_KOMPONENTE,PRODUKTIONSKOEFFIZIENT,einbaurate) VALUES(?,?,?,?)");
+
+        // Räder
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, raederId);
+        stmt.setInt(3, 2);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Rahmen
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, rahmenId);
+        stmt.setInt(3, 1);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Gabel
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, gabelId);
+        stmt.setInt(3, 1);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Farbe
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, farbeId);
+        stmt.setInt(3, 1);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Motor
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, motorId);
+        stmt.setInt(3, 1);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Akku
+        stmt.setInt(1, teilId);
+        stmt.setInt(2, akkuId);
+        stmt.setInt(3, 1);
+        stmt.setInt(4, 1);
+        stmt.executeUpdate();
+        conn.commit();
+
         /* Lege Arbeitsplan an */
 
         stmt = conn.prepareStatement(
@@ -89,7 +163,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
 
         int i = 1;
 
-        //Lackierung
+        // Lackierung
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 2001);
@@ -106,7 +180,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         conn.commit();
         i++;
 
-        //Rahmenmontage
+        // Rahmenmontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1001);
@@ -123,7 +197,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         conn.commit();
         i++;
 
-        //Motorenmontage
+        // Motorenmontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1002);
@@ -140,7 +214,7 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         conn.commit();
         i++;
 
-        //Radmontage
+        // Rädermontage
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1001);
         stmt.setInt(3, 1003);
@@ -157,30 +231,100 @@ public class LegeArbeitsplanAn implements JavaDelegate {
         conn.commit();
         i++;
 
-        //Nachbearbeitung
-        if (nachbearbeitung) {
-            stmt.setInt(1, arbeitsplanId);
-            stmt.setInt(2, 1001);
-            stmt.setInt(3, 1005);
-            stmt.setInt(4, i);
-            stmt.executeUpdate();
-            conn.commit();
-            i++;
-
-            stmt.setInt(1, arbeitsplanId);
-            stmt.setInt(2, 1004);
-            stmt.setInt(3, 1005);
-            stmt.setInt(4, i);
-            stmt.executeUpdate();
-            conn.commit();
-            i++;
-        }
-
-        //Qualitätskontrolle
+        // Qualitätskontrolle
         stmt.setInt(1, arbeitsplanId);
         stmt.setInt(2, 1003);
         stmt.setInt(3, 1004);
         stmt.setInt(4, i);
+        stmt.executeUpdate();
+        conn.commit();
+
+        /* Lege Bezugsgrößenzuordnung zum Arbeitsplan an */
+
+        stmt = conn.prepareStatement(
+                "INSERT INTO bezugsgroessenzuordnung(APLNR,AGANR,KSTNR,BZGRNR,INANSPRUCHNAHME_H) VALUES(?,?,?,?,?)");
+
+        // Lackierung
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1001);
+        stmt.setInt(3, 2001);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, lackPersonalMaterial);
+        stmt.executeUpdate();
+        conn.commit();
+
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1004);
+        stmt.setInt(3, 2001);
+        stmt.setInt(4, 1422);
+        stmt.setFloat(5, lackRuestLackierung);
+        stmt.executeUpdate();
+        conn.commit();
+
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1004);
+        stmt.setInt(3, 2001);
+        stmt.setInt(4, 1420);
+        stmt.setFloat(5, lackMaschinenLackierung);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Rahmenmontage
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1001);
+        stmt.setInt(3, 1001);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, rahmenPersonalMaterial);
+        stmt.executeUpdate();
+        conn.commit();
+
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1002);
+        stmt.setInt(3, 1001);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, rahmenPersonalMontage);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Motorenmontage
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1001);
+        stmt.setInt(3, 1002);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, motorPersonalMaterial);
+        stmt.executeUpdate();
+        conn.commit();
+
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1002);
+        stmt.setInt(3, 1002);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, motorPersonalMontage);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Rädermontage
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1001);
+        stmt.setInt(3, 1003);
+        stmt.setFloat(5, raederPersonalMaterial);
+        stmt.executeUpdate();
+        conn.commit();
+
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1002);
+        stmt.setInt(3, 1003);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, raederPersonalMontage);
+        stmt.executeUpdate();
+        conn.commit();
+
+        // Qualitätskontrolle
+        stmt.setInt(1, arbeitsplanId);
+        stmt.setInt(2, 1003);
+        stmt.setInt(3, 1004);
+        stmt.setInt(4, 1421);
+        stmt.setFloat(5, qualiPersonalEndkontrolle);
         stmt.executeUpdate();
         conn.commit();
 

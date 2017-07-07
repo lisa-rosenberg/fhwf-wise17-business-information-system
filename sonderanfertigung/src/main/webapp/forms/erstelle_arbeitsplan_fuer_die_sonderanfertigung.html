@@ -15,7 +15,7 @@
     </div>
 
     <p>Bitte erstellen Sie den Arbeitsplan f&uuml;r die Sonderanfertigung.</p>
-    <p><strong>Anforderungen der Sonderanfertigung:</strong></p>
+    <p><strong>ANFORDERUNGEN</strong></p>
 
     <div class="form-group">
         <label class="control-label col-md-2">R&auml;der</label>
@@ -176,10 +176,10 @@
     </div>
 
 
-    <p><strong>Arbeitsplan:</strong></p>
+    <p><strong>ARBEITSPLAN</strong></p>
 
     <div class="form-group">
-        <label class="control-label col-md-2">Bezeichnung f&uuml;r Sonderanfertigung</label>
+        <label class="control-label col-md-2">Sonderanfertigung</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="String"
@@ -190,79 +190,133 @@
         </div>
     </div>
 
-    <label class="control-label col-md-2">Durchzuf&uuml;hrende Arbeiten:</label>
+    <p><strong>Inanspruchnahme Lackierung:</strong></p>
+
     <div class="form-group">
-        <div class="col-md-10 col-md-offset-2">
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="lackierung"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="lackierung"
-                           class="form-control"
-                           checked
-                           disabled="true"/>
-                    Lackierung
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="rahmenmontage"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="rahmenmontage"
-                           class="form-control"
-                           checked
-                           disabled="true"/>
-                    Rahmenmontage
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="motorenmontage"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="motorenmontage"
-                           class="form-control"
-                           checked
-                           disabled="true"/>
-                    Motorenmontage
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="radmontage"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="radmontage"
-                           class="form-control"
-                           checked
-                           disabled="true"/>
-                    Radmontage
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="nachbearbeitung"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="nachbearbeitung"
-                           class="form-control"/>
-                    Nachbearbeitung
-                </label>
-            </div>
-            <div class="checkbox">
-                <label>
-                    <input cam-variable-name="qualitaetskontrolle"
-                           cam-variable-type="Boolean"
-                           type="checkbox"
-                           name="qualitaetskontrolle"
-                           class="form-control"
-                           checked
-                           disabled="true"/>
-                    Qualit&auml;tskontrolle
-                </label>
-            </div>
+        <label class="control-label col-md-2">Personalzeit Materialb.</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="lackPersonalMaterial"
+                   type="text"
+                   name="lackPersonalMaterial"
+                   value="0.25"
+                   required/>
+        </div>
+
+        <label class="control-label col-md-2">R&uuml;stzeit</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="lackRuestLackierung"
+                   type="text"
+                   name="lackRuestLackierung"
+                   value="0.25"
+                   required/>
+        </div>
+
+        <label class="control-label col-md-2">Maschinenzeit</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="lackMaschinenLackierung"
+                   type="text"
+                   name="lackMaschinenLackierung"
+                   value="0.25"
+                   required/>
+        </div>
+    </div>
+
+    <p><strong>Inanspruchnahme Rahmenmontage:</strong></p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Personalzeit Materialb.</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="rahmenPersonalMaterial"
+                   type="text"
+                   name="rahmenPersonalMaterial"
+                   value="0.25"
+                   required/>
+        </div>
+
+        <label class="control-label col-md-2">Personalzeit Montage</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="rahmenPersonalMontage"
+                   type="text"
+                   name="rahmenPersonalMontage"
+                   value="0.25"
+                   required/>
+        </div>
+    </div>
+
+    <p><strong>Inanspruchnahme Motorenmontage:</strong></p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Personalzeit Materialb.</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="motorPersonalMaterial"
+                   type="text"
+                   name="motorPersonalMaterial"
+                   value="0.25"
+                   required/>
+        </div>
+
+        <label class="control-label col-md-2">Personalzeit Montage</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="motorPersonalMontage"
+                   type="text"
+                   name="motorPersonalMontage"
+                   value="0.25"
+                   required/>
+        </div>
+    </div>
+
+    <p><strong>Inanspruchnahme R&auml;dermontage:</strong></p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Personalzeit Materialb.</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="raederPersonalMaterial"
+                   type="text"
+                   name="raederPersonalMaterial"
+                   value="0.25"
+                   required/>
+        </div>
+
+        <label class="control-label col-md-2">Personalzeit Montage</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="raederPersonalMontage"
+                   type="text"
+                   name="raederPersonalMontage"
+                   value="0.25"
+                   required/>
+        </div>
+    </div>
+
+    <p><strong>Inanspruchnahme Qualit&auml;tskontrolle:</strong></p>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Personalzeit</label>
+        <div class="col-md-10">
+            <input class="form-control"
+                   cam-variable-type="Double"
+                   cam-variable-name="qualiPersonalEndkontrolle"
+                   type="text"
+                   name="qualiPersonalEndkontrolle"
+                   value="0.25"
+                   required/>
         </div>
     </div>
 
