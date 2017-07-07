@@ -29,7 +29,7 @@ public class AngabenPruefen implements JavaDelegate {
         Integer teilId = (Integer) delegateExecution.getVariable("teilId");
         final Integer anderesTeilId = (Integer) delegateExecution.getVariable("anderesTeilId");
         final Integer mengeBestellt = (Integer) delegateExecution.getVariable("mengeBestellt");
-        String teilBez = null;
+        String teilBez;
 
         /* Angaben prüfen */
 
@@ -75,6 +75,29 @@ public class AngabenPruefen implements JavaDelegate {
 
         if (!rs.next()) {
             throw new Exception("Lieferant existiert nicht in der Datenbank.");
+        }
+
+        // Bietet der Lieferant das Teil an?
+        stmt = conn.prepareStatement(
+                "SELECT * FROM lieferant_teile WHERE id_lieferant = ? AND tnr = ?");
+
+        stmt.setInt(1, lieferantId);
+        stmt.setInt(2, teilId);
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            throw new Exception("Lieferant bietet Teil nicht an.");
+        }
+
+        // Passt Mindestbestellmenge?
+        stmt = conn.prepareStatement(
+                "SELECT * FROM lieferant_teile WHERE id_lieferant = ? AND tnr = ? AND mindest_bestellmenge_pal <= ?");
+
+        stmt.setInt(1, lieferantId);
+        stmt.setInt(2, teilId);
+        stmt.setInt(3, mengeBestellt);
+        rs = stmt.executeQuery();
+        if (!rs.next()) {
+            throw new Exception("Mindestbestellmenge passt nicht.");
         }
 
         /* Bestellung speichern (für Demonstrationszwecke, eigentlich wäre sie zu dem Zeitpunkt bereits vorhanden) */

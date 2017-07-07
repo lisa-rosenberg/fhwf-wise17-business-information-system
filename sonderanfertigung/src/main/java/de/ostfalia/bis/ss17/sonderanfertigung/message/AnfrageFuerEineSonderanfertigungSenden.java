@@ -21,6 +21,8 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
     public void execute(DelegateExecution delegateExecution) throws Exception {
         logger.info("Sende Anfrage für Sonderanfertigung an EBIKE2020-Vertrieb");
 
+        Integer kundeId = (Integer) delegateExecution.getVariable("kundeId");
+
         Integer raederId = (Integer) delegateExecution.getVariable("raederId");
         String raederBez = null;
         Double raederPreis = null;
@@ -57,18 +59,29 @@ public class AnfrageFuerEineSonderanfertigungSenden implements JavaDelegate {
         Integer akkuDS = null;
         Integer akkuSPP = null;
 
-        /* Suche der in der Datenbank bereits vorhandenen Teile */
-
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
 
+        /* Suche des Kunden */
+
         PreparedStatement stmt = conn.prepareStatement(
+                "SELECT * FROM kunde WHERE ID_Kunde = ?");
+
+        stmt.setInt(1, kundeId);
+        ResultSet rs = stmt.executeQuery();
+        if (!rs.next()) {
+            throw new Exception("Kunde existiert nicht in der Datenbank.");
+        }
+
+        /* Suche der in der Datenbank bereits vorhandenen Teile */
+
+        stmt = conn.prepareStatement(
                 "SELECT * FROM teil WHERE TNR = ?");
 
         // Räder
         stmt.setInt(1, raederId);
-        ResultSet rs = stmt.executeQuery();
+        rs = stmt.executeQuery();
         if (rs.next()) {
             raederBez = rs.getString("BEZEICHNUNG");
             raederPreis = (double) (rs.getFloat("STANDARDPREIS"));
