@@ -24,7 +24,7 @@ public class LegeNeueTeileAn implements JavaDelegate {
     @Override
     public void execute(DelegateExecution delegateExecution) throws Exception {
 
-        logger.info("Führe Produktkalkulation aus");
+        logger.info("Lege neue Teile an");
 
         final Integer raederId = (Integer) delegateExecution.getVariable("raederId");
         final String raederBez = (String) delegateExecution.getVariable("raederBez");
