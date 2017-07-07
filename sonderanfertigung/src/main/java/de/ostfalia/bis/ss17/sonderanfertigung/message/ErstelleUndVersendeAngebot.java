@@ -92,6 +92,8 @@ public class ErstelleUndVersendeAngebot implements JavaDelegate {
         messageContent.put("kleinteilePreis", delegateExecution.getVariable("kleinteilePreis"));
         messageContent.put("kleinteileGesamtpreis", delegateExecution.getVariable("kleinteileGesamtpreis"));
         messageContent.put("menge", delegateExecution.getVariable("menge"));
+        messageContent.put("personalkostenEinzeln", delegateExecution.getVariable("personalkostenEinzeln"));
+        messageContent.put("produktionskostenEinzeln", delegateExecution.getVariable("produktionskostenEinzeln"));
         messageContent.put("preisEinzeln", delegateExecution.getVariable("preisEinzeln"));
         messageContent.put("preisZwischen", delegateExecution.getVariable("preisZwischen"));
         messageContent.put("preisMwSt", delegateExecution.getVariable("preisMwSt"));
