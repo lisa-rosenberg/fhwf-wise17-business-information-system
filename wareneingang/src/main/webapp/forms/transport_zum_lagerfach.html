@@ -3,7 +3,7 @@
       role="form">
 
 
-    <p>Folgendes Lagerfach wurde f&uuml;r das Teil zugewiesen:</p>
+    <p>Folgende Lagerfächer wurden f&uuml;r das Teil zugewiesen:</p>
 
     <div class="form-group">
         <label class="control-label col-md-2">TNR</label>
@@ -37,35 +37,28 @@
         </div>
     </div>
 
+    <p><strong>Hinweis:</strong> Die Lagerfachangabe ist wie folgt kodiert: [<strong>L</strong>agerort-<strong>G</strong>ang-<strong>F</strong>ach-Einzulagernde <strong>M</strong>enge]</p>
     <div class="form-group">
-        <label class="control-label col-md-2">Lagerortnummer</label>
+        <label class="control-label col-md-2">F&auml;cher</label>
         <div class="col-md-10">
-            <input class="form-control"
-                   cam-variable-type="Integer"
-                   cam-variable-name="lagerort"
-                   type="text"
-                   name="lagerort"
-                   readonly="true"/>
+            <textarea class="form-control"
+                      cam-variable-type="String"
+                      cam-variable-name="faecher"
+                      type="text"
+                      name="faecher"
+                      rows="5"
+                      cols="50"
+                      readonly="true"></textarea>
         </div>
 
-        <label class="control-label col-md-2">Fachnummer</label>
+        <label class="control-label col-md-2">&Uuml;briggebliebende Menge</label>
         <div class="col-md-10">
             <input class="form-control"
                    cam-variable-type="Integer"
-                   cam-variable-name="fachnummer"
+                   cam-variable-name="mengeUebrig"
                    type="text"
-                   name="fachnummer"
-                   readonly="true"/>
-        </div>
-
-        <label class="control-label col-md-2">Gangnummer</label>
-        <div class="col-md-10">
-            <input class="form-control"
-                   cam-variable-type="Integer"
-                   cam-variable-name="gangnummer"
-                   type="text"
-                   name="gangnummer"
-                   readonly="true"/>
+                   name="mengeUebrig"
+                   readonly="true">
         </div>
     </div>
 

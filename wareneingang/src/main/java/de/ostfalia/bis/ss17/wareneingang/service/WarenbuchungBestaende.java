@@ -18,23 +18,25 @@ public class WarenbuchungBestaende implements JavaDelegate {
         logger.info("Buche Warenbuchung");
 
         final Integer teilId = (Integer) delegateExecution.getVariable("teilId");
-        final Integer mengeAngenommen = (Integer) delegateExecution.getVariable("mengeAngenommen");
-        final Integer fachnummer = (Integer) delegateExecution.getVariable("fachnummer");
+        final String faecher = (String) delegateExecution.getVariable("faecher");
 
         Class.forName("com.mysql.jdbc.Driver");
         final Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://localhost/bis", "root", "mysql");
         conn.setAutoCommit(false);
 
-        // Eintragen:
         final PreparedStatement stmt = conn.prepareStatement(
                 "UPDATE bis.lagerfach SET TEIL_TNR = ?, BESTAND_STUECK = IFNULL(BESTAND_STUECK, 0) + ? WHERE FACHNR = ?");
 
-        stmt.setInt(1, teilId);
-        stmt.setInt(2, mengeAngenommen);
-        stmt.setInt(3, fachnummer);
-        stmt.executeUpdate();
-        conn.commit();
+        for (String fach : faecher.split(",")) {
+            String[] werte = fach.replaceAll("[A-Z\\[\\]\\s]", "").split("-");
+
+            stmt.setInt(1, teilId);
+            stmt.setInt(2, Integer.parseInt(werte[3])); // Menge
+            stmt.setInt(3, Integer.parseInt(werte[2])); // Fachnummer
+            stmt.executeUpdate();
+            conn.commit();
+        }
 
         stmt.close();
         conn.close();
