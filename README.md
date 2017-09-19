@@ -4,13 +4,19 @@ Business IS - Gruppe 4
 Reference
 ---------
 
+#### Authors
+-   [70415245 | Lisa Rosenberg](https://github.com/lisa-rosenberg)
+-   [70428153 | Dmitrij Drandarov](https://github.com/dmitrij-drandarov)
+-   [Johann Ganin](https://github.com/JoGa89)
+
 #### Aufgabe
 - Thema:        `Kundenerfassungsprozess` + `Wareneingang`
 - Abgabe:       `07. Juli 2017`
 - Präsentation: `06. Juli 2017, 16:00 Uhr`
 
 #### Rahmenbedingungen
-- Tools:    `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
+- Tools:        `Java SE 8, Maven 3, Camunda Modeler, Camunda BPMN 2.0`
+- Tutorial:     [Get started with Camunda and BPMN 2.0](https://docs.camunda.org/get-started/bpmn20/)
 
 
 Progress
