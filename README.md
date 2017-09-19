@@ -4,7 +4,7 @@ Business IS - Gruppe 4
 Reference
 ---------
 
-#### Authors
+#### Autoren
 -   [70415245 | Lisa Rosenberg](https://github.com/lisa-rosenberg)
 -   [70428153 | Dmitrij Drandarov](https://github.com/dmitrij-drandarov)
 -   [Johann Ganin](https://github.com/JoGa89)
